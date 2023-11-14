@@ -1,0 +1,63 @@
+.body{
+    -fx-font-family: "Calibri";
+}
+.loginContainer{
+    -fx-background-color: linear-gradient(#360EAB, #360E83);
+    -fx-background-radius: 15;
+    -fx-opacity: 65%;
+    -fx-padding: 20 20 0 0;
+
+}
+.loginTopTitleLabel{
+    -fx-font-size: 30px;
+    -fx-text-fill: #FFFFFF;
+}
+.loginTitleLabel {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.textField{
+    -fx-background-radius: 30;
+    -fx-font-size: 14px;
+    -fx-padding: 0 0 0 15;
+}
+.buttonStyle{
+    -fx-font-size: 20px;
+    -fx-background-radius: 30;
+}
+.buttonStyle:hover {
+  -fx-background-color: linear-gradient(#1D0248, #1D0268);
+  -fx-text-fill: #FFFFFF;
+  -fx-cursor: hand;
+}
+.buttonStyle:pressed {
+    -fx-background-color: linear-gradient(#0A0238, #0B0268);
+    -fx-text-fill: grey;
+    -fx-cursor: hand;
+}
+.buttonStyleActual{
+    -fx-font-size: 20px;
+    -fx-background-radius: 30;
+}
+.errorLabel{
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+}
+.buttonStyleSmaller{
+    -fx-font-size: 15px;
+    -fx-background-radius: 30;
+}
+.buttonStyleSmaller:hover {
+  -fx-background-color: linear-gradient(#1D0248, #1D0268);
+  -fx-text-fill: #FFFFFF;
+  -fx-cursor: hand;
+}
+.buttonStyleSmaller:pressed {
+    -fx-background-color: linear-gradient(#0A0238, #0B0268);
+    -fx-text-fill: grey;
+    -fx-cursor: hand;
+}
+
+
+
