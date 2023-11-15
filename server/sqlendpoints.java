@@ -1,5 +1,5 @@
 public class sqlendpoints {
     String getUser(){
-        return "test";
+        return "ServerFunctions";
     }
 }

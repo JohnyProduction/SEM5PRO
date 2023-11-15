@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="4451e890-46e2-415e-a497-5e2a75edaf87" name="Changes" comment="" />
+    <list default="true" id="4451e890-46e2-415e-a497-5e2a75edaf87" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/server/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/ServerFunctions/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clientOLD/out/production/client/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/out/production/client/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/ServerFunctions/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/server/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/server/main$ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/server/main$ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/server/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/server/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/sqlendpoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/sqlendpoints.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +26,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2XxIlEV40bagtw901n5piiDfwpg" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -24,6 +43,14 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/janpe/Documents/GitHub/SEM5PRO/client",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -36,6 +63,8 @@
       <option name="presentableId" value="Default" />
       <updated>1699564454047</updated>
       <workItem from="1699564455548" duration="8000" />
+      <workItem from="1700044620552" duration="47000" />
+      <workItem from="1700051630864" duration="359000" />
     </task>
     <servers />
   </component>

@@ -3,6 +3,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import ServerFunctions.*;
 
 public class main {
     private static List<PrintWriter> clientWriters = new ArrayList<>();
@@ -40,45 +41,30 @@ public class main {
         @Override
         public void run() {
             try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                String message;
-                while ((message = reader.readLine()) != null) {
-                    System.out.println("Otrzymano od klienta: " + message);
+                String message = Message.receiveMessage(clientSocket);
+                //System.out.println(message);
 
-                    // Rozdziel komunikat na części
-                    String[] parts = message.split("\\|");
-                    if (parts.length >= 3 && parts[0].equals("LOGIN")) {
-                        String username = parts[1];
-                        String password = parts[2];
-
-                        // Sprawdzenie poprawności loginu i hasła
-                        if (checkCredentials(username, password)) {
-                            // Udane uwierzytelnienie
-                            broadcastMessage("Udane uwierzytelnienie");
-                        } else {
-                            // Błąd uwierzytelnienia
-                            broadcastMessage("Błąd uwierzytelnienia");
-                        }
+                assert message != null;
+                String[] parts = message.split("\\|");
+                if (parts.length >= 3 && parts[0].equals("LOGIN")) {
+                    String username = parts[1];
+                    String password = parts[2];
+                    if (checkCredentials(username)) {
+                        Message.sendMessage(clientWriters,"Zalogowano");
                     } else {
-                        // Obsługa innych rodzajów komunikatów
+                        Message.sendMessage(clientWriters,"Error");
                     }
+                }else{
+                    System.out.println("Text null");
                 }
-                reader.close();
                 clientSocket.close();
-
-                // Usuń obiekt PrintWriter po zakończeniu obsługi klienta.
-                clientWriters.remove(clientWriter);
+                clientWriters.remove(clientWriter); // Usuń obiekt PrintWriter po zakończeniu obsługi klienta.
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-    private static boolean checkCredentials(String username, String password) {
-        return username.equals("test") && password.equals("test");
-    }
-    private static void broadcastMessage(String message) {
-        for (PrintWriter writer : clientWriters) {
-            writer.println("Serwer: " + message);
-        }
+    private static boolean checkCredentials(String username) {
+        return username.equals("test") ;
     }
 }

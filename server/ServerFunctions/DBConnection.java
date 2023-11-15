@@ -1,3 +1,5 @@
+package ServerFunctions;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -5,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OracleDBConnection {
+public class DBConnection {
 
     public static <MyDataObject> List<MyDataObject> fetchDataFromDatabase() {
         String jdbcUrl = "jdbc:oracle:thin:@//your_oracle_host:1521/your_service_name";
