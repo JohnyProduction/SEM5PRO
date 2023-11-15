@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DBConnection {
 
-    public static <MyDataObject> List<MyDataObject> fetchDataFromDatabase() {
+    public static <MyDataObject> List<MyDataObject> fetchDataFromDatabase(String query) {
         String jdbcUrl = "jdbc:oracle:thin:@//your_oracle_host:1521/your_service_name";
         String username = "your_username";
         String password = "your_password";
@@ -24,7 +24,6 @@ public class DBConnection {
 
             Statement statement = connection.createStatement();
 
-            String query = "SELECT * FROM your_table_name";
 
             ResultSet resultSet = statement.executeQuery(query);
 
