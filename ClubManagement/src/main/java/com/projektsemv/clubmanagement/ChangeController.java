@@ -37,6 +37,9 @@ public class ChangeController {
         stage.setScene(new Scene(root, 1280, 720));
         stage.show();
     }
+
+
+
     public static void singUpUser(ActionEvent event, String username,
                                 String password, String email){
         //łączenie z bazą danych
