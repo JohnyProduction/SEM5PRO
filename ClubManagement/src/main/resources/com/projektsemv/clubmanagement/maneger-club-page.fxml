@@ -22,18 +22,17 @@
                <AnchorPane layoutX="14.0" layoutY="28.0">
                   <children>
                           <AnchorPane layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="326.0" styleClass="normalContainerCut" />
-                     <AnchorPane layoutY="259.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="326.0" styleClass="normalContainerLowOpacity" />
                           <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="326.0" styleClass="normalContainerLowOpacity" />
+                     <AnchorPane layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="326.0" styleClass="normalContainerLowOpacity" />
+                     <AnchorPane layoutY="335.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="326.0" styleClass="normalContainerLowOpacity" />
                      <AnchorPane layoutX="1.0" layoutY="546.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="326.0" styleClass="normalContainerLowOpacity" />
                           <Label fx:id="labelNameOfClub" layoutX="10.0" layoutY="25.0" prefHeight="32.0" prefWidth="229.0" styleClass="largeTextStyle" text="FC Barcelona" />
-                     <Text fontSmoothingType="LCD" layoutX="5.0" layoutY="97.9716796875" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallBoldTextStyle" text="Rozgrywki" wrappingWidth="267.0" />
-                     <Label fx:id="labelLeague" layoutX="27.0" layoutY="105.0" prefHeight="6.0" prefWidth="294.0" styleClass="mediumTextStyle" text="III Liga" />
-                     <Text fontSmoothingType="LCD" layoutX="5.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallBoldTextStyle" text="Liga" wrappingWidth="267.0" />
-                     <Label fx:id="labelManegerName" layoutX="20.0" layoutY="171.0" prefHeight="45.0" prefWidth="301.0" styleClass="mediumTextStyle" text="Arkadiusz Szcześniak" />
-                     <Label layoutX="11.0" layoutY="277.0" prefHeight="31.0" prefWidth="301.0" styleClass="mediumTextStyle2" text="Kontakt" />
-                     <Text fontSmoothingType="LCD" layoutX="5.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="smallBoldTextStyle" text="Telefon i adres" wrappingWidth="267.0" />
-                     <Label fx:id="labelPhoneNumber" layoutX="20.0" layoutY="330.0" prefHeight="62.0" prefWidth="301.0" styleClass="mediumTextStyle" text="12 34 56 789" />
-                     <Label fx:id="labelAddress" layoutX="20.0" layoutY="370.0" prefHeight="44.0" prefWidth="300.0" styleClass="mediumTextStyle" text="Błękitna 48/a 34-600 Kraków" />
+                     <Label fx:id="labelLeague" layoutX="20.0" layoutY="100.0" prefHeight="6.0" prefWidth="294.0" styleClass="mediumTextStyle" text="III Liga" />
+                     <Label layoutX="11.0" layoutY="170.0" prefHeight="50.0" prefWidth="301.0" styleClass="mediumTextStyle2" text="Trener" />
+                     <Label fx:id="labelManegerName" layoutX="20.0" layoutY="230.0" prefHeight="45.0" prefWidth="301.0" styleClass="mediumTextStyle" text="Arkadiusz Szcześniak" />
+                     <Label layoutX="11.0" layoutY="345.0" prefHeight="50.0" prefWidth="301.0" styleClass="mediumTextStyle2" text="Kontakt" />
+                     <Label fx:id="labelPhoneNumber" layoutX="20.0" layoutY="400.0" prefHeight="38.0" prefWidth="301.0" styleClass="mediumTextStyle" text="12 34 56 789" />
+                     <Label fx:id="labelAddress" layoutX="20.0" layoutY="430.0" prefHeight="50.0" prefWidth="300.0" styleClass="mediumTextStyle" text="Błękitna 48/a 34-600 Kraków" />
                      <Label layoutX="11.0" layoutY="556.0" prefHeight="44.0" prefWidth="301.0" styleClass="mediumTextStyle2" text="Finanse" />
                      <Label fx:id="labelFinance" layoutX="21.0" layoutY="611.0" prefHeight="50.0" prefWidth="301.0" styleClass="labelClick" text="Wydatki i przychody" />
                   </children>

@@ -71,8 +71,8 @@
     -fx-font-weight: bold;
 }
 .errorLabel{
-    -fx-font-size: 14px;
-    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-fill: #C5BCF5;
 }
 
 
