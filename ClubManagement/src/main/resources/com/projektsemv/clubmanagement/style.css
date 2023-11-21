@@ -22,11 +22,11 @@
 .normalContainerLowOpacity{
     -fx-background-color: linear-gradient(#360EAB, #360E83);
     -fx-padding: 20 20 0 0;
-    -fx-background-radius: 15 15 0 0;
+    -fx-background-radius: 0 0 15 15;
     -fx-opacity: 0.3;
 }
 .normalContainerCut{
-    -fx-background-color: linear-gradient(#432DB3, #2D1990, #432DB3);
+    -fx-background-color: linear-gradient(#360EAB, #360E83);
     -fx-padding: 20 20 0 0;
     -fx-background-radius: 15;
     fx-opacity: 0.9;
@@ -54,6 +54,11 @@
     -fx-text-fill: #C5BCF5;
     -fx-font-weight: bold;
 }
+.mediumWhiteTextStyleB {
+    -fx-font-size: 20px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
 .largeTextStyle{
     -fx-font-size: 28px;
      -fx-text-fill: #FFFFFF;
@@ -64,6 +69,13 @@
     -fx-background-radius: 30;
     -fx-font-size: 14px;
     -fx-padding: 0 0 0 15;
+}
+.textFieldColor{
+    -fx-background-radius: 10;
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: linear-gradient(#360EAB, #360E83);
+    -fx-padding: 15;
 }
 .smallBoldTextStyle{
     -fx-fill: #C5BCF5;
@@ -122,34 +134,50 @@
     -fx-text-fill: grey;
     -fx-cursor: hand;
 }
-
-
-
-
-.tableViewCut{
-    -fx-background-color: linear-gradient(#5646EC, #0A0238);
-    -fx-background-radius: 15 15 0 0px;
-    -fx-opacity: 0.9;
+.buttonStyleDarker{
+    -fx-font-size: 20px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#3D16AF, #060E43);
+    -fx-background-radius: 15;
+    -fx-opacity: 90%;
 }
+
+.buttonStyleDarker:hover {
+  -fx-background-color: linear-gradient(#1D0248, #1D0268);
+  -fx-text-fill: #FFFFFF;
+  -fx-cursor: hand;
+}
+.buttonStyleDarker:pressed {
+    -fx-background-color: linear-gradient(#0A0238, #0B0268);
+    -fx-text-fill: grey;
+    -fx-cursor: hand;
+}
+
+
 .tableView{
     -fx-background-color: linear-gradient(#432DB3, #2D1990);
-    -fx-background-radius: 15 15 0 0;
+    -fx-background-radius: 15;
     -fx-opacity: 0.9;
+
 }
 .tableView .table-column{
     -fx-alignment: CENTER;
 }
 .tableView .column-header, .filter{
-    -fx-background-color: linear-gradient(#FFFFFF, #C1C1C1);
+    -fx-background-color: linear-gradient(#360EAB, #360E83);
     -fx-size: 40px;
     -fx-background-radius: 20px;
     -fx-padding: 0 0 0 15;
 }
 
 .tableView .column-header-background{
-    -fx-background-color: linear-gradient(#FFFFFF, #C1C1C1);
+    -fx-background-color: linear-gradient(#360EAB, #360E83);
     -fx-background-insets: 0 0 0 0;
     -fx-background-radius: 15 15 0 0;
+}
+.table-view .column-header .label{
+    -fx-text-fill: #FFFFFF;
 }
 
 
