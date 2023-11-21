@@ -41,15 +41,16 @@ public class main {
         @Override
         public void run() {
             try {
+                //System.out.println(DBConnection.fetchDataFromDatabase(SQLEndpoints.getUser()));
                 String message = Message.receiveMessage(clientSocket);
-                //System.out.println(message);
+                System.out.println(message);
 
                 assert message != null;
                 String[] parts = message.split("\\|");
                 if (parts.length >= 3 && parts[0].equals("LOGIN")) {
                     String username = parts[1];
                     String password = parts[2];
-                    if (checkCredentials(username)) {
+                    if (Users.checkUserCredentials(username,password)) {
                         Message.sendMessage(clientWriters,"Zalogowano");
                     } else {
                         Message.sendMessage(clientWriters,"Error");
@@ -64,7 +65,5 @@ public class main {
             }
         }
     }
-    private static boolean checkCredentials(String username) {
-        return username.equals("test") ;
-    }
+
 }
