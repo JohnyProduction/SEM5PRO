@@ -151,7 +151,7 @@
 .buttonStyleDarker:pressed {
     -fx-background-color: linear-gradient(#0A0238, #0B0268);
     -fx-text-fill: grey;
-    -fx-cursor: hand;
+    -fx-cursor: hand;g
 }
 
 
