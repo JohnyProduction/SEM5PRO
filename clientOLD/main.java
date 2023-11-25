@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 public class main {
 
@@ -22,7 +24,7 @@ public class main {
         frame.setVisible(true);
 
         // Rozpocznij wątek do odbierania wiadomości od serwera.
-        new Thread(new MessageReceiver()).start();
+        new Thread(new FutureTask<>(new MessageReceiver())).start();
     }
 
     private static void placeComponents(JPanel panel) {
@@ -80,9 +82,9 @@ public class main {
         }
     }
     // Klasa do odbierania wiadomości od serwera w osobnym wątku.
-    private static class MessageReceiver implements Runnable {
+    private static class MessageReceiver implements Callable<Void> {
         @Override
-        public void run() {
+        public Void call() {
             try {
                 Socket socket = new Socket("localhost", 12345);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -94,6 +96,7 @@ public class main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            return null;
         }
 
         private void displayMessageInGUI(String message) {

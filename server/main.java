@@ -3,6 +3,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
+
 import ServerFunctions.*;
 
 public class main {
@@ -21,15 +24,14 @@ public class main {
                 clientWriters.add(clientWriter);
 
                 // Tworzenie wątku obsługującego każdego klienta.
-                Thread clientThread = new Thread(new ClientHandler(clientSocket, clientWriter));
-                clientThread.start();
+                new Thread(new FutureTask<>(new ClientHandler(clientSocket, clientWriter))).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static class ClientHandler implements Runnable {
+    private static class ClientHandler implements Callable<Void> {
         private Socket clientSocket;
         private PrintWriter clientWriter;
 
@@ -39,7 +41,7 @@ public class main {
         }
 
         @Override
-        public void run() {
+        public Void call() {
             try {
                 String message = Message.receiveMessage(clientSocket);
                 //System.out.println(message);
@@ -62,6 +64,7 @@ public class main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            return null;
         }
     }
     private static boolean checkCredentials(String username) {
