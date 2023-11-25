@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ManegerManegerListOfUsersController implements Initializable {
+public class ManegerListOfUsersController implements Initializable {
     /*Import JavaFX controls*/
     @FXML
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut;

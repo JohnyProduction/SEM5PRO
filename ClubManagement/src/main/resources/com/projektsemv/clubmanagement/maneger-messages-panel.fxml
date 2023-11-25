@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -34,25 +34,31 @@
       <children>
          <AnchorPane prefHeight="356.0" prefWidth="737.0">
             <children>
-               <AnchorPane layoutX="53.0" layoutY="555.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="141.0" prefWidth="591.0" styleClass="loginContainer" />
+               <AnchorPane layoutX="53.0" layoutY="555.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="141.0" prefWidth="591.0" styleClass="normalContainer" />
                <AnchorPane layoutX="79.0" layoutY="575.0" prefHeight="105.0" prefWidth="550.0">
                   <children>
-                     <TextField fx:id="recipientUsername" layoutX="315.0" layoutY="1.0" prefHeight="27.0" prefWidth="219.0" style="-fx-opacity: 0.85;" />
-                     <TextArea fx:id="messageTextArena" layoutY="41.0" prefHeight="64.0" prefWidth="533.0" style="-fx-opacity: 0.85;" />
-                     <ChoiceBox fx:id="roleChoiceBox" layoutX="123.0" layoutY="1.0" prefHeight="27.0" prefWidth="130.0" />
-                     <Label layoutX="131.0" layoutY="6.0" text="Rola" />
-                     <Label layoutX="322.0" layoutY="6.0" text="Nazwa użytkownika" />
-                     <Label layoutX="1.0" layoutY="-1.0" prefHeight="30.0" prefWidth="86.0" styleClass="mediumWhiteTextStyleB" text="Adresat" />
+                     <TextField fx:id="recipientUsername" layoutX="315.0" layoutY="1.0" prefHeight="27.0" prefWidth="219.0" styleClass="list-view" />
+                     <TextArea fx:id="messageTextArena" layoutY="41.0" prefHeight="64.0" prefWidth="533.0" styleClass="list-view" />
+                     <ChoiceBox fx:id="roleChoiceBox" layoutX="114.0" layoutY="1.0" prefHeight="27.0" prefWidth="139.0" styleClass="list-view" />
+                     <Label fx:id="roleLabel" layoutX="119.0" layoutY="6.0" prefHeight="17.0" prefWidth="36.0" text="Rola" />
+                     <Label layoutX="1.0" layoutY="-1.0" prefHeight="30.0" prefWidth="105.0" styleClass="mediumTextStyle2" text="Wyślij do" />
+                     <Label layoutX="269.0" prefHeight="30.0" prefWidth="36.0" styleClass="mediumTextStyle2" text="lub" />
+                     <Label fx:id="messageLabel" layoutX="8.0" layoutY="44.0" prefHeight="17.0" prefWidth="112.0" text="Wpisz wiadomość..." />
+                     <Label fx:id="recipientUsernameLabel" layoutX="322.0" layoutY="6.0" prefHeight="17.0" prefWidth="112.0" text="Nazwa użytkownika" />
                   </children>
                </AnchorPane>
-               <AnchorPane layoutX="51.0" layoutY="51.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="899.0" styleClass="loginContainer">
+               <AnchorPane layoutX="51.0" layoutY="51.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="899.0" styleClass="normalContainer">
                   <children>
-                     <ScrollPane layoutX="29.0" layoutY="24.0" prefHeight="439.0" prefWidth="847.0" />
-                  </children></AnchorPane>
+                     <ListView fx:id="messagesList" layoutX="22.0" layoutY="60.0" prefHeight="256.0" prefWidth="860.0" />
+                     <TextArea fx:id="messagePreview" layoutX="21.0" layoutY="376.0" prefHeight="64.0" prefWidth="859.0" />
+                     <Label layoutX="22.0" layoutY="335.0" prefHeight="32.0" prefWidth="99.0" styleClass="mediumTextStyle2" text="Podgląd" />
+                  </children>
+               </AnchorPane>
                <Button fx:id="sendButton" layoutX="682.0" layoutY="652.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="219.0" styleClass="buttonStyleDarker" text="Wyślij" />
                <Button fx:id="deleteButton" layoutX="682.0" layoutY="596.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="130.0" styleClass="buttonStyleDarker" text="Usuń" />
             </children>
          </AnchorPane>
       </children>
    </VBox>
+   <Label layoutX="324.0" layoutY="68.0" prefHeight="32.0" prefWidth="277.0" styleClass="mediumTextStyle2" text="Twoje wiadomości" />
 </AnchorPane>
