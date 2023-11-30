@@ -45,7 +45,7 @@ public class LoginPanelController implements Initializable {
         signInButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent,"maneger-club-page.fxml","Lista użytkowników",null);
+                ChangeController.changeScene(actionEvent,"maneger-club-page.fxml","Strona klubu",null);
             }
         });
 
