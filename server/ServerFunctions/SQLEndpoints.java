@@ -1,8 +1,8 @@
 package ServerFunctions;
 
 public class SQLEndpoints {
-    static String getUser(){
-        return "SELECT username, password FROM USERS";
+    public static String getUser(String username){
+        return "SELECT username, password FROM USERS WHERE username='"+username+"'";
     }
-    static String getUserPermission(int userID){return "SELECT roleID FROM USERS where userID = "+userID;}
+    public static String getUserPermission(int userID){return "SELECT roleID FROM USERS where userID = "+userID;}
 }
