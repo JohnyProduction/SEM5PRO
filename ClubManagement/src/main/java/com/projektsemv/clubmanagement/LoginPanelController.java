@@ -18,7 +18,7 @@ public class LoginPanelController implements Initializable {
     private Button signInButton, registerButton;
 
     @FXML
-    private Label errorLabel, loginTitleLabel;
+    private Label errorLabel, loginTitleLabel, username;
 
     @FXML
     private TextField usernameTextField;
@@ -37,7 +37,7 @@ public class LoginPanelController implements Initializable {
         registerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent,"register-panel.fxml","Panel rejestracji",null);
+                ChangeController.changeScene(actionEvent,"register-panel.fxml","Panel rejestracji");
             }
         });
 
@@ -45,7 +45,7 @@ public class LoginPanelController implements Initializable {
         signInButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent,"maneger-club-page.fxml","Strona klubu",null);
+                ChangeController.changeScene(actionEvent,"manager-club-page.fxml","Strona klubu");
             }
         });
 

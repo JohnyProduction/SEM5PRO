@@ -27,7 +27,7 @@ public class MessagesPanelController implements Initializable {
     @FXML
     private ChoiceBox<String> roleChoiceBox;
     @FXML
-    private Label roleLabel, messageLabel, recipientUsernameLabel;
+    private Label username, roleLabel, messageLabel, recipientUsernameLabel;
     ObservableList<String> messages = FXCollections.observableArrayList(
             "Admin1" + " ┃ " + "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ameta." ,
             "Marek05" + " ┃ " + "Nam tempor consectetur diam, non blandit leo lacinia interdum. " ,
@@ -45,19 +45,19 @@ public class MessagesPanelController implements Initializable {
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", null);
+                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania");
             }
         });
         buttonOption1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "maneger-club-page.fxml", "Strona klubu", null);
+                ChangeController.changeScene(actionEvent, "manager-club-page.fxml", "Strona klubu");
             }
         });
         buttonOption2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "maneger-list-of-users.fxml", "Lista użytkowników", null);
+                ChangeController.changeScene(actionEvent, "manager-list-of-users.fxml", "Lista użytkowników");
             }
         });
         messagesList.setOnMouseClicked(new EventHandler<MouseEvent>() {

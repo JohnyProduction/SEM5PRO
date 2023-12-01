@@ -217,3 +217,21 @@
     -fx-wrap-text: true;
 }
 
+.bar-chart{
+    -fx-background-color: linear-gradient(#2D1990, #432DB3);
+
+}
+.axis{
+    -fx-tick-label-fill: #FFFFFF;
+    -fx-opacity: 0.7;
+
+}
+.axis-label{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+.chart-bar {
+    -fx-background-color: linear-gradient(#2D1990, #432DB3);
+    -fx-border-color: #000000 transparent rgba(0,168,355,0.3);
+}

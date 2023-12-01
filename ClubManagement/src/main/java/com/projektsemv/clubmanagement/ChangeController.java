@@ -6,40 +6,39 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class ChangeController {
     static Stage stage;
-    public static void changeScene(ActionEvent event, String fxmlFile,
-                                   String title, String username){
+    public static void changeScene(ActionEvent actionEvent, String fxmlFile, String title){
         Parent root = null;
-//        if(username != null) {
-//            try {
-//                FXMLLoader loader =
-//                        new FXMLLoader(DBUtils.class.getResource(fxmlFile));
-//                root = loader.load();
-//                LoginPanelController loginPanelController = loader.getController();
-//                //loginPanelController.setUserInformation(username);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }else{
-                try{
-                    root = FXMLLoader.load(ChangeController.class.getResource(fxmlFile));
-                }catch (IOException e){
+        try{
+            root = FXMLLoader.load(ChangeController.class.getResource(fxmlFile));
+        }catch (IOException e){
                     e.printStackTrace();
-                }
+        }
 
-        //}
-        stage = (Stage)((Node) event.getSource())
-                .getScene().getWindow();
+        stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setTitle(title);
         stage.setScene(new Scene(root, 1280, 720));
         stage.show();
     }
 
+    public static void changeSceneLabel(MouseEvent mouseEvent, String fxmlFile, String title){
+        Parent root = null;
+        try{
+            root = FXMLLoader.load(ChangeController.class.getResource(fxmlFile));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 1280, 720));
+        stage.show();
+    }
 
     public static void singUpUser(ActionEvent event, String username,
                                 String password, String email){
@@ -57,4 +56,6 @@ public class ChangeController {
         //pobranie hasła dla danego loginu
         //jeśli nie ERROR
     }
+
+
 }
