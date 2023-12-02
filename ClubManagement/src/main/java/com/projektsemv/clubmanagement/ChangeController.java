@@ -5,37 +5,37 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import com.projektsemv.clubmanagement.UserInfo.UserType;
 
 public class ChangeController {
     static Stage stage;
-    public static void changeScene(ActionEvent actionEvent, String fxmlFile, String title){
+    public static void changeScene(ActionEvent actionEvent, String fxmlFile, String title, UserType userType){
         Parent root = null;
         try{
-            root = FXMLLoader.load(ChangeController.class.getResource(fxmlFile));
+            root = FXMLLoader.load(ChangeController.class.getResource(userType.name() +"/"+ fxmlFile));
         }catch (IOException e){
                     e.printStackTrace();
         }
 
         stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setTitle(title);
+        stage.setTitle("Club management | " + title);
         stage.setScene(new Scene(root, 1280, 720));
         stage.show();
     }
 
-    public static void changeSceneLabel(MouseEvent mouseEvent, String fxmlFile, String title){
+    public static void changeSceneLabel(MouseEvent mouseEvent, String fxmlFile, String title, UserType userType){
         Parent root = null;
         try{
-            root = FXMLLoader.load(ChangeController.class.getResource(fxmlFile));
+            root = FXMLLoader.load(ChangeController.class.getResource(userType.name() +"/"+ fxmlFile));
         }catch (IOException e){
             e.printStackTrace();
         }
         stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
-        stage.setTitle(title);
+        stage.setTitle("Club management | " + title);
         stage.setScene(new Scene(root, 1280, 720));
         stage.show();
     }

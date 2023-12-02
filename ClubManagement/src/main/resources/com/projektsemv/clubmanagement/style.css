@@ -85,7 +85,7 @@
     -fx-padding: 15;
 }
 .smallBoldTextStyle{
-    -fx-fill: #C5BCF5;
+    -fx-text-fill: #C5BCF5;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
@@ -161,6 +161,10 @@
     -fx-cursor: hand;
 }
 
+.text-area {
+    -fx-opacity: 0.75;
+    -fx-wrap-text: true;
+}
 
 .tableView{
     -fx-background-color: linear-gradient(#432DB3, #2D1990);
@@ -187,6 +191,8 @@
     -fx-text-fill: #FFFFFF;
 }
 
+
+
 .list-view{
     -fx-opacity: 0.75;
 }
@@ -199,7 +205,6 @@
     -fx-pref-height: 0;
     -fx-max-height: 0;
 }
-
 .list-cell {
     -fx-pref-height: 40px;
 }
@@ -212,10 +217,8 @@
     -fx-background-color: linear-gradient(#2600AB, #260083);
     -fx-text-fill: #FFFFFF;
 }
-.text-area {
-    -fx-opacity: 0.75;
-    -fx-wrap-text: true;
-}
+
+
 
 .bar-chart{
     -fx-background-color: linear-gradient(#2D1990, #432DB3);
@@ -235,3 +238,24 @@
     -fx-background-color: linear-gradient(#2D1990, #432DB3);
     -fx-border-color: #000000 transparent rgba(0,168,355,0.3);
 }
+
+
+
+.chart-pie{
+    -fx-stroke: #000000;
+}
+.chart-pie-label{
+    -fx-fill: #C5BCF5;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+.default-color0.chart-pie { -fx-pie-color: #62831D; }
+.default-color1.chart-pie { -fx-pie-color: #5C4ACF; }
+
+
+
+.default-color0.chart-series-line { -fx-stroke: #62831D; }
+.default-color1.chart-series-line { -fx-stroke: #5C4ACF; }
+
+.default-color0.chart-line-symbol { -fx-background-color: #62831D, #62831D; }
+.default-color1.chart-line-symbol { -fx-background-color: #5C4ACF, #5C4ACF; }

@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
+
 public class LoginPanelController implements Initializable {
     /*Import JavaFX controls*/
     @FXML
@@ -37,15 +39,14 @@ public class LoginPanelController implements Initializable {
         registerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent,"register-panel.fxml","Panel rejestracji");
+                ChangeController.changeScene(actionEvent,"register-panel.fxml","Panel rejestracji", MANAGER);
             }
         });
 
-        //TODO: wrzuciłem to co niżej no i wywala błędy
         signInButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent,"manager-club-page.fxml","Strona klubu");
+                ChangeController.changeScene(actionEvent,"manager-club-page.fxml","Strona klubu", MANAGER);
             }
         });
 

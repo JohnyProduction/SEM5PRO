@@ -1,5 +1,6 @@
-package com.projektsemv.clubmanagement;
+package com.projektsemv.clubmanagement.manager;
 
+import com.projektsemv.clubmanagement.ChangeController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
 
 public class MessagesPanelController implements Initializable {
 
@@ -45,19 +48,19 @@ public class MessagesPanelController implements Initializable {
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania");
+                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", MANAGER);
             }
         });
         buttonOption1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-club-page.fxml", "Strona klubu");
+                ChangeController.changeScene(actionEvent, "manager-club-page.fxml", "Strona klubu", MANAGER);
             }
         });
         buttonOption2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-list-of-users.fxml", "Lista użytkowników");
+                ChangeController.changeScene(actionEvent, "manager-list-of-users.fxml", "Lista użytkowników", MANAGER);
             }
         });
         messagesList.setOnMouseClicked(new EventHandler<MouseEvent>() {

@@ -1,23 +1,22 @@
-package com.projektsemv.clubmanagement;
+package com.projektsemv.clubmanagement.manager;
 
+import com.projektsemv.clubmanagement.ChangeController;
+import com.projektsemv.clubmanagement.ChartsCreator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.projektsemv.clubmanagement.FinanceChartsCreator.FinanceType.*;
-import static com.projektsemv.clubmanagement.FinanceChartsCreator.chartFinances;
+import static com.projektsemv.clubmanagement.ChartsCreator.FinanceType.*;
+import static com.projektsemv.clubmanagement.ChartsCreator.chartFinances;
+import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
 
 
 public class ManagerFinanceStatsController implements Initializable {
@@ -31,7 +30,7 @@ public class ManagerFinanceStatsController implements Initializable {
     private BarChart barChart;
     @FXML
     private TableView financeTable;
-    FinanceChartsCreator.FinanceType tempFinanceType;
+    ChartsCreator.FinanceType tempFinanceType;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,26 +46,26 @@ public class ManagerFinanceStatsController implements Initializable {
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania");
+                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", MANAGER);
             }
         });
         buttonOption1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-club-page.fxml", "Strona klubu");
+                ChangeController.changeScene(actionEvent, "manager-club-page.fxml", "Strona klubu", MANAGER);
             }
         });
         buttonOption2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-list-of-users.fxml", "Lista użytkowników");
+                ChangeController.changeScene(actionEvent, "manager-list-of-users.fxml", "Lista użytkowników", MANAGER);
             }
         });
 
         buttonOption3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-messages-panel.fxml", "Wiadomości");
+                ChangeController.changeScene(actionEvent, "manager-messages-panel.fxml", "Wiadomości", MANAGER);
             }
         });
         allTransactionsButton.setOnAction(new EventHandler<ActionEvent>() {

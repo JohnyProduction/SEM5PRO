@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1023.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projektsemv.clubmanagement.MessagesPanelController">
+<AnchorPane prefHeight="720.0" prefWidth="1023.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projektsemv.clubmanagement.manager.MessagesPanelController">
       <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true">
           <image>
-              <Image url="@backgroundVolleyball.png" />
+              <Image url="@../backgroundVolleyball.png" />
           </image>
       </ImageView>
 

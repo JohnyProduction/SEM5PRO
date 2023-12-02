@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<AnchorPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projektsemv.clubmanagement.manager.ManagerClubStatsController">
+          <!--<LineChart fx:id="attendanceStatsChart">
+            <xAxis>
+              <CategoryAxis side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+              <NumberAxis side="LEFT" />
+            </yAxis>
+          </LineChart>
+       </children>
+    </StackPane>-->
+    <AnchorPane>
+       <children>
+     <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true">
+       <image>
+         <Image url="@../backgroundVolleyball.png" />
+       </image>
+     </ImageView>
+       </children>
+    </AnchorPane>
+
+          <AnchorPane>
+       <children>
+         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="250.0" styleClass="loginContainer" />
+       </children>
+    </AnchorPane>
+    <AnchorPane prefHeight="200.0" prefWidth="945.0">
+       <children>
+          <AnchorPane layoutX="865.0" layoutY="567.0" prefHeight="50.0" prefWidth="220.0">
+             <children>
+                 <Button fx:id="resultsStatsButton" layoutX="8.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" styleClass="buttonStyle" text="Wyniki" />
+                <Button fx:id="attendanceStatsButton" layoutX="165.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" styleClass="buttonStyle" text="Frekwencja" />
+             </children>
+          </AnchorPane>
+          <Label fx:id="mainStatsLabel" layoutX="380.0" layoutY="33.0" prefHeight="45.0" prefWidth="257.0" styleClass="loginTopTitleLabel" text="Statystyki wyników" />
+       </children>
+    </AnchorPane>
+
+                 <AnchorPane prefHeight="533.0" prefWidth="326.0">
+       <children>
+         <Label layoutX="40.0" layoutY="64.0" prefHeight="50.0" prefWidth="170.0" styleClass="loginTopTitleLabel" text="Dzień dobry!" />
+         <Label fx:id="username" layoutX="42.0" layoutY="114.0" prefHeight="32.0" prefWidth="200.0" styleClass="mediumTextStyle2" text="Admin1" />
+         <Button fx:id="buttonOption1" layoutX="25.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonStyle" text="Strona klubu" />
+         <Button fx:id="buttonOption2" layoutX="25.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonStyleActual" text="Lista użytkowników" />
+         <Button fx:id="buttonOption3" layoutX="25.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonStyle" text="Powiadomienia" />
+         <Button fx:id="buttonOptions" layoutX="25.0" layoutY="420.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" styleClass="buttonStyleSmaller" text="Moje konto" />
+         <Button fx:id="buttonLogOut" layoutX="25.0" layoutY="460.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" styleClass="buttonStyleSmaller" text="Wyloguj" />
+       </children>
+    </AnchorPane>
+    <AnchorPane layoutX="379.0" layoutY="564.0" prefHeight="59.0" prefWidth="294.0">
+       <children>
+          <AnchorPane layoutY="4.0" prefHeight="50.0" prefWidth="294.0" styleClass="normalContainerLowOpacity" />
+          <Label fx:id="statsInfoData" layoutX="158.0" layoutY="5.0" prefHeight="50.0" prefWidth="152.0" styleClass="loginTopTitleLabel" text="48,5%" />
+          <Label fx:id="statsInfoLabel" layoutX="15.0" layoutY="25.0" styleClass="smallBoldTextStyle" text="Procent zwycięstw" />
+       </children>
+    </AnchorPane>
+   <StackPane fx:id="stackPaneStats" layoutX="379.0" layoutY="83.0" prefHeight="465.0" prefWidth="787.0">
+           <AnchorPane prefHeight="444.0" prefWidth="815.0" styleClass="bar-chart" />
+           <LineChart fx:id="resultStatsChartLine">
+               <xAxis>
+                   <CategoryAxis side="BOTTOM" />
+               </xAxis>
+               <yAxis>
+                   <NumberAxis side="LEFT" />
+               </yAxis>
+           </LineChart>
+           <LineChart fx:id="attendanceStatsChartLine">
+               <xAxis>
+                   <CategoryAxis side="BOTTOM" />
+               </xAxis>
+               <yAxis>
+                   <NumberAxis side="LEFT" />
+               </yAxis>
+           </LineChart>
+            <PieChart fx:id="resultStatsChart" prefHeight="465.0" prefWidth="775.0" />
+   </StackPane>
+ </AnchorPane>
