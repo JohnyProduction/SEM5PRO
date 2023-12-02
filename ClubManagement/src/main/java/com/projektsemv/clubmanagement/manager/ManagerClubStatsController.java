@@ -33,14 +33,14 @@ public class ManagerClubStatsController implements Initializable {
     @FXML
     private PieChart resultStatsChart;
     @FXML
-    private LineChart resultStatsChartLine,attendanceStatsChartLine;
+    private LineChart resultStatsChartLine, attendanceStatsChartLine;
     @FXML
     private StackPane stackPaneStats;
     @FXML
     private TableView financeTable;
 
     @Override
-    public void initialize (URL url, ResourceBundle resourceBundle){
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         resultStatsChart.setData(resultStatsChartData());
         resultStatsChart.setLegendVisible(false);
 
@@ -51,7 +51,7 @@ public class ManagerClubStatsController implements Initializable {
         resultStatsChart.setVisible(true);
         resultStatsChartLine.setVisible(false);
         attendanceStatsChartLine.setVisible(false);
-
+        //TODO: Wartość zwycięstw z bazy
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -80,16 +80,19 @@ public class ManagerClubStatsController implements Initializable {
         resultsStatsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if(attendanceStatsChartLine.isVisible()){
+                if (attendanceStatsChartLine.isVisible()) {
                     attendanceStatsChartLine.setVisible(false);
                     resultStatsChart.setVisible(true);
-                }else if(resultStatsChart.isVisible()){
+                } else if (resultStatsChart.isVisible()) {
                     resultStatsChartLine.setVisible(true);
                     resultStatsChart.setVisible(false);
-                }else if(resultStatsChartLine.isVisible()){
+                } else if (resultStatsChartLine.isVisible()) {
                     resultStatsChartLine.setVisible(false);
                     resultStatsChart.setVisible(true);
                 }
+                mainStatsLabel.setText("Statystyki wyników");
+                statsInfoLabel.setText("Procent zwycięstw");
+                //TODO: Wartość zwycięstw z bazy
             }
         });
         attendanceStatsButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -99,6 +102,9 @@ public class ManagerClubStatsController implements Initializable {
                 resultStatsChart.setVisible(false);
                 attendanceStatsChartLine.setVisible(true);
 
+                mainStatsLabel.setText("Statystyki frekwencji");
+                statsInfoLabel.setText("Średnia na mecz");
+                //TODO: Wartość średniej z bazy
             }
         });
     }
