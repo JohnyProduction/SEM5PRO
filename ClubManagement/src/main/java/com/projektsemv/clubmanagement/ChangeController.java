@@ -16,7 +16,11 @@ public class ChangeController {
     public static void changeScene(ActionEvent actionEvent, String fxmlFile, String title, UserType userType){
         Parent root = null;
         try{
-            root = FXMLLoader.load(ChangeController.class.getResource(userType.name() +"/"+ fxmlFile));
+            if(userType != null) {
+                root = FXMLLoader.load(ChangeController.class.getResource(userType.name() + "/" + fxmlFile));
+            }else{
+                root = FXMLLoader.load(ChangeController.class.getResource(fxmlFile));
+            }
         }catch (IOException e){
                     e.printStackTrace();
         }
@@ -30,7 +34,11 @@ public class ChangeController {
     public static void changeSceneLabel(MouseEvent mouseEvent, String fxmlFile, String title, UserType userType){
         Parent root = null;
         try{
-            root = FXMLLoader.load(ChangeController.class.getResource(userType.name() +"/"+ fxmlFile));
+            if(userType != null) {
+                root = FXMLLoader.load(ChangeController.class.getResource(userType.name() + "/" + fxmlFile));
+            }else{
+                root = FXMLLoader.load(ChangeController.class.getResource(fxmlFile));
+            }
         }catch (IOException e){
             e.printStackTrace();
         }

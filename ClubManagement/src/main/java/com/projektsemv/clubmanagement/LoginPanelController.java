@@ -39,14 +39,14 @@ public class LoginPanelController implements Initializable {
         registerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent,"register-panel.fxml","Panel rejestracji", MANAGER);
+                ChangeController.changeScene(actionEvent,"register-panel.fxml","Panel rejestracji", null);
             }
         });
 
         signInButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent,"manager-club-page.fxml","Strona klubu", MANAGER);
+                ChangeController.changeScene(actionEvent,"club-page-manager.fxml","Strona klubu", MANAGER);
             }
         });
 

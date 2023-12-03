@@ -19,7 +19,7 @@ import static com.projektsemv.clubmanagement.ChartsCreator.chartFinances;
 import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
 
 
-public class ManagerFinanceStatsController implements Initializable {
+public class ManagerFinanceStatsControllerManager implements Initializable {
     @FXML
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut;
     @FXML
@@ -46,26 +46,31 @@ public class ManagerFinanceStatsController implements Initializable {
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", MANAGER);
+                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", null);
             }
         });
         buttonOption1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-club-page.fxml", "Strona klubu", MANAGER);
+                ChangeController.changeScene(actionEvent, "club-page-manager.fxml", "Strona klubu", MANAGER);
             }
         });
         buttonOption2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-list-of-users.fxml", "Lista użytkowników", MANAGER);
+                ChangeController.changeScene(actionEvent, "list-of-users-manager.fxml", "Lista użytkowników", MANAGER);
             }
         });
-
         buttonOption3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-messages-panel.fxml", "Wiadomości", MANAGER);
+                ChangeController.changeScene(actionEvent, "messages-panel-manager.fxml", "Wiadomości", MANAGER);
+            }
+        });
+        buttonOptions.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ChangeController.changeScene(actionEvent, "settings-page-manager.fxml", "Ustawienia", MANAGER);
             }
         });
         allTransactionsButton.setOnAction(new EventHandler<ActionEvent>() {

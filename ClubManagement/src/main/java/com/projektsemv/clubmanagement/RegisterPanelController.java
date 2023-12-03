@@ -47,7 +47,7 @@ public class RegisterPanelController implements Initializable {
         signInButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent,"login-panel.fxml","Panel logowania!", MANAGER);
+                ChangeController.changeScene(actionEvent,"login-panel.fxml","Panel logowania!", null);
             }
         });
 

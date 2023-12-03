@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
 
-public class ManagerClubPageController implements Initializable {
+public class ClubPageControllerManager implements Initializable {
     /*Import JavaFX controls*/
     @FXML
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut;
@@ -26,32 +26,38 @@ public class ManagerClubPageController implements Initializable {
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", MANAGER);
+                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", null);
             }
         });
 
         buttonOption2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-list-of-users.fxml", "Lista użytkowników", MANAGER);
+                ChangeController.changeScene(actionEvent, "list-of-users-manager.fxml", "Lista użytkowników", MANAGER);
             }
         });
         buttonOption3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-messages-panel.fxml", "Wiadomości", MANAGER);
+                ChangeController.changeScene(actionEvent, "messages-panel-manager.fxml", "Wiadomości", MANAGER);
+            }
+        });
+        buttonOptions.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ChangeController.changeScene(actionEvent, "settings-page-manager.fxml", "Ustawienia", MANAGER);
             }
         });
         labelFinance.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                ChangeController.changeSceneLabel(mouseEvent, "manager-finances-stats.fxml", "Finanse", MANAGER);
+                ChangeController.changeSceneLabel(mouseEvent, "finances-stats-manager.fxml", "Finanse", MANAGER);
             }
         });
         labelMoreStats.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                ChangeController.changeSceneLabel(mouseEvent, "manager-club-stats.fxml", "Statystyki klubowe", MANAGER);
+                ChangeController.changeSceneLabel(mouseEvent, "club-stats-manager.fxml", "Statystyki klubowe", MANAGER);
             }
         });
     }

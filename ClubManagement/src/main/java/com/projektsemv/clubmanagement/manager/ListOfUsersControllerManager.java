@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
 
-public class ManagerListOfUsersController implements Initializable {
+public class ListOfUsersControllerManager implements Initializable {
     /*Import JavaFX controls*/
     @FXML
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut;
@@ -25,22 +25,27 @@ public class ManagerListOfUsersController implements Initializable {
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", MANAGER);
+                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", null);
             }
         });
         buttonOption1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-club-page.fxml", "Strona klubu", MANAGER);
+                ChangeController.changeScene(actionEvent, "club-page-manager.fxml", "Strona klubu", MANAGER);
             }
         });
 
         buttonOption3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "manager-messages-panel.fxml", "Wiadomości", MANAGER);
+                ChangeController.changeScene(actionEvent, "messages-panel-manager.fxml", "Wiadomości", MANAGER);
             }
         });
-
+        buttonOptions.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ChangeController.changeScene(actionEvent, "settings-page-manager.fxml", "Ustawienia", MANAGER);
+            }
+        });
     }
 }
