@@ -48,18 +48,9 @@ public class main {
                 System.out.println(message);
 
                 assert message != null;
+                SwitchBoard.SwitchMenuBoard(message, clientWriters);
                 String[] parts = message.split("\\|");
-                if (parts.length >= 3 && parts[0].equals("LOGIN")) {
-                    String username = parts[1];
-                    String password = parts[2];
-                    if (Users.checkUserCredentials(username,password)) {
-                        Message.sendMessage(clientWriters,"Zalogowano");
-                    } else {
-                        Message.sendMessage(clientWriters,"Error");
-                    }
-                }else{
-                    System.out.println("Text null");
-                }
+
                 clientSocket.close();
                 clientWriters.remove(clientWriter); // Usuń obiekt PrintWriter po zakończeniu obsługi klienta.
             } catch (IOException e) {
