@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projektsemv.clubmanagement.fan.ClubPageControllerFan">
+    <AnchorPane>
+        <children>
+            <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" styleClass="smallBoldTextStyle">
+                <image>
+                    <Image url="@../backgroundVolleyball.png" />
+                </image>
+            </ImageView>
+            <AnchorPane layoutX="270.0" prefHeight="720.0" prefWidth="604.0">
+                <children>
+                    <AnchorPane layoutX="563.0" prefHeight="674.0" prefWidth="365.0">
+                        <children>
+                            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="330.0" styleClass="normalContainerLowOpacity" />
+                            <AnchorPane layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="330.0" styleClass="normalContainerLowOpacity" />
+                            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="78.0" prefWidth="330.0" styleClass="normalContainerLowOpacity" />
+                            <AnchorPane layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="330.0" styleClass="normalContainerLowOpacity" />
+                            <AnchorPane layoutY="365.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="330.0" styleClass="normalContainerLowOpacity" />
+                            <Label fx:id="labelNameOfClub" layoutX="10.0" layoutY="25.0" prefHeight="32.0" prefWidth="229.0" styleClass="largeTextStyle" text="FC Barcelona" />
+                            <Label fx:id="labelLeague" layoutX="20.0" layoutY="87.0" prefHeight="38.0" prefWidth="294.0" styleClass="mediumTextStyle" text="III Liga" />
+                            <Label layoutX="11.0" layoutY="143.0" prefHeight="38.0" prefWidth="301.0" styleClass="mediumTextStyle2" text="Trener" />
+                            <Label fx:id="labelManegerName" layoutX="20.0" layoutY="192.0" prefHeight="31.0" prefWidth="301.0" styleClass="mediumTextStyle" text="Arkadiusz Szcześniak" />
+                            <Label layoutX="11.0" layoutY="247.0" prefHeight="38.0" prefWidth="307.0" styleClass="mediumTextStyle2" text="Kontakt" />
+                            <Label fx:id="labelPhoneNumber" layoutX="20.0" layoutY="300.0" prefHeight="31.0" prefWidth="301.0" styleClass="mediumTextStyle" text="12 34 56 789" />
+                            <Label fx:id="labelAddress" layoutX="20.0" layoutY="326.0" prefHeight="31.0" prefWidth="300.0" styleClass="mediumTextStyle" text="Błękitna 48/a 34-600 Kraków" />
+                            <Label layoutX="11.0" layoutY="366.0" prefHeight="62.0" prefWidth="307.0" styleClass="mediumTextStyle2" text="Statystyki" />
+                            <Label fx:id="labelResultStats" layoutX="21.0" layoutY="430.0" prefHeight="38.0" prefWidth="307.0" styleClass="labelClick" text="➦Wyniki" />
+                        </children>
+                    </AnchorPane>
+                    <AnchorPane layoutY="157.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="505.0">
+                        <children>
+                            <TableView layoutX="14.0" layoutY="27.0" prefHeight="472.0" prefWidth="461.0" styleClass="tableView">
+                                <columns>
+                                    <TableColumn minWidth="0.0" prefWidth="109.0" text="Wynik" />
+                                    <TableColumn prefWidth="135.0" text="Przeciwnik" />
+                                    <TableColumn prefWidth="216.0" text="Data" />
+                                </columns>
+                            </TableView>
+                        </children></AnchorPane>
+                </children>
+            </AnchorPane>
+        </children>
+    </AnchorPane>
+
+    <AnchorPane>
+        <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="250.0" styleClass="loginContainer" />
+        </children>
+    </AnchorPane>
+
+    <AnchorPane prefHeight="533.0" prefWidth="326.0">
+        <children>
+            <Label fx:id="username" layoutX="42.0" layoutY="114.0" prefHeight="32.0" prefWidth="200.0" styleClass="mediumTextStyle2" text="Admin1" />
+            <Label layoutX="40.0" layoutY="64.0" prefHeight="50.0" prefWidth="170.0" styleClass="loginTopTitleLabel" text="Dzień dobry!" />
+            <Button fx:id="buttonOption1" layoutX="25.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonStyleActual" text="Strona klubu" />
+            <Button fx:id="buttonOption2" layoutX="25.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonStyle" text="Lista biletów" />
+            <Button fx:id="buttonOption3" layoutX="25.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonStyle" text="Powiadomienia" />
+            <Button fx:id="buttonOptions" layoutX="25.0" layoutY="420.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" styleClass="buttonStyleSmaller" text="Moje konto" />
+            <Button fx:id="buttonLogOut" layoutX="25.0" layoutY="460.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" styleClass="buttonStyleSmaller" text="Wyloguj" />
+        </children>
+    </AnchorPane>
+    <AnchorPane layoutX="296.0" layoutY="28.0" prefHeight="109.0" prefWidth="441.0">
+        <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="109.0" prefWidth="441.0" styleClass="normalContainerCut" />
+         <Label layoutX="163.0" layoutY="5.0" prefHeight="31.0" prefWidth="125.0" styleClass="smallBoldTextStyle" text="Ostatnie spotkanie" />
+            <Label fx:id="resultsClub1" layoutX="60.0" layoutY="20.0" prefHeight="62.0" prefWidth="53.0" styleClass="loginTopTitleLabel" text="FCB" />
+            <Label fx:id="resultsClub2" layoutX="312.0" layoutY="26.0" prefHeight="45.0" prefWidth="67.0" styleClass="loginTopTitleLabel" text="FCF" />
+            <Label fx:id="resultsOfMatch" layoutX="192.0" layoutY="28.0" prefHeight="45.0" prefWidth="65.0" styleClass="loginTopTitleLabel" text="3 : 0" />
+         <Label fx:id="resultsDateOfMatch" layoutX="187.0" layoutY="60.0" prefHeight="31.0" prefWidth="301.0" styleClass="smallBoldTextStyle" text="14.11.2023" />
+        </children>
+    </AnchorPane>
+</AnchorPane>

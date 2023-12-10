@@ -51,7 +51,13 @@ public class LoginPanelController implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 sendLoginDataToServer(usernameTextField.getText(),passwordTextField.getText());
-                ChangeController.changeScene(actionEvent,"club-page-manager.fxml","Strona klubu", MANAGER);
+                System.out.println(usernameTextField.getText());
+                if(!usernameTextField.getText().equals("login")) {
+                    ChangeController.changeScene(actionEvent, "club-page-manager.fxml", "Strona klubu Manager", MANAGER);
+                }else{
+                    //ChangeController.changeScene(actionEvent, "club-page-fan.fxml", "Strona klubu Fan", MEMBER);
+                    ChangeController.changeScene(actionEvent, "club-page-fan.fxml", "Strona klubu Fan", FAN);
+                }
             }
         });
 

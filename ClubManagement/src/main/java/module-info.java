@@ -10,4 +10,6 @@ module com.projektsemv.clubmanagement {
     exports com.projektsemv.clubmanagement;
     exports com.projektsemv.clubmanagement.manager;
     opens com.projektsemv.clubmanagement.manager to javafx.fxml;
+    exports com.projektsemv.clubmanagement.fan;
+    opens com.projektsemv.clubmanagement.fan to javafx.fxml;
 }

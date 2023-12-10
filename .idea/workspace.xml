@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4451e890-46e2-415e-a497-5e2a75edaf87" name="Changes" comment="" />
+    <list default="true" id="4451e890-46e2-415e-a497-5e2a75edaf87" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/server/ServerFunctions/SwitchBoard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/out/production/server/ServerFunctions/SwitchBoard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClubManagement/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ClubManagement/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClubManagement/src/main/java/com/projektsemv/clubmanagement/LoginPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClubManagement/src/main/java/com/projektsemv/clubmanagement/LoginPanelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clientOLD/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clientOLD/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clientOLD/out/production/client/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/out/production/client/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clientOLD/out/production/client/main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/out/production/client/main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clientOLD/out/production/client/main$MessageReceiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/out/production/client/main$MessageReceiver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clientOLD/out/production/client/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/out/production/client/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ServerFunctions/SQLEndpoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/ServerFunctions/SQLEndpoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ServerFunctions/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/ServerFunctions/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/server/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/server/ServerFunctions/SQLEndpoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/server/ServerFunctions/SQLEndpoints.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/server/ServerFunctions/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/server/ServerFunctions/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/server/main$ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/server/main$ClientHandler.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

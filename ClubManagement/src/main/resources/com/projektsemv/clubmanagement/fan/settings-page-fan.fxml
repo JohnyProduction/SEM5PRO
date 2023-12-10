@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projektsemv.clubmanagement.fan.SettingsPageControllerFan">
+   <AnchorPane>
+      <children>
+    <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true">
+      <image>
+        <Image url="@../backgroundVolleyball.png" />
+      </image>
+    </ImageView>
+         <AnchorPane layoutX="483.0" layoutY="-8.0" prefHeight="642.0" prefWidth="595.0" styleClass="normalContainerLowOpacity" />
+         <AnchorPane layoutX="317.0" layoutY="39.0" prefHeight="642.0" prefWidth="915.0">
+            <children>
+               <Label layoutX="317.0" layoutY="36.0" prefHeight="50.0" prefWidth="326.0" styleClass="loginTopTitleLabel" text="Ustawienia użytkownika" />
+               <TextField fx:id="settingsUsername" layoutX="380.0" layoutY="150.0" prefHeight="30.0" prefWidth="200.0" styleClass="textField" />
+               <TextField fx:id="settingsName" layoutX="380.0" layoutY="210.0" prefHeight="30.0" prefWidth="200.0" styleClass="textField" />
+               <TextField fx:id="settingsSurname" layoutX="380.0" layoutY="270.0" prefHeight="30.0" prefWidth="200.0" styleClass="textField" />
+               <TextField fx:id="settingsPassword" layoutX="380.0" layoutY="330.0" prefHeight="30.0" prefWidth="200.0" styleClass="textField" />
+               <TextField fx:id="settingsEmail" layoutX="380.0" layoutY="390.0" prefHeight="30.0" prefWidth="200.0" styleClass="textField" />
+               <Text layoutX="241.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="Nazwa użytkownika:" wrappingWidth="123.0" />
+               <Text layoutX="320.0" layoutY="350.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="Hasło:" wrappingWidth="38.0" />
+               <Text layoutX="285.0" layoutY="410.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="Adres email:" wrappingWidth="73.0" />
+               <Text layoutX="328.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="Imię:" wrappingWidth="30.0" />
+               <Text layoutX="300.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="Nazwisko:" wrappingWidth="61.0" />
+      
+               <Button fx:id="settingsEditButton" layoutX="380.0" layoutY="460.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="95.0" styleClass="buttonStyle" text="Edytuj" />
+               <Button fx:id="settingsDeleteButton" layoutX="487.0" layoutY="460.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="95.0" styleClass="buttonStyle" text="Usuń" />
+            </children>
+         </AnchorPane>
+      </children>
+   </AnchorPane>
+
+         <AnchorPane>
+      <children>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="250.0" styleClass="loginContainer" />
+      </children>
+   </AnchorPane>
+
+    <AnchorPane prefHeight="533.0" prefWidth="326.0">
+      <children>
+        <Label layoutX="40.0" layoutY="64.0" prefHeight="50.0" prefWidth="170.0" styleClass="loginTopTitleLabel" text="Dzień dobry!" />
+        <Label fx:id="username" layoutX="42.0" layoutY="114.0" prefHeight="32.0" prefWidth="200.0" styleClass="mediumTextStyle2" text="Admin1" />
+        <Button fx:id="buttonOption1" layoutX="25.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonStyle" text="Strona klubu" />
+        <Button fx:id="buttonOption2" layoutX="25.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonStyleActual" text="Lista biletów" />
+        <Button fx:id="buttonOption3" layoutX="25.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonStyle" text="Powiadomienia" />
+        <Button fx:id="buttonOptions" layoutX="25.0" layoutY="420.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" styleClass="buttonStyleSmaller" text="Moje konto" />
+        <Button fx:id="buttonLogOut" layoutX="25.0" layoutY="460.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" styleClass="buttonStyleSmaller" text="Wyloguj" />
+      </children>
+   </AnchorPane>
+</AnchorPane>
