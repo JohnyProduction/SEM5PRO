@@ -9,12 +9,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
 
 public class LoginPanelController implements Initializable {
+
     /*Import JavaFX controls*/
     @FXML
     private Button signInButton, registerButton;
@@ -46,11 +50,26 @@ public class LoginPanelController implements Initializable {
         signInButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent) {
+                sendLoginDataToServer(usernameTextField.getText(),passwordTextField.getText());
                 ChangeController.changeScene(actionEvent,"club-page-manager.fxml","Strona klubu", MANAGER);
             }
         });
 
 
+    }
+    private static void sendLoginDataToServer(String username, String password) {
+        try {
+            Socket socket = new Socket("localhost", 12345);
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+
+            // Wysłanie danych do serwera w określonym formacie, na przykład:
+            writer.println("LOGIN|" + username + "|" + password);
+
+            writer.close();
+            socket.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

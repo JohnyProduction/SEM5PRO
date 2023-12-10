@@ -81,7 +81,6 @@ public class main {
             ex.printStackTrace();
         }
     }
-    // Klasa do odbierania wiadomości od serwera w osobnym wątku.
     private static class MessageReceiver implements Callable<Void> {
         @Override
         public Void call() {
@@ -90,7 +89,6 @@ public class main {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 String message;
                 while ((message = reader.readLine()) != null) {
-                    // Odbierz i wyświetl wiadomość od serwera w GUI.
                     displayMessageInGUI(message);
                 }
             } catch (IOException e) {
@@ -101,9 +99,6 @@ public class main {
 
         private void displayMessageInGUI(String message) {
             System.out.println(message);
-            // Tutaj można zaimplementować kod do wyświetlania otrzymanych wiadomości w GUI klienta.
-            // Możesz użyć JLabel lub JTextArea do wyświetlenia wiadomości.
-            // Pamiętaj o zachowaniu dostępu do komponentów GUI z poziomu wątku Swing.
         }
     }
 }
