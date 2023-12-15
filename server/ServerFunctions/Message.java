@@ -11,7 +11,7 @@ import java.util.List;
 public class Message {
     public static void sendMessage(List<PrintWriter> clientWriters, String message) {
         for (PrintWriter writer : clientWriters) {
-            writer.println("Serwer: " + message);
+            writer.println(message);
         }
     }
     public static String receiveMessage(Socket socket) {
@@ -19,8 +19,7 @@ public class Message {
             InputStream inputStream = socket.getInputStream();
             byte[] buffer = new byte[1024];
             int bytesRead = inputStream.read(buffer);
-            String message = new String(buffer, 0, bytesRead);
-            return message;
+            return new String(buffer, 0, bytesRead);
         } catch (IOException e) {
             e.printStackTrace(); // handle exceptions properly in a real application
             return null;

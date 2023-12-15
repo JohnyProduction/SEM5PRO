@@ -9,6 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,7 +32,7 @@ public class RegisterPanelController implements Initializable {
 
     @FXML
     private PasswordField passwordTextField, passwordConfirmedTextField;
-
+    public static boolean status;
     protected void onRegisterButtonClick(){
 
 
@@ -44,12 +49,47 @@ public class RegisterPanelController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        signInButton.setOnAction(new EventHandler<ActionEvent>() {
+
+        registerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent,"login-panel.fxml","Panel logowania!", null);
+
+                sendRegisterDataToServer(usernameTextField.getText(),passwordTextField.getText(),emailTextField.getText());
+                if(status){
+                    ChangeController.changeScene(actionEvent,"login-panel.fxml","Panel logowania!", null);
+                }else{
+                    errorLabel.setText("Błąd rejestracji");
+                    errorLabel.setStyle("-fx-text-fill: RED;");
+                }
             }
         });
 
+    }
+    private static void handleServerResponse(String response) {
+        if ("SUCCESS".equals(response)) {
+            status = true;
+        } else {
+            status= false;
+        }
+    }
+    private static void sendRegisterDataToServer(String username, String password, String email) {
+        try {
+            Socket socket = new Socket("localhost", 12345);
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+
+            // Wysłanie danych do serwera w określonym formacie, na przykład:
+            writer.println("REGISTER|" + username + "|" + password +"|"+email);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String response = reader.readLine();
+            System.out.println(response);
+            handleServerResponse(response);
+
+            reader.close();
+            writer.close();
+            socket.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

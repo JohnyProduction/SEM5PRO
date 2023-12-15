@@ -20,13 +20,13 @@ public class Users {
         }
         return false; // Brak dopasowania użytkownika lub niepoprawne hasło
     }
-    public static boolean registerUserCredentials(String username,String password, String email,String name, String lastname) {
+    public static boolean registerUserCredentials(String username,String password, String email) {
         List<Map<String, Object>> userList = DBConnection.fetchDataFromDatabase(SQLEndpoints.getUser(username));
-        if (userList != null && !userList.isEmpty()) {
+        if (!userList.isEmpty()) {
             System.out.println("Taki użytkownik istnieje!");
             return false;
         } else {
-            DBConnection.fetchDataFromDatabase(SQLEndpoints.registerNewUser(username,password,email,name,lastname));
+            DBConnection.fetchDataFromDatabase(SQLEndpoints.registerNewUser(username,password,email));
             return true;
         }
     }

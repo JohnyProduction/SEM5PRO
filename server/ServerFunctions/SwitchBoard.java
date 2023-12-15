@@ -9,7 +9,7 @@ public class SwitchBoard {
                 String username = parts[1];
                 String password = parts[2];
                 if (Users.checkUserCredentials(username,password)) {
-                    Message.sendMessage(clientWriters,"Zalogowano");
+                    Message.sendMessage(clientWriters,"LOGIN|SUCCESS");
                 } else {
                     Message.sendMessage(clientWriters,"Error");
                 }
@@ -17,11 +17,9 @@ public class SwitchBoard {
             case "REGISTER":
                 String login = parts[1];
                 String pass =  parts[2];
-                String name = parts[3];
-                String lastname = parts[4];
-                String email = parts[5];
-                if(Users.registerUserCredentials(login,pass,name,lastname,email)){
-                    Message.sendMessage(clientWriters,"Dodano użytkownika");
+                String email = parts[3];
+                if(Users.registerUserCredentials(login,pass,email)){
+                    Message.sendMessage(clientWriters,"SUCCESS");
                 }else {
                     Message.sendMessage(clientWriters,"Error");
                 }

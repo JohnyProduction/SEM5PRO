@@ -16,22 +16,27 @@ public class DBConnection {
         List<Map<String, Object>> resultList = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)) {
+             Statement statement = connection.createStatement()) {
+                if (query.toLowerCase().startsWith("select")) {
+                    try (ResultSet resultSet = statement.executeQuery(query)) {
+                        ResultSetMetaData metaData = resultSet.getMetaData();
+                        int columnCount = metaData.getColumnCount();
 
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int columnCount = metaData.getColumnCount();
-
-            while (resultSet.next()) {
-                Map<String, Object> row = new HashMap<>();
-                for (int i = 1; i <= columnCount; i++) {
-                    String columnName = metaData.getColumnName(i);
-                    Object value = resultSet.getObject(i);
-                    row.put(columnName, value);
+                        while (resultSet.next()) {
+                            Map<String, Object> row = new HashMap<>();
+                            for (int i = 1; i <= columnCount; i++) {
+                                String columnName = metaData.getColumnName(i);
+                                Object value = resultSet.getObject(i);
+                                row.put(columnName, value);
+                            }
+                            resultList.add(row);
+                        }
+                    }
+                } else {
+                    // For non-SELECT queries (INSERT, UPDATE, DELETE, etc.)
+                    int rowsAffected = statement.executeUpdate(query);
+                    System.out.println("Rows affected: " + rowsAffected);
                 }
-                resultList.add(row);
-            }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

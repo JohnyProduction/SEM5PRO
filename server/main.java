@@ -43,13 +43,11 @@ public class main {
         @Override
         public Void call() {
             try {
-                //System.out.println(DBConnection.fetchDataFromDatabase(SQLEndpoints.getUser()));
                 String message = Message.receiveMessage(clientSocket);
                 System.out.println(message);
 
                 assert message != null;
                 SwitchBoard.SwitchMenuBoard(message, clientWriters);
-                String[] parts = message.split("\\|");
 
                 clientSocket.close();
                 clientWriters.remove(clientWriter); // Usuń obiekt PrintWriter po zakończeniu obsługi klienta.
