@@ -1,5 +1,6 @@
 package com.projektsemv.clubmanagement;
 
+import com.projektsemv.clubmanagement.UserFunction.UserFunctions;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +16,8 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.io.*;
+
+import com.projektsemv.clubmanagement.UserFunction.UserFunctions.*;
 
 import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
 
@@ -79,26 +82,17 @@ public class LoginPanelController implements Initializable {
 
     }
     private static void handleServerResponse(String response) {
-        if ("SUCCESS".equals(response)) {
-            status = true;
-        } else {
-           status = false;
-        }
+        status = UserFunctions.SwitchLoginClient(response);
     }
     private static void sendLoginDataToServer(String username, String password) {
             try {
                 Socket socket = new Socket("localhost", 12345);
                 PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
 
-                // Wysłanie danych do serwera w określonym formacie, na przykład:
                 writer.println("LOGIN|" + username + "|" + password);
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                String response = reader.readLine();
-                System.out.println(response);
-                handleServerResponse(response);
+                handleServerResponse(UserFunctions.ReadMessage(socket));
                 writer.close();
-                reader.close();
                 socket.close();
             } catch (IOException ex) {
                 ex.printStackTrace();

@@ -1,5 +1,6 @@
 package com.projektsemv.clubmanagement;
 
+import com.projektsemv.clubmanagement.UserFunction.UserFunctions;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -66,26 +67,17 @@ public class RegisterPanelController implements Initializable {
 
     }
     private static void handleServerResponse(String response) {
-        if ("SUCCESS".equals(response)) {
-            status = true;
-        } else {
-            status= false;
-        }
+        status = UserFunctions.SwitchLoginClient(response);
     }
     private static void sendRegisterDataToServer(String username, String password, String email) {
         try {
             Socket socket = new Socket("localhost", 12345);
             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
 
-            // Wysłanie danych do serwera w określonym formacie, na przykład:
+
             writer.println("REGISTER|" + username + "|" + password +"|"+email);
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String response = reader.readLine();
-            System.out.println(response);
-            handleServerResponse(response);
-
-            reader.close();
+            handleServerResponse(UserFunctions.ReadMessage(socket));
             writer.close();
             socket.close();
         } catch (IOException ex) {

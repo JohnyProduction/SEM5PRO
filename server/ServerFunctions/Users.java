@@ -9,13 +9,12 @@ public class Users {
         List<Map<String, Object>> userList = DBConnection.fetchDataFromDatabase(SQLEndpoints.getUser(username));
         System.out.println(userList);
         for (Map<String, Object> row : userList) {
+            Object storedUsername = row.get("username");
             Object storedPassword = row.get("password");
-            System.out.println("Stored Password from DB: " + storedPassword);
-            System.out.println("Password from Client: " + password);
-
-            // Sprawdź, czy hasła się zgadzają
-            if (storedPassword != null && storedPassword.toString().trim().equals(password.trim())) {
-                return true; // Znaleziono użytkownika z pasującym hasłem
+            if(storedUsername != null && storedUsername.toString().trim().equals(username.trim())){
+                if (storedPassword != null && storedPassword.toString().trim().equals(password.trim())) {
+                    return true; // Znaleziono użytkownika z pasującym hasłem
+                }
             }
         }
         return false; // Brak dopasowania użytkownika lub niepoprawne hasło

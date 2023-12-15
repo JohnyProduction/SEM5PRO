@@ -11,7 +11,7 @@ public class SwitchBoard {
                 if (Users.checkUserCredentials(username,password)) {
                     Message.sendMessage(clientWriters,"LOGIN|SUCCESS");
                 } else {
-                    Message.sendMessage(clientWriters,"Error");
+                    Message.sendMessage(clientWriters,"LOGIN|ERROR");
                 }
                 break;
             case "REGISTER":
@@ -19,9 +19,9 @@ public class SwitchBoard {
                 String pass =  parts[2];
                 String email = parts[3];
                 if(Users.registerUserCredentials(login,pass,email)){
-                    Message.sendMessage(clientWriters,"SUCCESS");
+                    Message.sendMessage(clientWriters,"REGISTER|SUCCESS");
                 }else {
-                    Message.sendMessage(clientWriters,"Error");
+                    Message.sendMessage(clientWriters,"REGISTER|ERROR");
                 }
                 break;
             case "":
