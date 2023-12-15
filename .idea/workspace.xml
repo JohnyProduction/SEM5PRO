@@ -5,24 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4451e890-46e2-415e-a497-5e2a75edaf87" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/ServerFunctions/SwitchBoard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/out/production/server/ServerFunctions/SwitchBoard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClubManagement/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ClubManagement/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClubManagement/src/main/java/com/projektsemv/clubmanagement/ChangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClubManagement/src/main/java/com/projektsemv/clubmanagement/ChangeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClubManagement/src/main/java/com/projektsemv/clubmanagement/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClubManagement/src/main/java/com/projektsemv/clubmanagement/LoginPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClubManagement/src/main/java/com/projektsemv/clubmanagement/LoginPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClubManagement/src/main/java/com/projektsemv/clubmanagement/LoginPanelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientOLD/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientOLD/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientOLD/out/production/client/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/out/production/client/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientOLD/out/production/client/main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/out/production/client/main$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientOLD/out/production/client/main$MessageReceiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/out/production/client/main$MessageReceiver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientOLD/out/production/client/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/clientOLD/out/production/client/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/ServerFunctions/SQLEndpoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/ServerFunctions/SQLEndpoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/ServerFunctions/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/ServerFunctions/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/server/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/server/ServerFunctions/SQLEndpoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/server/ServerFunctions/SQLEndpoints.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/server/ServerFunctions/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/server/ServerFunctions/Users.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/server/main$ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/server/main$ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClubManagement/src/main/java/com/projektsemv/clubmanagement/fan/TicketsPanelControllerFan.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClubManagement/src/main/java/com/projektsemv/clubmanagement/fan/TicketsPanelControllerFan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClubManagement/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/ClubManagement/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClubManagement/src/main/resources/com/projektsemv/clubmanagement/fan/tickets-panel-fan.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ClubManagement/src/main/resources/com/projektsemv/clubmanagement/fan/tickets-panel-fan.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClubManagement/src/main/resources/com/projektsemv/clubmanagement/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/ClubManagement/src/main/resources/com/projektsemv/clubmanagement/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SEM5PRO/ServerFunctions/SQLEndpoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SEM5PRO/ServerFunctions/SQLEndpoints.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SEM5PRO/ServerFunctions/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SEM5PRO/ServerFunctions/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SEM5PRO/main$ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SEM5PRO/main$ClientHandler.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +29,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
@@ -43,23 +48,62 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/janpe/Documents/GitHub/SEM5PRO/client&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Daniel/Studia/SEMESTR 5/Projekt/SEM5PRO/ClubManagement/src/main/resources/com/projektsemv/clubmanagement/member",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Daniel\Studia\SEMESTR 5\Projekt\SEM5PRO\ClubManagement\src\main\resources\com\projektsemv\clubmanagement\member" />
+      <recent name="D:\Daniel\Studia\SEMESTR 5\Projekt\SEM5PRO\ClubManagement\src\main\resources\com\projektsemv\clubmanagement\manager" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Daniel\Studia\SEMESTR 5\Projekt\SEM5PRO\ClubManagement\src\main\resources\com\projektsemv\clubmanagement\fan" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.projektsemv.clubmanagement.fan" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.projektsemv.clubmanagement.member" />
+      <recent name="com.projektsemv.clubmanagement.manager" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Client">
+    <configuration name="Client" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.projektsemv.clubmanagement.LoginPanel" />
+      <module name="Client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="main" />
+      <module name="SEM5PRO" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.Server" />
+    </list>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

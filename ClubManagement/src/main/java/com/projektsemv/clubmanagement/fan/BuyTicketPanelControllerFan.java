@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 import static com.projektsemv.clubmanagement.UserInfo.UserType.FAN;
 
-public class TicketsPanelControllerFan implements Initializable {
+public class BuyTicketPanelControllerFan implements Initializable {
 
     @FXML
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut, buyTicketButton;
@@ -40,14 +40,26 @@ public class TicketsPanelControllerFan implements Initializable {
             "Szefuńvcio12" + " ┃ " + "Donec nibh tortor, lacinia sit amet orci at, " ,
             "Kibic1" + " ┃ " + "iaculis condimentum est. Donec gravida ultrices diam a aliquet. "
     );
+    ObservableList<String> roles = FXCollections.observableArrayList("Właściciel", "Gracz", "Kibic");
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         messagesList.setItems(messages);
-        //roleChoiceBox.setItems(roles);
+        buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", null);
+            }
+        });
         buttonOption1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 ChangeController.changeScene(actionEvent, "club-page-fan.fxml", "Strona klubu", FAN);
+            }
+        });
+        buttonOption2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ChangeController.changeScene(actionEvent, "tickets-panel-fan.fxml", "Lista biletów", FAN);
             }
         });
         buttonOption3.setOnAction(new EventHandler<ActionEvent>() {
@@ -62,28 +74,15 @@ public class TicketsPanelControllerFan implements Initializable {
                 ChangeController.changeScene(actionEvent, "settings-page-fan.fxml", "Ustawienia", FAN);
             }
         });
-        buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", null);
-            }
-        });
         messagesList.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 //Pobieranie do textArea zaznaczonego elementu
                 String selectedItem = messagesList.getSelectionModel().getSelectedItem();
-                messagePreview.setText("\n" + selectedItem);
+                messagePreview.setText(selectedItem);
                 messagePreview.setEditable(false);
             }
         });
-        buyTicketButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "buy-ticket-panel-fan.fxml", "Kupno biletów", FAN);
-            }
-        });
-
 
     }
 }

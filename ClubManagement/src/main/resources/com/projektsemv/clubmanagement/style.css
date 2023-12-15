@@ -206,7 +206,7 @@
     -fx-max-height: 0;
 }
 .list-cell {
-    -fx-pref-height: 40px;
+    -fx-pref-height: 50px;
 }
 .list-cell:hover {
     -fx-background-color: linear-gradient(#360EAB, #360E83);

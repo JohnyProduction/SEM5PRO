@@ -26,7 +26,11 @@ public class ChangeController {
         }
 
         stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setTitle("Club management | " + title);
+        if(userType != null) {
+            stage.setTitle("Club management | " + title + " | " + userType.name());
+        }else{
+            stage.setTitle("Club management | " + title + "|");
+        }
         stage.setScene(new Scene(root, 1280, 720));
         stage.show();
     }
@@ -43,27 +47,14 @@ public class ChangeController {
             e.printStackTrace();
         }
         stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
-        stage.setTitle("Club management | " + title);
+
+        if(userType != null) {
+            stage.setTitle("Club management | " + title + " | " + userType.name());
+        }else{
+            stage.setTitle("Club management | " + title);
+        }
+
         stage.setScene(new Scene(root, 1280, 720));
         stage.show();
     }
-
-    public static void singUpUser(ActionEvent event, String username,
-                                String password, String email){
-        //łączenie z bazą danych
-        //sprawdzenie czy użytkownik istnieje
-        //("SELECT * FROM users WHERE username = ?")
-        //jeśli istnieje zwracamy ERROR
-        //else INSERT INTO users (...) VALUES (?,?,...)
-
-    }
-
-    public static void logInUser(ActionEvent event, String username,
-                                 String password){
-        //łączenie z bazą
-        //pobranie hasła dla danego loginu
-        //jeśli nie ERROR
-    }
-
-
 }

@@ -52,11 +52,13 @@ public class LoginPanelController implements Initializable {
             public void handle(ActionEvent actionEvent) {
                 sendLoginDataToServer(usernameTextField.getText(),passwordTextField.getText());
                 System.out.println(usernameTextField.getText());
-                if(!usernameTextField.getText().equals("login")) {
-                    ChangeController.changeScene(actionEvent, "club-page-manager.fxml", "Strona klubu Manager", MANAGER);
+                if(usernameTextField.getText().equals("fan")) {
+                    ChangeController.changeScene(actionEvent, "club-page-fan.fxml", "Strona klubu", FAN);
+                }else if((usernameTextField.getText().equals("m"))) {
+                    ChangeController.changeScene(actionEvent, "club-page-member.fxml", "Strona klubu", MEMBER);
                 }else{
-                    //ChangeController.changeScene(actionEvent, "club-page-fan.fxml", "Strona klubu Fan", MEMBER);
-                    ChangeController.changeScene(actionEvent, "club-page-fan.fxml", "Strona klubu Fan", FAN);
+                    ChangeController.changeScene(actionEvent, "club-page-manager.fxml", "Strona klubu", MANAGER);
+
                 }
             }
         });
