@@ -1,4 +1,4 @@
-package com.projektsemv.clubmanagement.fan;
+package com.projektsemv.clubmanagement.member;
 
 import com.projektsemv.clubmanagement.ChangeController;
 import javafx.collections.FXCollections;
@@ -14,12 +14,12 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.projektsemv.clubmanagement.UserInfo.UserType.FAN;
+import static com.projektsemv.clubmanagement.UserInfo.UserType.MEMBER;
 
-public class TicketsPanelControllerFan implements Initializable {
+public class MessagesPanelControllerMember implements Initializable {
 
     @FXML
-    private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut, buyTicketButton;
+    private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut;
 
     @FXML
     private ListView<String> messagesList;
@@ -40,32 +40,33 @@ public class TicketsPanelControllerFan implements Initializable {
             "Szefuńvcio12" + " ┃ " + "Donec nibh tortor, lacinia sit amet orci at, " ,
             "Kibic1" + " ┃ " + "iaculis condimentum est. Donec gravida ultrices diam a aliquet. "
     );
+    ObservableList<String> roles = FXCollections.observableArrayList("Właściciel", "Gracz", "Kibic");
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         messagesList.setItems(messages);
-        //roleChoiceBox.setItems(roles);
+        roleChoiceBox.setItems(roles);
+        buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", null);
+            }
+        });
         buttonOption1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "club-page-fan.fxml", "Strona klubu", FAN);
+                ChangeController.changeScene(actionEvent, "club-page-member.fxml", "Strona klubu", MEMBER);
             }
         });
-        buttonOption3.setOnAction(new EventHandler<ActionEvent>() {
+        buttonOption2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "messages-panel-fan.fxml", "Wiadomości", FAN);
+                ChangeController.changeScene(actionEvent, "list-of-users-member.fxml", "Lista użytkowników", MEMBER);
             }
         });
         buttonOptions.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "settings-page-fan.fxml", "Ustawienia", FAN);
-            }
-        });
-        buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", null);
+                ChangeController.changeScene(actionEvent, "settings-page-member.fxml", "Ustawienia", MEMBER);
             }
         });
         messagesList.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -73,17 +74,34 @@ public class TicketsPanelControllerFan implements Initializable {
             public void handle(MouseEvent event) {
                 //Pobieranie do textArea zaznaczonego elementu
                 String selectedItem = messagesList.getSelectionModel().getSelectedItem();
-                messagePreview.setText("\n" + selectedItem);
+                messagePreview.setText(selectedItem);
                 messagePreview.setEditable(false);
             }
         });
-        buyTicketButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "buy-ticket-panel-fan.fxml", "Kupno biletów", FAN);
+        //Ukryj etykietę po wybraniu opcji
+        roleChoiceBox.setOnAction(event -> {
+            roleLabel.setVisible(false);
+        });
+        //Ukryj etykietę po kliknięciu
+        messageTextArena.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                messageLabel.setVisible(false); // Ukryj etykietę po kliknięciu w obszar tekstowy
+                messageTextArena.setEditable(true);
+            }else{
+                messageTextArena.setEditable(false);
             }
+            event.consume(); //zdarzenie obsłużone
         });
 
+        recipientUsername.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                recipientUsername.setEditable(true);
+                recipientUsernameLabel.setVisible(false);
+            }else{
+                recipientUsername.setEditable(false);
+            }
+            event.consume();
+        });
 
     }
 }
