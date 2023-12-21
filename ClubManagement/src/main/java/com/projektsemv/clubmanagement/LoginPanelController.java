@@ -41,11 +41,9 @@ public class LoginPanelController implements Initializable {
     private PasswordField passwordTextField;
 
     public static boolean status;
-    //    /* Make the label with the fx:id of 'errorLabel' change its text and color on Sign in Button click */
-    protected void onSignInButtonClick() {
-        errorLabel.setText("Podane dane są błędne!");
-        errorLabel.setStyle("-fx-text-fill: RED;");
-    }
+//    protected void onSignInButtonClick() {
+//        errorLabel.setText("ERROR! Podane dane są błędne!");
+//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -64,8 +62,7 @@ public class LoginPanelController implements Initializable {
                 if(status){
                     ChangeController.changeScene(actionEvent, "club-page-member.fxml", "Strona klubu", MEMBER);
                 }else{
-                    errorLabel.setText("Błąd logowania");
-                    errorLabel.setStyle("-fx-text-fill: RED;");
+                    errorLabel.setText("ERROR! Błąd logowania!");
                 }
                 //System.out.println(usernameTextField.getText());
                 /*
