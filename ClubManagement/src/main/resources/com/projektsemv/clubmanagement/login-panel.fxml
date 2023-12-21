@@ -31,7 +31,7 @@
     <Label fx:id="loginTitleLabel" layoutX="32.0" layoutY="90.0" prefHeight="20.0" prefWidth="282.0" styleClass="loginTitleLabel" text="Zaloguj się albo zarejestruj aby kontynuować" />
     <TextField fx:id="usernameTextField" layoutX="28.0" layoutY="120.0" prefHeight="51.0" prefWidth="290.0" promptText="nazwa użytkownika" styleClass="textField" />
     <PasswordField fx:id="passwordTextField" layoutX="28.0" layoutY="180.0" prefHeight="51.0" prefWidth="290.0" promptText="hasło" styleClass="textField" />
-    <Label fx:id="errorLabel" layoutX="7.0" layoutY="49.0" prefHeight="31.0" prefWidth="192.0" styleClass="errorLabel" text="" />
+    <Label fx:id="errorLabel" layoutX="112.0" layoutY="323.0" prefHeight="31.0" prefWidth="148.0" styleClass="errorLabel" text="" />
     <Button fx:id="signInButton" layoutX="28.0" layoutY="260.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="137.0" styleClass="buttonStyle" text="Zaloguj" />
     <Button fx:id="registerButton" layoutX="180.0" layoutY="260.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="137.0" styleClass="buttonStyle" text="Zarejestruj" />
       </children>
