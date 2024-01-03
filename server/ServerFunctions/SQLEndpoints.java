@@ -2,7 +2,7 @@ package ServerFunctions;
 
 public class SQLEndpoints {
     public static String getUser(String username){
-        return "SELECT username, password, UserID FROM USERS WHERE username='"+username+"'";
+        return "SELECT username, password FROM USERS WHERE username='"+username+"'";
     }
     public static String getAllUserInfo(String username, String password){
         return "SELECT * FROM users WHERE username='"+username+"' and password='"+password+"'";

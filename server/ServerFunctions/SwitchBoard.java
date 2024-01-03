@@ -2,19 +2,16 @@ package ServerFunctions;
 import java.io.*;
 import java.util.List;
 public class SwitchBoard {
-    public static int userID;
-    public static void SwitchMenuBoard(String message,PrintWriter serverWriter ){
+    public static void SwitchMenuBoard(String message,List<PrintWriter> clientWriters ){
         String[] parts = message.split("\\|");
         switch(parts[0].trim()) {
             case "LOGIN":
                 String username = parts[1];
                 String password = parts[2];
                 if (Users.checkUserCredentials(username,password)) {
-                    userID = Users.saveUserID();
-                    serverWriter.println(Users.getUserPermission(userID));
-                    serverWriter.println("LOGIN|SUCCESS");
+                    Message.sendMessage(clientWriters,"LOGIN|SUCCESS");
                 } else {
-                    serverWriter.println("LOGIN|ERROR");
+                    Message.sendMessage(clientWriters,"LOGIN|ERROR");
                 }
                 break;
             case "REGISTER":
@@ -22,9 +19,9 @@ public class SwitchBoard {
                 String pass =  parts[2];
                 String email = parts[3];
                 if(Users.registerUserCredentials(login,pass,email)){
-                    serverWriter.println("REGISTER|SUCCESS");
+                    Message.sendMessage(clientWriters,"REGISTER|SUCCESS");
                 }else {
-                    serverWriter.println("REGISTER|ERROR");
+                    Message.sendMessage(clientWriters,"REGISTER|ERROR");
                 }
                 break;
             case "":

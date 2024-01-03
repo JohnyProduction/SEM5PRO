@@ -1,10 +1,14 @@
 package com.projektsemv.clubmanagement;
 
+<<<<<<< HEAD
 import com.projektsemv.clubmanagement.UserFunction.Client;
 
 import com.projektsemv.clubmanagement.UserFunction.SocketClient;
 import com.projektsemv.clubmanagement.UserFunction.UserFunctions;
 
+=======
+import com.projektsemv.clubmanagement.UserFunction.UserFunctions;
+>>>>>>> parent of 297f159 (Repair everything)
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,8 +18,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
 
 public class RegisterPanelController implements Initializable {
 
@@ -46,6 +57,7 @@ public class RegisterPanelController implements Initializable {
         errorLabel.setStyle("-fx-text-fill: GREEN;");
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -54,7 +66,7 @@ public class RegisterPanelController implements Initializable {
             public void handle(ActionEvent actionEvent) {
 <<<<<<< Updated upstream
 
-
+                sendRegisterDataToServer(usernameTextField.getText(),passwordTextField.getText(),emailTextField.getText());
                 if(status){
                     ChangeController.changeScene(actionEvent,"login-panel.fxml","Panel logowania!", null);
                 }else{
@@ -71,11 +83,21 @@ public class RegisterPanelController implements Initializable {
         });
 
     }
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     private void handleServerResponse(String response) {
         status = Client.switchLoginClient(response);
+=======
+    private static void handleServerResponse(String response) {
+        status = UserFunctions.SwitchLoginClient(response);
+>>>>>>> parent of 297f159 (Repair everything)
     }
+    private static void sendRegisterDataToServer(String username, String password, String email) {
+        try {
+            Socket socket = new Socket("localhost", 12345);
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
 
+<<<<<<< HEAD
 }
 =======
 
@@ -95,3 +117,16 @@ public class RegisterPanelController implements Initializable {
     }
 }
 >>>>>>> Stashed changes
+=======
+
+            writer.println("REGISTER|" + username + "|" + password +"|"+email);
+
+            handleServerResponse(UserFunctions.ReadMessage(socket));
+            writer.close();
+            socket.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
+>>>>>>> parent of 297f159 (Repair everything)
