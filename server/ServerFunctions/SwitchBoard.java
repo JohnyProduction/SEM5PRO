@@ -29,6 +29,16 @@ public class SwitchBoard {
                     serverWriter.println("REGISTER|ERROR");
                 }
                 break;
+            case"GETPAGEMEMBER":
+                serverWriter.println(Users.getUsername(userID));
+                if(parts[1].equals("MEMBER")){
+
+                } else if (parts[1].equals("MANAGER")) {
+
+                }else if (parts[1].equals("FAN")) {
+
+                }
+                break;
             case "":
                 break;
         }

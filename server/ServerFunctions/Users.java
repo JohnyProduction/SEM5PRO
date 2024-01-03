@@ -47,6 +47,22 @@ public class Users {
 
         return role;
     }
+    public static String getUsername(int userID) {
+        List<Map<String, Object>> usernameObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getUsername(userID));
+        String username="";
+
+        if (!usernameObject.isEmpty()) {
+            // Assuming "roleID" is the key in the map
+            Object roleObject = usernameObject.get(0).get("name");
+
+            if (roleObject != null) {
+                // Safely convert the roleObject to an integer
+                username = roleObject.toString();
+            }
+        }
+
+        return username;
+    }
 
     public static int saveUserID(){
         return userID;

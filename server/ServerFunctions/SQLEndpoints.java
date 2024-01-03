@@ -8,6 +8,10 @@ public class SQLEndpoints {
     public static String registerNewUser(String username,String password, String email){
         return "INSERT INTO USERS (username, password, email,roleID) VALUES('"+username+"','"+password+"','"+email+"',1)";
     }
+    public static String getUsername(int userID){
+        return "SELECT name FROM users where UserID='"+userID+"'";
+    }
+
     public static String getUserID(String username, String password){
         return "SELECT UserID FROM users where username='"+username+"' and password='"+password+"'+";
     }
