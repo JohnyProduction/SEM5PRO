@@ -1,12 +1,10 @@
 package com.projektsemv.clubmanagement;
 
-<<<<<<< Updated upstream
 import com.projektsemv.clubmanagement.UserFunction.Client;
-import com.projektsemv.clubmanagement.UserFunction.UserFunction;
-=======
+
 import com.projektsemv.clubmanagement.UserFunction.SocketClient;
 import com.projektsemv.clubmanagement.UserFunction.UserFunctions;
->>>>>>> Stashed changes
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
