@@ -1,5 +1,7 @@
 package com.projektsemv.clubmanagement;
 
+import com.projektsemv.clubmanagement.UserFunction.Client;
+import com.projektsemv.clubmanagement.UserFunction.Message;
 import com.projektsemv.clubmanagement.UserFunction.UserFunctions;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,15 +13,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.io.*;
-
-import com.projektsemv.clubmanagement.UserFunction.UserFunctions.*;
-
-import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
+import java.io.PrintWriter;
+import java.io.BufferedReader;
+import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.*;
 
 public class LoginPanelController implements Initializable {
 
@@ -41,12 +39,15 @@ public class LoginPanelController implements Initializable {
     private PasswordField passwordTextField;
 
     public static boolean status;
-//    protected void onSignInButtonClick() {
-//        errorLabel.setText("ERROR! Podane dane są błędne!");
-//    }
-
+    private static BufferedReader ReadFromServer;
+    private static PrintWriter SendToServer;
+    private static final Message message = new Message();
+    private static int userRole;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        LoginPanelController.ReadFromServer = Client.ReadFromServer;
+        LoginPanelController.SendToServer = Client.SendToServer;
+
         status=false;
         registerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -58,41 +59,50 @@ public class LoginPanelController implements Initializable {
         signInButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent) {
-                sendLoginDataToServer(usernameTextField.getText(),passwordTextField.getText());
+
+                try {
+                    checkInputs();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 if(status){
-                    ChangeController.changeScene(actionEvent, "club-page-member.fxml", "Strona klubu", MEMBER);
+                    if(userRole == 1){
+                        ChangeController.changeScene(actionEvent, "club-page-member.fxml", "Strona klubu", MEMBER);
+                    } else if (userRole == 2) {
+                        ChangeController.changeScene(actionEvent, "club-page-manager.fxml", "Strona klubu", MANAGER);
+                    } else if (userRole == 3) {
+                        ChangeController.changeScene(actionEvent, "club-page-fan.fxml", "Strona klubu", FAN);
+                    }
                 }else{
                     errorLabel.setText("ERROR! Błąd logowania!");
                 }
-                //System.out.println(usernameTextField.getText());
-                /*
-                if(usernameTextField.getText().equals("fan")) {
-                    ChangeController.changeScene(actionEvent, "club-page-fan.fxml", "Strona klubu", FAN);
-                }else if((usernameTextField.getText().equals("m"))) {
-                }else{
-                    ChangeController.changeScene(actionEvent, "club-page-manager.fxml", "Strona klubu", MANAGER);
-
-                }*/
             }
         });
 
 
     }
-    private static void handleServerResponse(String response) {
-        status = UserFunctions.SwitchLoginClient(response);
+    private void handleServerResponse(String response) {
+        status = UserFunctions.switchLoginClient(response);
     }
-    private static void sendLoginDataToServer(String username, String password) {
-            try {
-                Socket socket = new Socket("localhost", 12345);
-                PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-
-                writer.println("LOGIN|" + username + "|" + password);
-
-                handleServerResponse(UserFunctions.ReadMessage(socket));
-                writer.close();
-                socket.close();
-            } catch (IOException ex) {
+    private void checkInputs()throws IOException{
+        if (usernameTextField.getText().isEmpty() && passwordTextField.getText().isEmpty())
+            errorLabel.setText("Username and Password can't be empty!");
+        else if (!usernameTextField.getText().isEmpty() && passwordTextField.getText().isEmpty())
+            errorLabel.setText("Password can't be empty!");
+        else if (usernameTextField.getText().isEmpty() && !passwordTextField.getText().isEmpty())
+            errorLabel.setText("Username can't be empty!");
+        else {
+            message.sendLoginMessage(SendToServer, usernameTextField.getText(), passwordTextField.getText());
+            try{
+                userRole = Integer.parseInt(ReadFromServer.readLine());
+                System.out.println(userRole);
+                handleServerResponse(ReadFromServer.readLine());
+            }catch (IOException ex) {
                 ex.printStackTrace();
+                System.err.println("Error reading message: " + ex.getMessage());
             }
+
+        }
     }
+
 }

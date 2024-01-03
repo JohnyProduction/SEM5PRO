@@ -1,9 +1,6 @@
 package com.projektsemv.clubmanagement.member;
 
 import com.projektsemv.clubmanagement.ChangeController;
-import com.projektsemv.clubmanagement.UserFunction.SocketClient;
-import com.projektsemv.clubmanagement.UserFunction.UserFunctions;
-import com.projektsemv.clubmanagement.UserFunction.UserInfo.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.MANAGER;
 import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.MEMBER;
 
 public class ClubPageControllerMember implements Initializable {
@@ -26,8 +24,6 @@ public class ClubPageControllerMember implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        SocketClient socketClient = SocketClient.getInstance("localhost", 12345);
-        System.out.println(socketClient.receiveMessage());
 
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
