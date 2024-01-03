@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.projektsemv.clubmanagement.ChartsCreator.*;
-import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
+import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.*;
 
 public class ClubStatsControllerManager implements Initializable {
     @FXML

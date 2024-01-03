@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 import static com.projektsemv.clubmanagement.ChartsCreator.FinanceType.*;
 import static com.projektsemv.clubmanagement.ChartsCreator.chartFinances;
-import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
+import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.*;
 
 
 public class ManagerFinanceStatsControllerManager implements Initializable {

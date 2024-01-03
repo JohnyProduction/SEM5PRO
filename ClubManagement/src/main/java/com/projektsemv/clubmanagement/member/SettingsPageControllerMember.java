@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.projektsemv.clubmanagement.UserInfo.UserType.MEMBER;
+import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.MEMBER;
 
 public class SettingsPageControllerMember implements Initializable {
     /*Import JavaFX controls*/

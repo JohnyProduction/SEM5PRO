@@ -12,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
+import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.*;
 
 public class ClubPageControllerManager implements Initializable {
     /*Import JavaFX controls*/

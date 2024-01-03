@@ -1,8 +1,14 @@
 package com.projektsemv.clubmanagement;
 
+<<<<<<< Updated upstream
 import com.projektsemv.clubmanagement.UserFunction.Client;
 import com.projektsemv.clubmanagement.UserFunction.UserFunction;
 import com.projektsemv.clubmanagement.UserFunction.Message;
+=======
+import com.projektsemv.clubmanagement.UserFunction.SocketClient;
+import com.projektsemv.clubmanagement.UserFunction.UserFunctions;
+import com.projektsemv.clubmanagement.UserFunction.UserInfo.*;
+>>>>>>> Stashed changes
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+<<<<<<< Updated upstream
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,15 +26,18 @@ import java.io.PrintWriter;
 import java.io.BufferedReader;
 
 import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
+=======
+import java.net.URL;
+import java.util.ResourceBundle;
+>>>>>>> Stashed changes
 
 public class LoginPanelController implements Initializable {
 
-    /*Import JavaFX controls*/
     @FXML
     private Button signInButton, registerButton;
 
     @FXML
-    public  Label errorLabel;
+    public Label errorLabel;
     @FXML
     public Label loginTitleLabel;
     @FXML
@@ -40,6 +50,7 @@ public class LoginPanelController implements Initializable {
     private PasswordField passwordTextField;
 
     public static boolean status;
+<<<<<<< Updated upstream
     private static BufferedReader ReadFromServer;
     private static PrintWriter SendToServer;
     private static final Message message = new Message();
@@ -50,16 +61,30 @@ public class LoginPanelController implements Initializable {
         LoginPanelController.SendToServer = Client.SendToServer;
 
         status=false;
+=======
+    private SocketClient socketClient;
+    protected void onSignInButtonClick() {
+        errorLabel.setText("Podane dane są błędne!");
+        errorLabel.setStyle("-fx-text-fill: RED;");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        status = false;
+        socketClient = SocketClient.getInstance("localhost", 12345);
+
+>>>>>>> Stashed changes
         registerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent,"register-panel.fxml","Panel rejestracji", null);
+                ChangeController.changeScene(actionEvent, "register-panel.fxml", "Panel rejestracji", null);
             }
         });
 
-        signInButton.setOnAction(new EventHandler<ActionEvent>(){
+        signInButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+<<<<<<< Updated upstream
 
                 try {
                     checkInputs();
@@ -76,12 +101,20 @@ public class LoginPanelController implements Initializable {
                     }
                 }else{
                     errorLabel.setText("ERROR! Błąd logowania!");
+=======
+                sendLoginDataToServer(usernameTextField.getText(), passwordTextField.getText());
+                if (status) {
+                    //System.out.println(socketClient.receiveMessage());
+                    ChangeController.changeScene(actionEvent, "club-page-member.fxml", "Strona klubu", UserType.MEMBER);
+                } else {
+                    errorLabel.setText("Błąd logowania");
+                    errorLabel.setStyle("-fx-text-fill: RED;");
+>>>>>>> Stashed changes
                 }
             }
         });
-
-
     }
+<<<<<<< Updated upstream
     private void handleServerResponse(String response) {
         status = Client.switchLoginClient(response);
     }
@@ -106,3 +139,21 @@ public class LoginPanelController implements Initializable {
     }
 
 }
+=======
+
+    private static void handleServerResponse(String response) {
+        status = UserFunctions.SwitchLoginClient(response);
+    }
+
+    private void sendLoginDataToServer(String username, String password) {
+
+
+        try {
+            socketClient.sendMessage("LOGIN|" + username + "|" + password);
+            handleServerResponse(socketClient.receiveMessage());
+        } finally {
+            //socketClient.closeConnection();
+        }
+    }
+}
+>>>>>>> Stashed changes

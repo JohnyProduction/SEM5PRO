@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.projektsemv.clubmanagement.UserInfo.UserType.MEMBER;
+import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.MEMBER;
 
 public class MessagesPanelControllerMember implements Initializable {
 

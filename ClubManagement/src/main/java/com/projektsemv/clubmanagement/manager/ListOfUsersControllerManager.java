@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
+import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.*;
 
 public class ListOfUsersControllerManager implements Initializable {
     /*Import JavaFX controls*/

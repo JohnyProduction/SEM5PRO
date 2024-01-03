@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import com.projektsemv.clubmanagement.UserInfo.UserType;
+import com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType;
 
 public class ChangeController {
     static Stage stage;
