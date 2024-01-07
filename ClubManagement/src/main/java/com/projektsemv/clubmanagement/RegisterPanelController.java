@@ -29,7 +29,7 @@ public class RegisterPanelController implements Initializable {
     private Label errorLabel, loginTitleLabel;
 
     @FXML
-    private TextField usernameTextField, emailTextField;
+    private TextField usernameTextField, emailTextField, surnameTextField, nameTextField;
 
     @FXML
     private PasswordField passwordTextField, passwordConfirmedTextField;

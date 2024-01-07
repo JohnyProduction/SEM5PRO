@@ -21,22 +21,24 @@
 
    <AnchorPane>
       <children>
-        <AnchorPane layoutX="80.0" layoutY="105.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="420.0" styleClass="loginContainer" />
+        <AnchorPane layoutX="80.0" layoutY="105.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="420.0" styleClass="loginContainer" />
       </children>
    </AnchorPane>
 
    <AnchorPane layoutX="110.0" layoutY="149.0" prefHeight="456.0" prefWidth="360.0">
       <children>
-        <Label layoutX="92.0" layoutY="5.0" prefHeight="50.0" prefWidth="176.0" styleClass="loginTopTitleLabel" text="Dzień dobry!" />
-        <TextField fx:id="usernameTextField" layoutX="28.0" layoutY="100.0" prefHeight="50.0" prefWidth="290.0" promptText="nazwa użytkownika" styleClass="textField" />
-        <TextField fx:id="emailTextField" layoutX="28.0" layoutY="160.0" prefHeight="50.0" prefWidth="290.0" promptText="email" styleClass="textField" />
-        <PasswordField fx:id="passwordTextField" layoutX="28.0" layoutY="220.0" prefHeight="50.0" prefWidth="290.0" promptText="hasło" styleClass="textField" />
-        <PasswordField fx:id="passwordConfirmedTextField" layoutX="28.0" layoutY="280.0" prefHeight="50.0" prefWidth="290.0" promptText="powtórz hasło" styleClass="textField" />
+        <Label layoutX="92.0" layoutY="-11.0" prefHeight="50.0" prefWidth="176.0" styleClass="loginTopTitleLabel" text="Dzień dobry!" />
+        <TextField fx:id="usernameTextField" layoutX="28.0" layoutY="140.0" prefHeight="50.0" prefWidth="290.0" promptText="nazwa użytkownika" styleClass="textField" />
+        <TextField fx:id="emailTextField" layoutX="28.0" layoutY="200.0" prefHeight="50.0" prefWidth="290.0" promptText="email" styleClass="textField" />
+        <PasswordField fx:id="passwordTextField" layoutX="28.0" layoutY="260.0" prefHeight="50.0" prefWidth="290.0" promptText="hasło" styleClass="textField" />
+        <PasswordField fx:id="passwordConfirmedTextField" layoutX="28.0" layoutY="320.0" prefHeight="50.0" prefWidth="290.0" promptText="powtórz hasło" styleClass="textField" />
         <Label fx:id="errorLabel" layoutX="7.0" layoutY="49.0" prefHeight="31.0" prefWidth="192.0" styleClass="errorLabel" text="" />
-        <Button fx:id="registerButton" layoutX="28.0" layoutY="350.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="137.0" styleClass="buttonStyle" text="Zarejestruj" />
-        <Button fx:id="signInButton" layoutX="180.0" layoutY="350.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="137.0" styleClass="buttonStyle" text="Zaloguj" />
+        <Button fx:id="registerButton" layoutX="24.0" layoutY="403.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="137.0" styleClass="buttonStyle" text="Zarejestruj" />
+        <Button fx:id="signInButton" layoutX="181.0" layoutY="403.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="137.0" styleClass="buttonStyle" text="Zaloguj" />
 
-         <Label fx:id="loginTitleLabel1" layoutX="33.0" layoutY="60.0" prefHeight="31.0" prefWidth="280.0" styleClass="loginTitleLabel" text="Zaloguj się albo zarejestruj aby kontynuować" />
+         <Label fx:id="loginTitleLabel1" layoutX="33.0" layoutY="34.0" prefHeight="31.0" prefWidth="280.0" styleClass="loginTitleLabel" text="Zaloguj się albo zarejestruj aby kontynuować" />
+         <TextField fx:id="nameTextField" layoutX="29.0" layoutY="80.0" prefHeight="50.0" prefWidth="137.0" promptText="imię" styleClass="textField" />
+         <TextField fx:id="surnameTextField" layoutX="181.0" layoutY="80.0" prefHeight="50.0" prefWidth="137.0" promptText="nazwisko" styleClass="textField" />
       </children>
    </AnchorPane>
 </AnchorPane>
