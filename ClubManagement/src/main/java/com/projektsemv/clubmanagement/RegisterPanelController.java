@@ -1,5 +1,7 @@
 package com.projektsemv.clubmanagement;
 
+import com.projektsemv.clubmanagement.UserFunction.Client;
+import com.projektsemv.clubmanagement.UserFunction.Message;
 import com.projektsemv.clubmanagement.UserFunction.UserFunctions;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,13 +14,9 @@ import javafx.scene.control.TextField;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static com.projektsemv.clubmanagement.UserInfo.UserType.*;
 
 public class RegisterPanelController implements Initializable {
     /*Import JavaFX controls*/
@@ -34,28 +32,24 @@ public class RegisterPanelController implements Initializable {
     @FXML
     private PasswordField passwordTextField, passwordConfirmedTextField;
     public static boolean status;
-    protected void onRegisterButtonClick(){
-
-
-    }
-    protected void createAccount(){
-
-    }
-
-    protected void onSignInButtonClick() {
-        errorLabel.setText("Podane dane są błędne!");
-        errorLabel.setStyle("-fx-text-fill: GREEN;");
-    }
-
+    private static BufferedReader ReadFromServer;
+    private static PrintWriter SendToServer;
+    private static final Message message = new Message();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        RegisterPanelController.ReadFromServer = Client.ReadFromServer;
+        RegisterPanelController.SendToServer = Client.SendToServer;
         registerButton.setOnAction(new EventHandler<ActionEvent>() {
+
             @Override
             public void handle(ActionEvent actionEvent) {
+                try{
+                    checkInputs();
+                }catch(IOException e) {
+                    throw new RuntimeException(e);
+                }
 
-                sendRegisterDataToServer(usernameTextField.getText(),passwordTextField.getText(),emailTextField.getText());
                 if(status){
                     ChangeController.changeScene(actionEvent,"login-panel.fxml","Panel logowania!", null);
                 }else{
@@ -66,22 +60,25 @@ public class RegisterPanelController implements Initializable {
         });
 
     }
-    private static void handleServerResponse(String response) {
-        status = UserFunctions.SwitchLoginClient(response);
+    private void handleServerResponse(String response) {
+        status = UserFunctions.switchLoginClient(response);
     }
-    private static void sendRegisterDataToServer(String username, String password, String email) {
-        try {
-            Socket socket = new Socket("localhost", 12345);
-            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+    private void checkInputs() throws IOException {
+        if (usernameTextField.getText().isEmpty() && passwordTextField.getText().isEmpty() && passwordConfirmedTextField.getText().isEmpty())
+            errorLabel.setText("Username and Password can't be empty!");
+        else if (!usernameTextField.getText().isEmpty() && passwordTextField.getText().isEmpty() && passwordConfirmedTextField.getText().isEmpty())
+            errorLabel.setText("Password can't be empty!");
+        else if (usernameTextField.getText().isEmpty() && !passwordTextField.getText().isEmpty() && !passwordConfirmedTextField.getText().isEmpty())
+            errorLabel.setText("Username can't be empty!");
+        else {
+            message.sendRegisterMessage(SendToServer, usernameTextField.getText(), passwordTextField.getText(),passwordConfirmedTextField.getText());
+            try{
+                handleServerResponse(ReadFromServer.readLine());
+            }catch (IOException ex) {
+                ex.printStackTrace();
+                System.err.println("Error reading message: " + ex.getMessage());
+            }
 
-
-            writer.println("REGISTER|" + username + "|" + password +"|"+email);
-
-            handleServerResponse(UserFunctions.ReadMessage(socket));
-            writer.close();
-            socket.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
 }
