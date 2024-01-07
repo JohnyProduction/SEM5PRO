@@ -11,8 +11,8 @@ public class SwitchBoard {
                 String password = parts[2];
                 if (Users.checkUserCredentials(username,password)) {
                     userID = Users.saveUserID();
-                    System.out.println(userID);
-                    System.out.println(Users.getUserPermission(userID));
+                    //System.out.println(userID);
+                    //System.out.println(Users.getUserPermission(userID));
                     serverWriter.println(Users.getUserPermission(userID));
                     serverWriter.println("LOGIN|SUCCESS");
                 } else {
@@ -32,7 +32,9 @@ public class SwitchBoard {
             case"GETPAGEMEMBER":
                 serverWriter.println(Users.getUsername(userID));
                 if(parts[1].equals("MEMBER")){
-
+                    serverWriter.println("MEMBERSIDEBAR"+Users.getMemberSidebar(userID));
+                    System.out.println("MEMBERLASTMATCH"+Users.getLastMatch(userID));
+                    serverWriter.println("MEMBERLASTMATCH"+Users.getLastMatch(userID));
                 } else if (parts[1].equals("MANAGER")) {
 
                 }else if (parts[1].equals("FAN")) {

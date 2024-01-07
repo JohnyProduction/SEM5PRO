@@ -29,6 +29,8 @@ public class ClubPageControllerMember implements Initializable {
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut;
     @FXML
     private Label username, labelNameOfClub, labelLeague, labelManagerName, labelPhoneNumber, labelAddress, labelFinance, labelMoreStats;
+    @FXML
+    private Label resultsClub1,resultsClub2,resultsOfMatch,resultsDateOfMatch;
     private static BufferedReader ReadFromServer;
     private static PrintWriter SendToServer;
     private static final Message message = new Message();
@@ -68,12 +70,48 @@ public class ClubPageControllerMember implements Initializable {
             protected Void call() throws Exception {
                 try {
                     // Perform time-consuming operations (e.g., reading from the server) here
-                    message.sendGetPage(SendToServer, "MEMBER");
+                    message.sendGetMemberPage(SendToServer, "MEMBER");
                     String serverResponse = ReadFromServer.readLine();
-                    System.out.println(serverResponse);
+                    //System.out.println(serverResponse);
 
                     // Update the UI on the JavaFX application thread
                     Platform.runLater(() -> username.setText(serverResponse));
+                    String sidebarResponse = ReadFromServer.readLine();
+                    Platform.runLater(() -> {
+                        // Split the received data into an array of values
+                        String[] values = sidebarResponse.split("\\|");
+                        //System.out.println(sidebarResponse);
+                        //System.out.println(values[3]);
+                        // Check if there are enough values to fill the labels
+                        if (values.length >= 5) {
+                            // Set values to the respective labels
+                            labelNameOfClub.setText(values[1]);
+                            labelLeague.setText(values[2]);
+                            labelManagerName.setText(values[3]);
+                            labelAddress.setText(values[4]);
+                            labelPhoneNumber.setText(values[5]);
+                        } else {
+                            // Handle the case where there are not enough values
+                            System.out.println("Invalid data received from the server");
+                        }
+                    });
+                    String lastMatchResponse = ReadFromServer.readLine();
+                    Platform.runLater(() -> {
+                        // Split the received data into an array of values
+                        String[] values = lastMatchResponse.split("\\|");
+
+                        // Check if there are enough values to fill the labels
+                        if (values.length >= 5) {
+                            // Set values to the respective labels
+                            resultsClub1.setText(values[1]);
+                            resultsClub2.setText(values[2]);
+                            resultsOfMatch.setText(values[3]+" : "+values[4]);
+                            resultsDateOfMatch.setText(values[5]);
+                        } else {
+                            // Handle the case where there are not enough values
+                            System.out.println("Invalid data received from the server");
+                        }
+                    });
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

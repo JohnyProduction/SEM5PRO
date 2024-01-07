@@ -63,7 +63,32 @@ public class Users {
 
         return username;
     }
+    public static String getMemberSidebar(int userID) {
 
+        List<Map<String, Object>> sidebarObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getMemberSideBar(userID));
+        StringBuilder sideBarData = new StringBuilder();
+        for (Map<String, Object> row : sidebarObject) {
+            sideBarData.append("|").append(row.get("ClubName")).append("|")
+                    .append(row.get("LeagueName")).append("|")
+                    .append(row.get("ManagerName")).append("|")
+                    .append(row.get("ClubAddress")).append("|")
+                    .append(row.get("ClubContact")).append("|");
+        }
+        return sideBarData.toString();
+    }
+    public static String getLastMatch(int userID) {
+        List<Map<String, Object>> lastMatchObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getLastMatch(userID));
+        StringBuilder lastMatchData = new StringBuilder();
+        for (Map<String, Object> row : lastMatchObject) {
+            lastMatchData.append("|").append(row.get("Club1")).append("|");
+            lastMatchData.append(row.get("Club2")).append("|");
+            lastMatchData.append(row.get("HomeResult")).append("|");
+            lastMatchData.append(row.get("GuestResult")).append("|");
+            lastMatchData.append(row.get("MatchDate")).append("|");
+        }
+
+        return lastMatchData.toString();
+    }
     public static int saveUserID(){
         return userID;
     }
