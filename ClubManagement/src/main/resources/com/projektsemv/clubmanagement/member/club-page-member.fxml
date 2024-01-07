@@ -38,11 +38,11 @@
                     </AnchorPane>
                     <AnchorPane layoutY="157.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="505.0">
                         <children>
-                            <TableView layoutX="14.0" layoutY="27.0" prefHeight="472.0" prefWidth="461.0" styleClass="tableView">
+                            <TableView fx:id="tableView" layoutX="14.0" layoutY="27.0" prefHeight="472.0" prefWidth="461.0" styleClass="tableView">
                                 <columns>
-                                    <TableColumn minWidth="0.0" prefWidth="109.0" text="Wynik" />
-                                    <TableColumn prefWidth="135.0" text="Przeciwnik" />
-                                    <TableColumn prefWidth="216.0" text="Data" />
+                                    <TableColumn fx:id="resultColumn" minWidth="0.0" prefWidth="109.0" text="Wynik" />
+                                    <TableColumn fx:id="opponentColumn" prefWidth="135.0" text="Przeciwnik" />
+                                    <TableColumn fx:id="dateColumn" prefWidth="216.0" text="Data" />
                                 </columns>
                             </TableView>
                         </children></AnchorPane>

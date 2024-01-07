@@ -50,6 +50,31 @@ public class SQLEndpoints {
                 "    m.Date DESC\n" +
                 "LIMIT 1;";
     }
+    public static String getMatchTable(int userID){
+        return "SELECT\n" +
+                "    CASE\n" +
+                "        WHEN p.ClubID = m.ClubID1 THEN CONCAT(r.result_home, ' : ', r.result_guest)\n" +
+                "        ELSE CONCAT(r.result_guest,' : ', r.result_home)\n" +
+                "    END AS Result,\n" +
+                "    CASE\n" +
+                "        WHEN p.ClubID = m.ClubID1 THEN c2.club_name\n" +
+                "        ELSE c1.club_name\n" +
+                "    END AS OpponentClub,\n" +
+                "    DATE_FORMAT(m.Date, '%d.%m.%Y') AS MatchDate\n" +
+                "FROM\n" +
+                "    matches m\n" +
+                "JOIN\n" +
+                "    clubs c1 ON m.ClubID1 = c1.ClubID\n" +
+                "JOIN\n" +
+                "    clubs c2 ON m.ClubID2 = c2.ClubID\n" +
+                "JOIN\n" +
+                "    Results r ON m.ResultID = r.ResultID\n" +
+                "JOIN\n" +
+                "    players p ON (p.ClubID = m.ClubID1 OR p.ClubID = m.ClubID2) AND p.UserID = "+userID+"\n" +
+                "ORDER BY\n" +
+                "    m.Date DESC\n" +
+                "LIMIT 1;";
+    }
     public static String getUserID(String username, String password){
         return "SELECT UserID FROM users where username='"+username+"' and password='"+password+"'+";
     }

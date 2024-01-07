@@ -7,7 +7,6 @@ public class Users {
     private static int userID;
     public static boolean checkUserCredentials(String username, String password) {
         List<Map<String, Object>> userList = DBConnection.fetchDataFromDatabase(SQLEndpoints.getUser(username));
-        System.out.println(userList);
         for (Map<String, Object> row : userList) {
             Object storedUsername = row.get("username");
             Object storedPassword = row.get("password");
@@ -88,6 +87,16 @@ public class Users {
         }
 
         return lastMatchData.toString();
+    }
+    public static String getTableMatch(int userID) {
+        List<Map<String, Object>> tableMatchObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getMatchTable(userID));
+        StringBuilder tableMatchData = new StringBuilder();
+        for (Map<String, Object> row : tableMatchObject) {
+            tableMatchData.append("|").append(row.get("Result")).append("|");
+            tableMatchData.append(row.get("OpponentClub")).append("|");
+            tableMatchData.append(row.get("MatchDate")).append("|");
+        }
+        return tableMatchData.toString();
     }
     public static int saveUserID(){
         return userID;
