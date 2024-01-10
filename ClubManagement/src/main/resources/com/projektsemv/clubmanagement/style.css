@@ -89,9 +89,9 @@
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
-.errorLabel{
+.whiteLabel{
     -fx-font-size: 13px;
-    -fx-text-fill: #Bb0a50;
+    -fx-fill: white;
 }
 
 
