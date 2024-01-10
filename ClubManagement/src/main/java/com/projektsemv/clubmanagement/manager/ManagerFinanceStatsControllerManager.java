@@ -33,7 +33,7 @@ public class ManagerFinanceStatsControllerManager implements Initializable {
     @FXML
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut;
     @FXML
-    private Button allTransactionsButton, incomesButton, outcomesButton;
+    private Button allTransactionsButton, incomesButton, expensesButton;
     @FXML
     private Label username;
     @FXML
@@ -41,7 +41,7 @@ public class ManagerFinanceStatsControllerManager implements Initializable {
     @FXML
     private Label mainFinanceLabel;
     @FXML
-    private BarChart barChart;
+    private BarChart allBarChart, incomesBarChart, expensesBarChart;
     @FXML
     private TableView financeTable;
     ChartsCreator.FinanceType tempFinanceType;
@@ -59,8 +59,18 @@ public class ManagerFinanceStatsControllerManager implements Initializable {
         ManagerFinanceStatsControllerManager.ReadFromServer = Client.ReadFromServer;
         ManagerFinanceStatsControllerManager.SendToServer = Client.SendToServer;
         preparePage();
-        barChart.getData().add(chartFinances(PRZYCHODY));
-        barChart.setLegendVisible(false);
+
+        allBarChart.setVisible(false);
+        expensesBarChart.setVisible(false);
+        incomesBarChart.setVisible(true);
+
+        allBarChart.setLegendVisible(false);
+        expensesBarChart.setLegendVisible(false);
+        incomesBarChart.setLegendVisible(false);
+
+        incomesBarChart.getData().add(chartFinances(PRZYCHODY));
+        incomesBarChart.setLegendVisible(false);
+
         tempFinanceType = PRZYCHODY;
         mainFinanceLabel.setText("Statystyki przychodów");
         //TODO:sumOfMoneyLabel
@@ -100,8 +110,15 @@ public class ManagerFinanceStatsControllerManager implements Initializable {
         allTransactionsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                barChart.getData().remove(0);
-                barChart.getData().add(chartFinances(SUMA));
+                allBarChart.setVisible(true);
+                expensesBarChart.setVisible(false);
+                incomesBarChart.setVisible(false);
+
+                allBarChart.getData().remove(0);
+
+                allBarChart.getData().add(chartFinances(SUMA));
+
+                incomesBarChart.getData().add(expensesData);
                 tempFinanceType = SUMA;
                 mainFinanceLabel.setText("Statystyki sumaryczne");
                 //sumOfMoneyLabel =
@@ -110,18 +127,29 @@ public class ManagerFinanceStatsControllerManager implements Initializable {
         incomesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                barChart.getData().remove(0);
-                barChart.getData().add(incomesData);
+                allBarChart.setVisible(false);
+                expensesBarChart.setVisible(false);
+                incomesBarChart.setVisible(true);
+
+                //Usuwanie danych z listy przed pobraniem raz jeszcze
+                //incomesBarChart.getData().remove(0);
+                //incomesBarChart.getData().add(incomesData);
+
                 sumOfMoneyLabel.setText(String.valueOf((Math.round(incomes)*100.0) / 100.0)+" zł");
                 mainFinanceLabel.setText("Statystyki przychodów");
                 //sumOfMoneyLabel =
             }
         });
-        outcomesButton.setOnAction(new EventHandler<ActionEvent>() {
+        expensesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                barChart.getData().remove(0);
-                barChart.getData().add(expensesData);
+                allBarChart.setVisible(false);
+                expensesBarChart.setVisible(true);
+                incomesBarChart.setVisible(false);
+
+                expensesBarChart.getData().remove(0);
+                expensesBarChart.getData().add(expensesData);
+
                 sumOfMoneyLabel.setText(String.valueOf((Math.round(expenses)*100.0) / 100.0)+" zł");
                 mainFinanceLabel.setText("Statystyki wydatków");
                 //sumOfMoneyLabel =
@@ -147,7 +175,7 @@ public class ManagerFinanceStatsControllerManager implements Initializable {
                             // Check if there are enough values to fill the labels
                             if (values.length >= 3) {
                                incomesData = resultData(values);
-                                barChart.getData().add(incomesData);
+                                incomesBarChart.getData().add(incomesData);
                                 incomes = Float.parseFloat(values[1]);
                             } else {
                                 // Handle the case where there are not enough values
@@ -165,7 +193,7 @@ public class ManagerFinanceStatsControllerManager implements Initializable {
                             // Check if there are enough values to fill the labels
                             if (values.length >= 3) {
                                 expensesData = resultData(values);
-                                barChart.getData().add(expensesData);
+                                incomesBarChart.getData().add(expensesData);
                                 expenses = Float.parseFloat(values[1]);
                             } else {
                                 // Handle the case where there are not enough values

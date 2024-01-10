@@ -10,6 +10,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 
 <AnchorPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projektsemv.clubmanagement.manager.ManagerFinanceStatsControllerManager">
    <AnchorPane>
@@ -36,18 +37,44 @@
              <TableColumn fx:id="userListColName" prefWidth="132.0" text="Data" />
            </columns>
          </TableView>
-               <BarChart fx:id="barChart" layoutX="296.0" layoutY="85.0" prefHeight="480.0" prefWidth="452.0">
-                 <xAxis>
-                   <CategoryAxis label="Wydatki bieżące w porównaniu z ostatnim miesiącem " side="BOTTOM" fx:id="xAxis" />
-                 </xAxis>
-                 <yAxis>
-                   <NumberAxis fx:id="yAxis" prefHeight="418.0" prefWidth="41.0" side="LEFT" />
-                 </yAxis>
-               </BarChart>
+         <StackPane layoutX="296.0" layoutY="85.0">
+            <AnchorPane prefHeight="472.0" prefWidth="452.0" styleClass="normalContainerMediumOpacity">
+               <children>
+      
+                           <BarChart fx:id="allBarChart" prefHeight="480.0" prefWidth="452.0">
+                             <xAxis>
+                                 <CategoryAxis label="" />
+                             </xAxis>
+                             <yAxis>
+                               <NumberAxis prefHeight="418.0" prefWidth="41.0" side="LEFT" />
+                             </yAxis>
+                           </BarChart>
+      
+                     <BarChart fx:id="incomesBarChart" prefHeight="480.0" prefWidth="452.0">
+                        <xAxis>
+                           <CategoryAxis label="" />
+                        </xAxis>
+                        <yAxis>
+                           <NumberAxis prefHeight="418.0" prefWidth="41.0" side="LEFT" />
+                        </yAxis>
+                     </BarChart>
+      
+                     <BarChart fx:id="expensesBarChart" prefHeight="484.0" prefWidth="452.0">
+                        <xAxis>
+                            <CategoryAxis label="" />
+                        </xAxis>
+                        <yAxis>
+                           <NumberAxis prefHeight="418.0" prefWidth="41.0" side="LEFT" />
+                        </yAxis>
+                     </BarChart>
+               </children>
+            </AnchorPane>
+
+         </StackPane>
          <AnchorPane layoutX="817.0" layoutY="530.0">
             <children>
                 <Button fx:id="incomesButton" layoutX="139.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" styleClass="buttonStyle" text="Przychody" />
-                <Button fx:id="outcomesButton" layoutX="278.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" styleClass="buttonStyle" text="Wydatki" />
+                <Button fx:id="expensesButton" layoutX="278.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" styleClass="buttonStyle" text="Wydatki" />
                <Button fx:id="allTransactionsButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" styleClass="buttonStyle" text="Wszystkie" />
             </children>
          </AnchorPane>
