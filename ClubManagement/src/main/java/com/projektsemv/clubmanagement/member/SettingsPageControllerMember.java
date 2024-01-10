@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,12 +37,20 @@ public class SettingsPageControllerMember implements Initializable {
     private static final Message message = new Message();
     @FXML
     private Label username;
+    List<String> textFieldData = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SettingsPageControllerMember.ReadFromServer = Client.ReadFromServer;
         SettingsPageControllerMember.SendToServer = Client.SendToServer;
-
         preparePage();
+        //System.out.println(textFieldData);
+        /*
+        settingsUsername.setText(textFieldData.get(1));
+        settingsName.setText(textFieldData.get(2));
+        settingsSurname.setText(textFieldData.get(3));
+        settingsPassword.setText(textFieldData.get(4));
+        settingsEmail.setText(textFieldData.get(5));
+*/
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -69,11 +79,7 @@ public class SettingsPageControllerMember implements Initializable {
 
     }
     private void preparePage() {
-        settingsUsername = new TextField();
-        settingsName= new TextField();
-        settingsSurname= new TextField();
-        settingsPassword= new TextField();
-        settingsEmail= new TextField();
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -81,8 +87,6 @@ public class SettingsPageControllerMember implements Initializable {
                     // Perform time-consuming operations (e.g., reading from the server) here
                     message.sendGetSettings(SendToServer);
                     String serverResponse = ReadFromServer.readLine();
-                    //System.out.println(serverResponse);
-
                     // Update the UI on the JavaFX application thread
                     Platform.runLater(() -> username.setText(serverResponse));
                     String settingsResponse = ReadFromServer.readLine();
@@ -91,17 +95,11 @@ public class SettingsPageControllerMember implements Initializable {
                         // Split the received data into an array of values
                         String[] values = settingsResponse.split("\\|");
                         if(values[0].equals("USERSETTINGS")){
-                            System.out.println(values);
                             // Check if there are enough values to fill the labels
                             if (values.length >= 4) {
-                                settingsUsername.setText(values[1]);
-                                settingsName.setText(values[2]);
-                                settingsSurname.setText(values[3]);
-                                settingsPassword.setText(values[4]);
-                                settingsEmail.setText(values[5]);
-                            } else {
-                                // Handle the case where there are not enough values
-                                System.out.println("Invalid data received from the server");
+                                for (int i=1;i<values.length;i++){
+                                    textFieldData.add(values[i].toString());
+                                }
                             }
                         }else{
                             System.out.println("Error getting match table data");

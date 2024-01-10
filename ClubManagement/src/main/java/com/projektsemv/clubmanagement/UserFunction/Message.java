@@ -17,4 +17,8 @@ public class Message {
     public void sendGetStatisticsPage(PrintWriter writer,String... arguments ) {
         writer.println("GETSTATISICS" + "|" + String.join("|", arguments));
     }
+    public void sendGetFinancePage(PrintWriter writer,String... arguments ) {
+        writer.println("GETFINANCE" + "|" + String.join("|", arguments));
+    }
+
 }

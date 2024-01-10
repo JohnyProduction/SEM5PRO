@@ -153,7 +153,7 @@ public class ClubPageControllerManager implements Initializable {
                     Platform.runLater(() -> {
                         // Split the received data into an array of values
                         String[] values = matchTableResponse.split("\\|");
-                        System.out.println(matchTableResponse);
+                        //System.out.println(matchTableResponse);
                         if(values[0].equals("MANAGERMATCHTABLE")){
                             // Check if there are enough values to fill the labels
                             if (values.length >= 4) {

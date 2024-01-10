@@ -21,13 +21,15 @@ public class SwitchBoard {
                 String login = parts[1];
                 String pass =  parts[2];
                 String email = parts[3];
-                if(Users.registerUserCredentials(login,pass,email)){
+                String name = parts[4];
+                String surname = parts[5];
+                if(Users.registerUserCredentials(login,pass,email,name,surname)){
                     serverWriter.println("REGISTER|SUCCESS");
                 }else {
                     serverWriter.println("REGISTER|ERROR");
                 }
                 break;
-            case"GETPAGE":
+            case "GETPAGE":
                 serverWriter.println(Users.getUsername(userID));
                 if(parts[1].equals("MEMBER")){
                     serverWriter.println("MEMBERSIDEBAR"+Users.getMemberSidebar(userID));
@@ -41,21 +43,31 @@ public class SwitchBoard {
 
                 }
                 break;
-            case"GETSTATISICS":
+            case "GETSTATISICS":
                 if(parts[1].equals("MEMBER")){
                     serverWriter.println("MEMBERCHART"+Users.getStatisticsWinRatio(userID));
                     //System.out.println(Users.getMonthlyStatisticsWinRatio(userID));
                     serverWriter.println("MEMBERCHARTLINE|"+Users.getMonthlyStatisticsWinRatio(userID));
                 }else if (parts[1].equals("MANAGER")) {
-
+                    serverWriter.println(Users.getUsername(userID));
+                    serverWriter.println("MANAGERCHART"+Users.getManagerStatisticsWinRatio(userID));
+                    //System.out.println(Users.getManagerStatisticsWinRatio(userID));
+                    serverWriter.println("MANAGERCHARTLINE|"+Users.getManagerMonthlyStatisticsWinRatio(userID));
                 }else if (parts[1].equals("FAN")) {
 
                 }
                 break;
-            case"GETSETTINGS":
+            case "GETSETTINGS":
                     serverWriter.println(Users.getUsername(userID));
                     System.out.println(Users.getSettings(userID));
                     serverWriter.println("USERSETTINGS"+Users.getSettings(userID));
+                break;
+            case "GETFINANCE":
+                    serverWriter.println(Users.getUsername(userID));
+                    serverWriter.println("INCOMES"+Users.getManagerIncomesChart(userID));
+                    System.out.println("INCOMES"+Users.getManagerIncomesChart(userID));
+                    serverWriter.println("EXPENSES"+Users.getManagerExpensesChart(userID));
+                System.out.println("EXPENSES"+Users.getManagerExpensesChart(userID));
                 break;
             case "":
                 break;

@@ -28,7 +28,8 @@ public class RegisterPanelController implements Initializable {
 
     @FXML
     private TextField usernameTextField, emailTextField;
-
+    @FXML
+    private TextField nameTextField, surnameTextField;
     @FXML
     private PasswordField passwordTextField, passwordConfirmedTextField;
     public static boolean status;
@@ -71,7 +72,7 @@ public class RegisterPanelController implements Initializable {
         else if (usernameTextField.getText().isEmpty() && !passwordTextField.getText().isEmpty() && !passwordConfirmedTextField.getText().isEmpty())
             errorLabel.setText("Username can't be empty!");
         else {
-            message.sendRegisterMessage(SendToServer, usernameTextField.getText(), passwordTextField.getText(),passwordConfirmedTextField.getText());
+            message.sendRegisterMessage(SendToServer, usernameTextField.getText(), passwordTextField.getText(),passwordConfirmedTextField.getText(), nameTextField.getText(),surnameTextField.getText());
             try{
                 handleServerResponse(ReadFromServer.readLine());
             }catch (IOException ex) {

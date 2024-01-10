@@ -5,8 +5,8 @@ public class SQLEndpoints {
         return "SELECT username, password, UserID FROM USERS WHERE username='"+username+"'";
     }
     public static String getUserPermission(int userID){return "SELECT roleID FROM USERS where userID = "+userID;}
-    public static String registerNewUser(String username,String password, String email){
-        return "INSERT INTO USERS (username, password, email,roleID) VALUES('"+username+"','"+password+"','"+email+"',1)";
+    public static String registerNewUser(String username,String password, String email, String name, String surname){
+        return "INSERT INTO USERS (username, password, email,roleID,name, surname) VALUES('"+username+"','"+password+"','"+email+"',3,'"+name+"','"+surname+"')";
     }
     public static String getUsername(int userID){
         return "SELECT name FROM users where UserID='"+userID+"'";
@@ -171,7 +171,46 @@ public class SQLEndpoints {
                 "ORDER BY\n" +
                 "    m.Date DESC\n";
     }
-
+    public  static String getManagerWinRatio(int userID){
+        return"SELECT\n" +
+                "    COALESCE((SUM(CASE WHEN r.WinnerClubID = m.ClubID1 THEN 1 ELSE 0 END) / COUNT(*)) * 100, 0) AS Win,\n" +
+                "    COALESCE((SUM(CASE WHEN r.WinnerClubID != m.ClubID1 THEN 1 ELSE 0 END) / COUNT(*)) * 100, 0) AS Lose\n" +
+                "FROM clubs c\n" +
+                "JOIN matches m ON c.ClubID = m.ClubID1 OR c.ClubID = m.ClubID2\n" +
+                "LEFT JOIN Results r ON m.MatchID = r.MatchID\n" +
+                "WHERE c.ManagerID = "+userID;
+    }
+    public static String getManagerMonthWinRatio(int userID) {
+        return "SELECT\n" +
+                "    months.Month AS Month,\n" +
+                "    COALESCE(SUM(CASE WHEN r.WinnerClubID = c.ClubID THEN 1 ELSE 0 END), 0) AS Wins,\n" +
+                "    COALESCE(SUM(CASE WHEN r.WinnerClubID != c.ClubID THEN 1 ELSE 0 END), 0) AS Losses\n" +
+                "FROM (\n" +
+                "    SELECT DISTINCT MONTH(m.Date) AS Month\n" +
+                "    FROM matches m\n" +
+                ") months\n" +
+                "LEFT JOIN Results r ON r.MatchID = MatchID\n" +
+                "LEFT JOIN matches m ON r.MatchID = m.MatchID\n" +
+                "LEFT JOIN clubs c ON r.WinnerClubID = c.ClubID OR m.ClubID1 = c.ClubID OR m.ClubID2 = c.ClubID\n" +
+                "WHERE c.ManagerID = "+ userID+"\n" +
+                "GROUP BY months.Month;";
+    }
+    public static String getManagerIncomes(int userID){
+        return "SELECT\n" +
+                "    SUM(CASE WHEN MONTH(f.date) = MONTH(CURRENT_DATE()) AND YEAR(f.date) = YEAR(CURRENT_DATE()) THEN f.Income ELSE 0 END) AS CurrentMonthIncome,\n" +
+                "    SUM(CASE WHEN MONTH(f.date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH) AND YEAR(f.date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH) THEN f.Income ELSE 0 END) AS PreviousMonthIncome\n" +
+                "FROM finance f\n" +
+                "JOIN clubs c ON f.ClubID = c.ClubID\n" +
+                "WHERE c.ManagerID = "+userID;
+    }
+    public static String getManagerExpenses(int userID){
+        return "SELECT\n" +
+                "    SUM(CASE WHEN MONTH(f.date) = MONTH(CURRENT_DATE()) AND YEAR(f.date) = YEAR(CURRENT_DATE()) THEN f.Expenses ELSE 0 END) AS CurrentMonthExpenses,\n" +
+                "    SUM(CASE WHEN MONTH(f.date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH) AND YEAR(f.date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH) THEN f.Expenses ELSE 0 END) AS PreviousMonthExpenses\n" +
+                "FROM finance f\n" +
+                "JOIN clubs c ON f.ClubID = c.ClubID\n" +
+                "WHERE c.ManagerID ="+userID;
+    }
 
 
 
