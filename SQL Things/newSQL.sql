@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS finance (
   Budget double DEFAULT NULL,
   Income double DEFAULT NULL,
   Expenses double DEFAULT NULL,
+  date datetime default null,
   INDEX idx_ClubID (ClubID)
 );
 
@@ -43,10 +44,11 @@ CREATE TABLE IF NOT EXISTS matches (
   INDEX idx_Date (Date)
 );
 CREATE TABLE Results (
-  ResultID int(11) primary key not null auto_increment,
-  MatchID int(11) default null,
-  result_home int(10) default null,
-  result_guest int(10) default null
+  ResultID int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  MatchID int(11) DEFAULT NULL,
+  result_home int(10) DEFAULT NULL,
+  result_guest int(10) DEFAULT NULL,
+  WinnerClubID int(11) DEFAULT NULL
 );
 CREATE TABLE IF NOT EXISTS notification (
   NotificationID int(11) PRIMARY KEY NOT NULL,
@@ -99,6 +101,25 @@ CREATE TABLE IF NOT EXISTS users (
   INDEX idx_roleID (roleID),
   FOREIGN KEY (roleID) REFERENCES roles (RoleID)
 );
+-- Dodaj tabelę przechowującą informacje o fanach klubu
+CREATE TABLE IF NOT EXISTS fans (
+  FanID int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  UserID int(11) DEFAULT NULL,
+  ClubID int(11) DEFAULT NULL,
+  FOREIGN KEY (UserID) REFERENCES users (UserID),
+  FOREIGN KEY (ClubID) REFERENCES clubs (ClubID)
+);
+
+-- Dodaj tabelę przechowującą informacje o systemie kupowania biletów
+CREATE TABLE IF NOT EXISTS tickets (
+  TicketID int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  MatchID int(11) DEFAULT NULL,
+  UserID int(11) DEFAULT NULL,
+  Price double DEFAULT NULL,
+  IsPurchased bool,
+  FOREIGN KEY (MatchID) REFERENCES matches (MatchID),
+  FOREIGN KEY (UserID) REFERENCES users (UserID)
+);
 
 -- Add foreign key constraints
 ALTER TABLE finance ADD FOREIGN KEY (ClubID) REFERENCES clubs (ClubID);
@@ -110,7 +131,7 @@ ALTER TABLE clubs add FOREIGN KEY (ManagerID) references users(UserID);
 ALTER table matches add foreign key (ClubID1) references clubs(ClubID);
 ALTER table matches add foreign key (ClubID2) references clubs(ClubID);
 ALTER table Results add foreign key (MatchID) references matches(MatchID);
-
+ALTER table Results add foreign key (WinnerClubID) references clubs(ClubID);
 
 
 -- Insert roles into the roles table
@@ -124,7 +145,8 @@ VALUES ('test', 'test', 'Jan', 'Czajkowski', '1990-01-01', 'test@example.com', 1
 -- Insert user with role 1 (MEMBER) and username 'test'
 INSERT INTO clubmanagement.users (username, password, name, surname, birth_date, email, roleID)
 VALUES ('test2', 'test2', 'Daniel', 'Czajkowski', '1990-01-01', 'test@example.com', 2);
-
+VALUES ('testtest', 'testtest', 'Adam', 'Czajkowski', '1990-01-01', 'test@example.com', 2);
+INSERT INTO clubmanagement.users (username, password, name, surname, birth_date, email, roleID) VALUES ('test3','test3','test','test',CURRENT_TIMESTAMP,'test',3);
 
 -- Insert volleyball leagues from Poland
 INSERT INTO clubmanagement.league (name, description) VALUES ('PlusLiga', 'Top-tier Polish volleyball league');
@@ -135,10 +157,20 @@ INSERT INTO clubmanagement.league (name, description) VALUES ('II Liga', 'Third-
 INSERT INTO clubmanagement.clubs (club_name, short_club_name,foundation_date, address, contact, ManagerID, LeagueID)
 VALUES ('Projekt Warszawa', 'PW','2024-01-10', 'Sample Address', 'Contact Info', 2, 1);
 INSERT INTO clubs (club_name, short_club_name, foundation_date, address, contact, ManagerID, LeagueID)
-VALUES ('ASSECO Resovia', 'AR', '2024-01-07', 'Address in Poland', 'Contact Information', 2, 1);
+VALUES ('ASSECO Resovia', 'AR', '2024-01-07', 'Address in Poland', 'Contact Information', 3, 1);
 
 INSERT INTO clubmanagement.players (position, number, UserID, ClubID, statisticsID)
 VALUES (4,7, 1, 1, NULL);
 
 INSERT INTO matches (ClubID1, ClubID2, Date, ResultID) value ('1','2',CURRENT_TIMESTAMP,1);
-INSERT INTO Results (MatchID, result_home, result_guest) values (1,3,1);
+INSERT INTO Results (MatchID, result_home, result_guest,WinnerClubID) values (1,3,1,1);
+INSERT INTO matches (ClubID1, ClubID2, Date, ResultID) value ('1','2','2024-01-09',2);
+INSERT INTO Results (MatchID, result_home, result_guest,WinnerClubID) values (2,0,3,2);
+INSERT INTO matches (ClubID1, ClubID2, Date, ResultID) value ('1','2','2024-01-08',3);
+INSERT INTO Results (MatchID, result_home, result_guest,WinnerClubID) values (3,3,2,1);
+
+INSERT INTO finance (FinanceID, ClubID, Budget, Income, Expenses, date) VALUES (1,1,9000,650,150,'2023-12-12');
+INSERT INTO finance (FinanceID, ClubID, Budget, Income, Expenses, date) VALUES (2,1,1000,500,0,'2024-01-12');
+
+INSERT INTO fans (UserID, ClubID) values (4,1);
+INSERT INTO tickets (MatchID, UserID, Price, IsPurchased) VALUES (1,4,25,1);
