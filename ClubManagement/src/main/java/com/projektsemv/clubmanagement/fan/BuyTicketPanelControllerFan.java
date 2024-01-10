@@ -31,13 +31,14 @@ public class BuyTicketPanelControllerFan implements Initializable {
     @FXML
     private Label username, roleLabel, messageLabel, recipientUsernameLabel;
     ObservableList<String> messages = FXCollections.observableArrayList(
-            "Admin1" + " ┃ " + "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ameta." ,
-            "Marek05" + " ┃ " + "Nam tempor consectetur diam, non blandit leo lacinia interdum. " ,
-            "Antek11" + " ┃ " + "Morbi condimentum dictum neque, ac elementum justo efficitur non. " ,
-            "Piłkarz18" + " ┃ " + "Aenean aliquam cursus sem congue efficitur. Vestibulum rhoncus tristique" ,
-            "Piłkarz20" + " ┃ " + " mollis. Praesent lacinia arcu in massa faucibus faucibus. " ,
-            "Szefuńvcio12" + " ┃ " + "Donec nibh tortor, lacinia sit amet orci at, " ,
-            "Kibic1" + " ┃ " + "iaculis condimentum est. Donec gravida ultrices diam a aliquet. "
+            "1" + " ┃ " + "2024-12-19" + " ┃ " + "50.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs Zaksa Kędzierzyn-Koźle",
+            "2" + " ┃ " + "2024-11-19" + " ┃ " + "55.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs ZAKSA Strzelce Opolskie",
+            "3" + " ┃ " + "2024-09-09" + " ┃ " + "45.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs Trefl Gdańsk",
+            "4" + " ┃ " + "2024-12-12" + " ┃ " + "40.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs Indykpol AZS Olsztyn",
+            "5" + " ┃ " + "2024-03-19" + " ┃ " + "45.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs Jastrzębski Węgiel",
+            "6" + " ┃ " + "2024-02-09" + " ┃ " + "55.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs PGE Skra Bełchatów",
+            "7" + " ┃ " + "2024-01-11" + " ┃ " + "60.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs ZAKSA Strzelce Opolskie"
+
     );
     ObservableList<String> roles = FXCollections.observableArrayList("Właściciel", "Gracz", "Kibic");
     @Override

@@ -14,7 +14,6 @@ public class Client {
 
     public static void main(String[] args) {
         Thread clientThread = new Thread(() -> {
-
             String serverAddress = "localhost";
             int serverPort = 12345;
 

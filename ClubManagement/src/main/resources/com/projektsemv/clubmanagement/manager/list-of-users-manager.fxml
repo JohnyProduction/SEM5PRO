@@ -35,13 +35,13 @@
                <TextField fx:id="userListName" layoutX="601.0" layoutY="5.0" prefHeight="30.0" prefWidth="190.0" styleClass="textField" />
                <TextField fx:id="userListSurname" layoutX="601.0" layoutY="50.0" prefHeight="30.0" prefWidth="190.0" styleClass="textField" />
       
-               <Text layoutX="199.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="ID użytkownika:" wrappingWidth="95.0" />
-               <Text layoutX="177.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="Nazwa użytkownika:" wrappingWidth="124.0" />
-               <Text layoutX="256.0" layoutY="114.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="Hasło:" wrappingWidth="38.0" />
-               <Text layoutX="224.0" layoutY="159.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="Adres email:" wrappingWidth="77.0" />
-               <Text layoutX="564.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="Imię:" wrappingWidth="30.0" />
-               <Text layoutX="537.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="Nazwisko:" wrappingWidth="61.0" />
-               <Text layoutX="564.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorLabel" text="Rola:" wrappingWidth="30.0" />
+               <Text layoutX="199.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteLabel" text="ID użytkownika:" wrappingWidth="95.0" />
+               <Text layoutX="177.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteLabel" text="Nazwa użytkownika:" wrappingWidth="124.0" />
+               <Text layoutX="256.0" layoutY="114.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteLabel" text="Hasło:" wrappingWidth="38.0" />
+               <Text layoutX="224.0" layoutY="159.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteLabel" text="Adres email:" wrappingWidth="77.0" />
+               <Text layoutX="564.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteLabel" text="Imię:" wrappingWidth="30.0" />
+               <Text layoutX="537.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteLabel" text="Nazwisko:" wrappingWidth="61.0" />
+               <Text layoutX="564.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteLabel" text="Rola:" wrappingWidth="30.0" />
                <ChoiceBox fx:id="userListRole" layoutX="601.0" layoutY="95.0" prefHeight="30.0" prefWidth="190.0" styleClass="textField" />
             </children>
          </AnchorPane>

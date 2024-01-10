@@ -53,7 +53,7 @@ public class RegisterPanelController implements Initializable {
                 if(status){
                     ChangeController.changeScene(actionEvent,"login-panel.fxml","Panel logowania!", null);
                 }else{
-                    errorLabel.setText("Błąd rejestracji");
+                    errorLabel.setText("ERROR! Błąd rejestracji");
                     errorLabel.setStyle("-fx-text-fill: RED;");
                 }
             }

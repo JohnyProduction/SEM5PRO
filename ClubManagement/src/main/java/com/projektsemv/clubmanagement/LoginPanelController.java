@@ -78,8 +78,6 @@ public class LoginPanelController implements Initializable {
                 }
             }
         });
-
-
     }
     private void handleServerResponse(String response) {
         status = UserFunctions.switchLoginClient(response);
