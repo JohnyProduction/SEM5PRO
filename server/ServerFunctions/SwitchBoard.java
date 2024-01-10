@@ -27,17 +27,35 @@ public class SwitchBoard {
                     serverWriter.println("REGISTER|ERROR");
                 }
                 break;
-            case"GETPAGEMEMBER":
+            case"GETPAGE":
                 serverWriter.println(Users.getUsername(userID));
                 if(parts[1].equals("MEMBER")){
                     serverWriter.println("MEMBERSIDEBAR"+Users.getMemberSidebar(userID));
                     serverWriter.println("MEMBERLASTMATCH"+Users.getLastMatch(userID));
-                    serverWriter.println("MEMBERMATCHTABLE"+Users.getTableMatch(userID));
+                    serverWriter.println("MEMBERMATCHTABLE|"+Users.getTableMatch(userID));
                 } else if (parts[1].equals("MANAGER")) {
+                    serverWriter.println("MANAGERSIDEBAR"+Users.getManagerSidebar(userID));
+                    serverWriter.println("MANAGERLASTMATCH"+Users.getManagerLastMatch(userID));
+                    serverWriter.println("MANAGERMATCHTABLE|"+Users.getManagerMatchTable(userID));
+                }else if (parts[1].equals("FAN")) {
+
+                }
+                break;
+            case"GETSTATISICS":
+                if(parts[1].equals("MEMBER")){
+                    serverWriter.println("MEMBERCHART"+Users.getStatisticsWinRatio(userID));
+                    //System.out.println(Users.getMonthlyStatisticsWinRatio(userID));
+                    serverWriter.println("MEMBERCHARTLINE|"+Users.getMonthlyStatisticsWinRatio(userID));
+                }else if (parts[1].equals("MANAGER")) {
 
                 }else if (parts[1].equals("FAN")) {
 
                 }
+                break;
+            case"GETSETTINGS":
+                    serverWriter.println(Users.getUsername(userID));
+                    System.out.println(Users.getSettings(userID));
+                    serverWriter.println("USERSETTINGS"+Users.getSettings(userID));
                 break;
             case "":
                 break;

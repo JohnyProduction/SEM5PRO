@@ -62,9 +62,24 @@ public class Users {
 
         return username;
     }
+    public static String getSettings(int userID) {
+
+        List<Map<String, Object>> settingsObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getSettingsData(userID));
+        System.out.println(settingsObject);
+        StringBuilder settingsData = new StringBuilder();
+        for (Map<String, Object> row : settingsObject) {
+            settingsData.append("|").append(row.get("username")).append("|")
+                    .append(row.get("name")).append("|")
+                    .append(row.get("surname")).append("|")
+                    .append(row.get("password")).append("|")
+                    .append(row.get("email")).append("|");
+        }
+        return settingsData.toString();
+    }
     public static String getMemberSidebar(int userID) {
 
         List<Map<String, Object>> sidebarObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getMemberSideBar(userID));
+        System.out.println(sidebarObject);
         StringBuilder sideBarData = new StringBuilder();
         for (Map<String, Object> row : sidebarObject) {
             sideBarData.append("|").append(row.get("ClubName")).append("|")
@@ -77,6 +92,7 @@ public class Users {
     }
     public static String getLastMatch(int userID) {
         List<Map<String, Object>> lastMatchObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getLastMatch(userID));
+        System.out.println(lastMatchObject);
         StringBuilder lastMatchData = new StringBuilder();
         for (Map<String, Object> row : lastMatchObject) {
             lastMatchData.append("|").append(row.get("Club1")).append("|");
@@ -92,10 +108,73 @@ public class Users {
         List<Map<String, Object>> tableMatchObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getMatchTable(userID));
         StringBuilder tableMatchData = new StringBuilder();
         for (Map<String, Object> row : tableMatchObject) {
-            tableMatchData.append("|").append(row.get("Result")).append("|");
+            tableMatchData.append(row.get("Result")).append("|");
             tableMatchData.append(row.get("OpponentClub")).append("|");
             tableMatchData.append(row.get("MatchDate")).append("|");
         }
+        return tableMatchData.toString();
+    }
+    public static String getStatisticsWinRatio(int userID) {
+        List<Map<String, Object>> winRatioObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getWinRatio(userID));
+        StringBuilder winRatioData = new StringBuilder();
+        for (Map<String, Object> row : winRatioObject) {
+            winRatioData.append("|").append(row.get("Win")).append("|");
+            winRatioData.append(row.get("Lose")).append("|");
+        }
+        return winRatioData.toString();
+    }
+    public static String getMonthlyStatisticsWinRatio(int userID) {
+        List<Map<String, Object>> winRatioObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getMonthWinRatio(userID));
+        System.out.println(winRatioObject);
+        StringBuilder winRatioData = new StringBuilder();
+        for (Map<String, Object> row : winRatioObject) {
+            winRatioData.append(row.get("Month")).append("|");
+            winRatioData.append(row.get("Wins")).append("|");
+            winRatioData.append(row.get("Losses")).append("|");
+        }
+        return winRatioData.toString();
+    }
+
+
+    //MANAGER
+    public static String getManagerSidebar(int userID) {
+
+        List<Map<String, Object>> sidebarObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getManagerSideBar(userID));
+        //System.out.println(sidebarObject);
+        StringBuilder sideBarData = new StringBuilder();
+        for (Map<String, Object> row : sidebarObject) {
+            sideBarData.append("|").append(row.get("ClubName")).append("|")
+                    .append(row.get("LeagueName")).append("|")
+                    .append(row.get("ManagerName")).append("|")
+                    .append(row.get("ClubAddress")).append("|")
+                    .append(row.get("ClubContact")).append("|");
+        }
+        return sideBarData.toString();
+    }
+    public static String getManagerLastMatch(int userID) {
+        List<Map<String, Object>> lastMatchObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getManagerLastMatch(userID));
+        //System.out.println(lastMatchObject);
+        StringBuilder lastMatchData = new StringBuilder();
+        for (Map<String, Object> row : lastMatchObject) {
+            lastMatchData.append("|").append(row.get("Club1")).append("|");
+            lastMatchData.append(row.get("Club2")).append("|");
+            lastMatchData.append(row.get("HomeResult")).append("|");
+            lastMatchData.append(row.get("GuestResult")).append("|");
+            lastMatchData.append(row.get("MatchDate")).append("|");
+        }
+
+        return lastMatchData.toString();
+    }
+    public static String getManagerMatchTable(int userID) {
+        List<Map<String, Object>> tableMatchObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getManagerMatchTable(userID));
+        System.out.println(tableMatchObject);
+        StringBuilder tableMatchData = new StringBuilder();
+        for (Map<String, Object> row : tableMatchObject) {
+            tableMatchData.append(row.get("Result")).append("|");
+            tableMatchData.append(row.get("OpponentClub")).append("|");
+            tableMatchData.append(row.get("MatchDate")).append("|");
+        }
+        System.out.println(tableMatchData.toString());
         return tableMatchData.toString();
     }
     public static int saveUserID(){

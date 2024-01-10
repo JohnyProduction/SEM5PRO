@@ -71,6 +71,12 @@ public class ClubPageControllerMember implements Initializable {
                 ChangeController.changeScene(actionEvent, "login-panel.fxml", "Panel logowania", null);
             }
         });
+        buttonOption2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ChangeController.changeScene(actionEvent, "club-stats-member.fxml", "Statystyki klubowe", MEMBER);
+            }
+        });
         buttonOption3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -96,7 +102,7 @@ public class ClubPageControllerMember implements Initializable {
             protected Void call() throws Exception {
                 try {
                     // Perform time-consuming operations (e.g., reading from the server) here
-                    message.sendGetMemberPage(SendToServer, "MEMBER");
+                    message.sendGetPage(SendToServer, "MEMBER");
                     String serverResponse = ReadFromServer.readLine();
                     //System.out.println(serverResponse);
 
@@ -154,7 +160,7 @@ public class ClubPageControllerMember implements Initializable {
                             if (values.length >= 4) {
                                 ObservableList<Match> data = FXCollections.observableArrayList();
                                 for (int i = 1; i + 2 <= values.length; i += 3) {
-                                    data.add(new Match(values[i], values[i + 1], values[i + 2]));
+                                    data.add(new Match(values[i], values[i + 1], values[i +  2]));
                                 }
                                 tableView.setItems(data);
                             } else {
@@ -183,14 +189,5 @@ public class ClubPageControllerMember implements Initializable {
 
         // You may want to set the cell factory for each column if you want custom rendering or editing
     }
-    private void addTestRowToTableView() {
-        // Create an ObservableList for the table data
 
-
-        // Add a row with test values
-
-
-        // Set the data to the TableView
-
-    }
 }

@@ -28,7 +28,7 @@
                             <Label fx:id="labelNameOfClub" layoutX="10.0" layoutY="25.0" prefHeight="32.0" prefWidth="229.0" styleClass="largeTextStyle" text="FC Barcelona" />
                             <Label fx:id="labelLeague" layoutX="20.0" layoutY="87.0" prefHeight="38.0" prefWidth="294.0" styleClass="mediumTextStyle" text="III Liga" />
                             <Label layoutX="11.0" layoutY="143.0" prefHeight="38.0" prefWidth="301.0" styleClass="mediumTextStyle2" text="Trener" />
-                            <Label fx:id="labelManegerName" layoutX="20.0" layoutY="192.0" prefHeight="31.0" prefWidth="301.0" styleClass="mediumTextStyle" text="Arkadiusz Szcześniak" />
+                            <Label fx:id="labelManagerName" layoutX="20.0" layoutY="192.0" prefHeight="31.0" prefWidth="301.0" styleClass="mediumTextStyle" text="Arkadiusz Szcześniak" />
                             <Label layoutX="11.0" layoutY="247.0" prefHeight="38.0" prefWidth="307.0" styleClass="mediumTextStyle2" text="Kontakt" />
                             <Label fx:id="labelPhoneNumber" layoutX="20.0" layoutY="300.0" prefHeight="31.0" prefWidth="301.0" styleClass="mediumTextStyle" text="12 34 56 789" />
                             <Label fx:id="labelAddress" layoutX="20.0" layoutY="326.0" prefHeight="31.0" prefWidth="300.0" styleClass="mediumTextStyle" text="Błękitna 48/a 34-600 Kraków" />
@@ -39,11 +39,11 @@
                     </AnchorPane>
                     <AnchorPane layoutY="157.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="505.0">
                         <children>
-                            <TableView layoutX="14.0" layoutY="27.0" prefHeight="472.0" prefWidth="461.0" styleClass="tableView">
+                            <TableView fx:id="tableView" layoutX="14.0" layoutY="27.0" prefHeight="472.0" prefWidth="461.0" styleClass="tableView">
                                 <columns>
-                                    <TableColumn minWidth="0.0" prefWidth="109.0" text="Wynik" />
-                                    <TableColumn prefWidth="135.0" text="Przeciwnik" />
-                                    <TableColumn prefWidth="216.0" text="Data" />
+                                    <TableColumn fx:id="resultColumn" minWidth="0.0" prefWidth="109.0" text="Wynik" />
+                                    <TableColumn fx:id="opponentColumn" prefWidth="135.0" text="Przeciwnik" />
+                                    <TableColumn fx:id="dateColumn" prefWidth="216.0" text="Data" />
                                 </columns>
                             </TableView>
                         </children></AnchorPane>

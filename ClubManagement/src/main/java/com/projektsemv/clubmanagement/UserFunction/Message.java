@@ -8,7 +8,13 @@ public class Message {
     public void sendRegisterMessage(PrintWriter writer,String... arguments ) {
         writer.println("REGISTER" + "|" + String.join("|", arguments));
     }
-    public void sendGetMemberPage(PrintWriter writer,String... arguments ) {
-        writer.println("GETPAGEMEMBER" + "|" + String.join("|", arguments));
+    public void sendGetPage(PrintWriter writer,String... arguments ) {
+        writer.println("GETPAGE" + "|" + String.join("|", arguments));
+    }
+    public void sendGetSettings(PrintWriter writer,String... arguments ) {
+        writer.println("GETSETTINGS" + "|" + String.join("|", arguments));
+    }
+    public void sendGetStatisticsPage(PrintWriter writer,String... arguments ) {
+        writer.println("GETSTATISICS" + "|" + String.join("|", arguments));
     }
 }
