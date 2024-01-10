@@ -64,10 +64,12 @@ public class SwitchBoard {
                 break;
             case "GETFINANCE":
                     serverWriter.println(Users.getUsername(userID));
-                    serverWriter.println("INCOMES"+Users.getManagerIncomesChart(userID));
-                    System.out.println("INCOMES"+Users.getManagerIncomesChart(userID));
-                    serverWriter.println("EXPENSES"+Users.getManagerExpensesChart(userID));
-                System.out.println("EXPENSES"+Users.getManagerExpensesChart(userID));
+                    serverWriter.println("INCOMES|"+Users.getManagerIncomesChart(userID));
+                    System.out.println("CHART|"+Users.getManagerFinanceChart(userID));
+                    serverWriter.println("CHART|"+Users.getManagerFinanceChart(userID));
+                    //System.out.println("INCOMES"+Users.getManagerIncomesChart(userID));
+                    //serverWriter.println("EXPENSES"+Users.getManagerExpensesChart(userID));
+                    //System.out.println("EXPENSES"+Users.getManagerExpensesChart(userID));
                 break;
             case "":
                 break;

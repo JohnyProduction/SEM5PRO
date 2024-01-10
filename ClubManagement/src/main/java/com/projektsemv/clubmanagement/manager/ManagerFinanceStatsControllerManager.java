@@ -1,9 +1,10 @@
 package com.projektsemv.clubmanagement.manager;
 
 import com.projektsemv.clubmanagement.ChangeController;
-import com.projektsemv.clubmanagement.ChartsCreator;
+
 import com.projektsemv.clubmanagement.UserFunction.Client;
 import com.projektsemv.clubmanagement.UserFunction.Message;
+import com.projektsemv.clubmanagement.UserFunction.Transactions;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +17,10 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,8 +28,6 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.projektsemv.clubmanagement.ChartsCreator.FinanceType.*;
-import static com.projektsemv.clubmanagement.ChartsCreator.chartFinances;
 import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.*;
 
 
@@ -33,39 +35,38 @@ public class ManagerFinanceStatsControllerManager implements Initializable {
     @FXML
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut;
     @FXML
-    private Button allTransactionsButton, incomesButton, outcomesButton;
-    @FXML
     private Label username;
     @FXML
-    private static Label sumOfMoneyLabel;
+    private Label sumOfMoneyLabel;
     @FXML
     private Label mainFinanceLabel;
     @FXML
-    private BarChart barChart;
+    private BarChart incomesBarChart;
     @FXML
-    private TableView financeTable;
-    ChartsCreator.FinanceType tempFinanceType;
+    private TableView<Transactions> financeTable;
+    @FXML
+    private TableColumn<Transactions, String> transactionID;
 
+    @FXML
+    private TableColumn<Transactions, String> transactionAmount;
+
+    @FXML
+    private TableColumn<Transactions, String> transactionDate;
     private static BufferedReader ReadFromServer;
     private static PrintWriter SendToServer;
     private static final Message message = new Message();
-    private static ObservableList<XYChart.Series> incomesData;
-    private static ObservableList<XYChart.Series> expensesData;
-    private static ObservableList<XYChart.Series> sumData;
-    private static float incomes;
-    private static float expenses;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ManagerFinanceStatsControllerManager.ReadFromServer = Client.ReadFromServer;
         ManagerFinanceStatsControllerManager.SendToServer = Client.SendToServer;
         preparePage();
-        barChart.getData().add(chartFinances(PRZYCHODY));
-        barChart.setLegendVisible(false);
-        tempFinanceType = PRZYCHODY;
-        mainFinanceLabel.setText("Statystyki przychodów");
-        //TODO:sumOfMoneyLabel
-        //TODO:financeTable
 
+        initializeTableView2();
+
+
+        incomesBarChart.setVisible(true);
+        incomesBarChart.setLegendVisible(false);
 
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -97,36 +98,6 @@ public class ManagerFinanceStatsControllerManager implements Initializable {
                 ChangeController.changeScene(actionEvent, "settings-page-manager.fxml", "Ustawienia", MANAGER);
             }
         });
-        allTransactionsButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                barChart.getData().remove(0);
-                barChart.getData().add(chartFinances(SUMA));
-                tempFinanceType = SUMA;
-                mainFinanceLabel.setText("Statystyki sumaryczne");
-                //sumOfMoneyLabel =
-            }
-        });
-        incomesButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                barChart.getData().remove(0);
-                barChart.getData().add(incomesData);
-                sumOfMoneyLabel.setText(String.valueOf((Math.round(incomes)*100.0) / 100.0)+" zł");
-                mainFinanceLabel.setText("Statystyki przychodów");
-                //sumOfMoneyLabel =
-            }
-        });
-        outcomesButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                barChart.getData().remove(0);
-                barChart.getData().add(expensesData);
-                sumOfMoneyLabel.setText(String.valueOf((Math.round(expenses)*100.0) / 100.0)+" zł");
-                mainFinanceLabel.setText("Statystyki wydatków");
-                //sumOfMoneyLabel =
-            }
-        });
     }
     private void preparePage() {
         Task<Void> task = new Task<Void>() {
@@ -143,36 +114,48 @@ public class ManagerFinanceStatsControllerManager implements Initializable {
                     Platform.runLater(() -> {
                         // Split the received data into an array of values
                         String[] values = incomesResponse.split("\\|");
-                        if(values[0].equals("INCOMES")){
+                        //System.out.println(incomesResponse);
+                        if (values[0].equals("INCOMES")) {
                             // Check if there are enough values to fill the labels
                             if (values.length >= 3) {
-                               incomesData = resultData(values);
-                                barChart.getData().add(incomesData);
-                                incomes = Float.parseFloat(values[1]);
+                                ObservableList<Transactions> dataF = FXCollections.observableArrayList();
+                                for (int i = 1; i + 2 <= values.length; i += 3) {
+                                    dataF.add(new Transactions(values[i], values[i + 1], values[i + 2]));
+                                }
+                                financeTable.setItems(dataF);
                             } else {
                                 // Handle the case where there are not enough values
                                 System.out.println("Invalid data received from the server");
                             }
-                        }else{
-                            System.out.println("Error getting incomes data");
+                        } else {
+                            System.out.println("Error getting transaction data");
                         }
                     });
-                    String expensesResponse = ReadFromServer.readLine();
+                    String financeResponse = ReadFromServer.readLine();
                     Platform.runLater(() -> {
                         // Split the received data into an array of values
-                        String[] values = expensesResponse.split("\\|");
-                        if(values[0].equals("EXPENSES")){
+                        String[] values = financeResponse.split("\\|");
+                        //System.out.println(incomesResponse);
+                        if (values[0].equals("CHART")) {
                             // Check if there are enough values to fill the labels
-                            if (values.length >= 3) {
-                                expensesData = resultData(values);
-                                barChart.getData().add(expensesData);
-                                expenses = Float.parseFloat(values[1]);
+                            if (values.length >= 2) {
+                                // Set categories for the X-axis
+                                // Set categories for the X-axis
+                                XYChart.Series<String, Number> series = new XYChart.Series<>();
+
+                                // Convert Float to Integer to remove decimals
+                                Integer incomeValue = Math.round(Float.parseFloat(values[1]));
+                                Integer incomeValue2 = Math.round(Float.parseFloat(values[2]));
+                                series.getData().add(new XYChart.Data<>("Przychody", incomeValue));
+                                series.getData().add(new XYChart.Data<>("Wydatki", incomeValue2));
+                                incomesBarChart.getData().add(series);
+                                sumOfMoneyLabel.setText(values[3]);
                             } else {
                                 // Handle the case where there are not enough values
                                 System.out.println("Invalid data received from the server");
                             }
-                        }else{
-                            System.out.println("Error getting expenses data");
+                        } else {
+                            System.out.println("Error getting transaction data");
                         }
                     });
 
@@ -186,17 +169,16 @@ public class ManagerFinanceStatsControllerManager implements Initializable {
         // Start the task in a new thread
         new Thread(task).start();
     }
-    public static ObservableList<XYChart.Series> resultData(String[] values) {
-        XYChart.Series actual = new XYChart.Series();
-        actual.getData().add(new XYChart.Data<>("Ten miesiąc", Math.max(Float.parseFloat(values[1]), 0)));
 
-        XYChart.Series last = new XYChart.Series();
-        last.getData().add(new XYChart.Data<>("Ostatni miesiąc", Math.max(Float.parseFloat(values[2]), 0)));
-
-        ObservableList<XYChart.Series> lineChartData = FXCollections.observableArrayList(actual, last);
-        return lineChartData;
+    private void initializeTableView2() {
+        // Initialize columns
+        transactionID.setCellValueFactory(new PropertyValueFactory<>("TransactionID"));
+        transactionAmount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+        transactionDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        // You may want to set the cell factory for each column if you want custom rendering or editing
     }
 
-}
 
+
+}
 

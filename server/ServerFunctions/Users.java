@@ -202,23 +202,24 @@ public class Users {
         //System.out.println(winRatioObject);
         StringBuilder incomesData = new StringBuilder();
         for (Map<String, Object> row : winRatioObject) {
-            incomesData.append("|").append(row.get("CurrentMonthIncome")).append("|");
-            incomesData.append(row.get("PreviousMonthIncome")).append("|");
-
+            incomesData.append(row.get("FinanceID")).append("|");
+            incomesData.append(row.get("Value")).append("|");
+            incomesData.append(row.get("Date")).append("|");
         }
         return incomesData.toString();
     }
-    public static String getManagerExpensesChart(int userID){
-        List<Map<String, Object>> winRatioObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getManagerExpenses(userID));
-        //System.out.println(winRatioObject);
+    public static String getManagerFinanceChart(int userID){
+        List<Map<String, Object>> winRatioObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getManagerFinance(userID));
+        System.out.println(winRatioObject);
         StringBuilder incomesData = new StringBuilder();
         for (Map<String, Object> row : winRatioObject) {
-            incomesData.append("|").append(row.get("CurrentMonthExpenses")).append("|");
-            incomesData.append(row.get("PreviousMonthExpenses")).append("|");
-
+            incomesData.append(row.get("total_income")).append("|");
+            incomesData.append(row.get("total_expenses")).append("|");
+            incomesData.append(row.get("net_profit")).append("|");
         }
         return incomesData.toString();
     }
+
     public static int saveUserID(){
         return userID;
     }

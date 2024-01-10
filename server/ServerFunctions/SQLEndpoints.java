@@ -196,26 +196,36 @@ public class SQLEndpoints {
                 "GROUP BY months.Month;";
     }
     public static String getManagerIncomes(int userID){
-        return "SELECT\n" +
-                "    SUM(CASE WHEN MONTH(f.date) = MONTH(CURRENT_DATE()) AND YEAR(f.date) = YEAR(CURRENT_DATE()) THEN f.Income ELSE 0 END) AS CurrentMonthIncome,\n" +
-                "    SUM(CASE WHEN MONTH(f.date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH) AND YEAR(f.date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH) THEN f.Income ELSE 0 END) AS PreviousMonthIncome\n" +
+        return  "SELECT f.FinanceID, f.Income AS Value, f.date AS Date, 'INCOMES' AS Type\n" +
                 "FROM finance f\n" +
                 "JOIN clubs c ON f.ClubID = c.ClubID\n" +
-                "WHERE c.ManagerID = "+userID;
-    }
-    public static String getManagerExpenses(int userID){
-        return "SELECT\n" +
-                "    SUM(CASE WHEN MONTH(f.date) = MONTH(CURRENT_DATE()) AND YEAR(f.date) = YEAR(CURRENT_DATE()) THEN f.Expenses ELSE 0 END) AS CurrentMonthExpenses,\n" +
-                "    SUM(CASE WHEN MONTH(f.date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH) AND YEAR(f.date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH) THEN f.Expenses ELSE 0 END) AS PreviousMonthExpenses\n" +
+                "WHERE f.Income IS NOT NULL\n" +
+                "AND c.ManagerID = "+ userID+"\n" +
+                "\n" +
+                "UNION ALL\n" +
+                "\n" +
+                "SELECT f.FinanceID, -f.Expenses AS Value, f.date AS Date, 'EXPENSES' AS Type\n" +
                 "FROM finance f\n" +
                 "JOIN clubs c ON f.ClubID = c.ClubID\n" +
-                "WHERE c.ManagerID ="+userID;
+                "WHERE f.Income IS NULL\n" +
+                "AND c.ManagerID = "+userID;
     }
-
-
-
-
-
+    public static String getManagerFinance(int userID){
+        return"SELECT\n" +
+                "    MONTH(f.date) AS transaction_month,\n" +
+                "    SUM(f.Income) AS total_income,\n" +
+                "    SUM(f.Expenses) AS total_expenses,\n" +
+                "    SUM(f.Income - f.Expenses) AS net_profit\n" +
+                "FROM\n" +
+                "    finance f\n" +
+                "JOIN\n" +
+                "    clubs c ON f.ClubID = c.ClubID\n" +
+                "WHERE\n" +
+                "    c.ManagerID = "+ userID+"\n" +
+                "    AND MONTH(f.date) = MONTH(CURRENT_DATE())\n" +
+                "GROUP BY\n" +
+                "    c.club_name, MONTH(f.date);";
+    }
 
 
 
