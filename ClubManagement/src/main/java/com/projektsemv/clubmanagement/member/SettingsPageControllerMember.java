@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import java.util.ArrayList;
@@ -32,14 +33,20 @@ public class SettingsPageControllerMember implements Initializable {
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut, settingsEditButton, settingsDeleteButton;
     @FXML
     TextField settingsUsername, settingsName, settingsSurname, settingsPassword, settingsEmail;
+    @FXML
+    private Label username;
+    @FXML
+    ChoiceBox leagueChoiceBox, clubChoiceBox;
     private static BufferedReader ReadFromServer;
     private static PrintWriter SendToServer;
     private static final Message message = new Message();
-    @FXML
-    private Label username;
+    ObservableList<String> teamsChoice = FXCollections.observableArrayList("FCA", "FCB", "FCC"); //Przykładowa lista klubów, aby zaprezentować działanie choiceBoxów
+
     List<String> textFieldData = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        leagueChoiceBox.setItems(teamsChoice);
+        clubChoiceBox.setItems(teamsChoice);
         SettingsPageControllerMember.ReadFromServer = Client.ReadFromServer;
         SettingsPageControllerMember.SendToServer = Client.SendToServer;
         preparePage();
