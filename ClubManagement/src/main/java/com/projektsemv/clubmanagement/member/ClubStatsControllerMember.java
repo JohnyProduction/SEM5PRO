@@ -45,8 +45,6 @@ public class ClubStatsControllerMember implements Initializable {
     private LineChart resultStatsChartLine, attendanceStatsChartLine;
     @FXML
     private StackPane stackPaneStats;
-    @FXML
-    private TableView financeTable;
     private static BufferedReader ReadFromServer;
     private static PrintWriter SendToServer;
     private static final Message message = new Message();
@@ -113,7 +111,6 @@ public class ClubStatsControllerMember implements Initializable {
 
                 mainStatsLabel.setText("Statystyki frekwencji");
                 statsInfoLabel.setText("Średnia na mecz");
-                //TODO: Wartość średniej z bazy
             }
         });
     }
@@ -124,13 +121,14 @@ public class ClubStatsControllerMember implements Initializable {
                 try {
                     // Perform time-consuming operations (e.g., reading from the server) here
                     String serverResponse = ReadFromServer.readLine();
-
+                    System.out.println(serverResponse);
                     // Update the UI on the JavaFX application thread
                     Platform.runLater(() -> username.setText(serverResponse));
                     // Perform time-consuming operations (e.g., reading from the server) here
                     message.sendGetStatisticsPage(SendToServer, "MEMBER");
                     // Update the UI on the JavaFX application thread
                     String winRatioResponse = ReadFromServer.readLine();
+                    System.out.println(winRatioResponse);
                     Platform.runLater(() -> {
                         // Split the received data into an array of values
                         String[] values = winRatioResponse.split("\\|");

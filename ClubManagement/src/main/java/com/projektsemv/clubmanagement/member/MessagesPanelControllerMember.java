@@ -60,7 +60,7 @@ public class MessagesPanelControllerMember implements Initializable {
         buttonOption2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "club-stats-member.fxml", "Lista użytkowników", MEMBER);
+                ChangeController.changeScene(actionEvent, "club-stats-member.fxml", "Statystyki", MEMBER);
             }
         });
         buttonOptions.setOnAction(new EventHandler<ActionEvent>() {
@@ -84,17 +84,19 @@ public class MessagesPanelControllerMember implements Initializable {
             @Override
             protected Void call() throws Exception {
                 try {
+
                     // Perform time-consuming operations (e.g., reading from the server) here
                     //String serverResponse = ReadFromServer.readLine();
 
                     message.sendGetNewsPage(SendToServer, "MEMBER");
                     //System.out.println(serverResponse);
-                    //Platform.runLater(() -> username.setText(serverResponse));
+                    Platform.runLater(() -> username.setText("test"));
                     // Update the UI on the JavaFX application thread
                     String newsResponse = ReadFromServer.readLine();
                     Platform.runLater(() -> {
                         // Split the received data into an array of values
                         String[] values = newsResponse.split("\\|");
+                        //System.out.println(newsResponse);
                         if(values[0].equals("NEWS")){
                             // Check if there are enough values to fill the labels
                             if (values.length >= 2) {
@@ -105,7 +107,9 @@ public class MessagesPanelControllerMember implements Initializable {
                                 }
                                 messagesList.setItems(messages);
                                 // Handle the case where there are not enough values
-                                System.out.println("Invalid data received from the server");
+                            }
+                            else {
+                            System.out.println("Invalid data received from the server");
                             }
                         }else{
                             System.out.println("Error getting news data");

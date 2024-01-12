@@ -347,8 +347,26 @@ public class SQLEndpoints {
                 "    m.Date DESC";
     }
 
-
-
+    public static String getFanNews(int userID){
+        return "SELECT\n" +
+                "    CONCAT(u2.name, ' ', u2.surname) AS sendername,\n" +
+                "    m.MessageText AS message\n" +
+                "FROM\n" +
+                "    users u\n" +
+                "JOIN fans f ON\n" +
+                "    u.userID = f.userID\n" +
+                "JOIN clubs c ON\n" +
+                "    f.clubid = c.clubid\n" +
+                "JOIN messages m ON\n" +
+                "    c.managerid = m.senderid\n" +
+                "JOIN roles r ON\n" +
+                "    m.receiverroleid = r.roleid\n" +
+                "JOIN users u2 ON\n" +
+                "    c.managerid=u2.userid\n" +
+                "\n" +
+                "WHERE\n" +
+                "    u.userid = " + userID + " and r.roleid = u.roleid;";
+    }
 
     public static String getUserID(String username, String password){
         return "SELECT UserID FROM users where username='"+username+"' and password='"+password+"'+";

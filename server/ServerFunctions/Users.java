@@ -337,6 +337,17 @@ public class Users {
         return tableMatchData.toString();
     }
 
+    public static String getFanNews(int userID){
+        List<Map<String, Object>> newsObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getFanNews(userID));
+        //System.out.println(winRatioObject);
+        StringBuilder newsData = new StringBuilder();
+        for (Map<String, Object> row : newsObject) {
+            newsData.append(row.get("sendername")).append("|");
+            newsData.append(row.get("message")).append("|");
+        }
+        return newsData.toString();
+    }
+
 
     public static int saveUserID(){
         return userID;
