@@ -120,7 +120,16 @@ CREATE TABLE IF NOT EXISTS tickets (
   FOREIGN KEY (MatchID) REFERENCES matches (MatchID),
   FOREIGN KEY (UserID) REFERENCES users (UserID)
 );
-
+-- Dodaj tabelę przechowującą wiadomości od menadżerów
+CREATE TABLE IF NOT EXISTS messages (
+  MessageID int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  MessageText varchar(255) DEFAULT NULL,
+  SenderID int(11) DEFAULT NULL,
+  ReceiverRoleID int(11) DEFAULT NULL,
+  Date timestamp DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (SenderID) REFERENCES clubs(ManagerID),
+  FOREIGN KEY (ReceiverRoleID) REFERENCES roles(RoleID)
+);
 -- Add foreign key constraints
 ALTER TABLE finance ADD FOREIGN KEY (ClubID) REFERENCES clubs (ClubID);
 ALTER TABLE notification ADD FOREIGN KEY (ClubID) REFERENCES clubs (ClubID);
@@ -174,3 +183,9 @@ INSERT INTO finance (FinanceID, ClubID, Budget, Income, Expenses, date) VALUES (
 
 INSERT INTO fans (UserID, ClubID) values (4,1);
 INSERT INTO tickets (MatchID, UserID, Price, IsPurchased) VALUES (1,4,25,1);
+
+
+-- Przykładowe wiadomości od menadżerów
+INSERT INTO messages (MessageText, SenderID, ReceiverRoleID) VALUES ('Witajcie, drużyna! Mamy dzisiaj ważny mecz o godzinie 18:00. Bądźcie gotowi!', 2, 1);
+INSERT INTO messages (MessageText, SenderID, ReceiverRoleID) VALUES ('Zmiana planów treningowych. Proszę wszystkich o dostosowanie się.', 2, 2);
+INSERT INTO messages (MessageText, SenderID, ReceiverRoleID) VALUES ('Dziękujemy fanom za wsparcie podczas ostatniego meczu. Jesteście niesamowici!', 2, 3);
