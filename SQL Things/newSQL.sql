@@ -50,17 +50,6 @@ CREATE TABLE Results (
   result_guest int(10) DEFAULT NULL,
   WinnerClubID int(11) DEFAULT NULL
 );
-CREATE TABLE IF NOT EXISTS notification (
-  NotificationID int(11) PRIMARY KEY NOT NULL,
-  ClubID int(11) DEFAULT NULL,
-  title varchar(255) DEFAULT NULL,
-  description varchar(255) DEFAULT NULL,
-  Date timestamp DEFAULT CURRENT_TIMESTAMP,
-  IsVisible bool,
-  SenderID int(11),
-  INDEX idx_ClubID (ClubID),
-  INDEX idx_SenderID (SenderID)
-);
 
 CREATE TABLE IF NOT EXISTS players (
   PlayerID int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -132,7 +121,6 @@ CREATE TABLE IF NOT EXISTS messages (
 );
 -- Add foreign key constraints
 ALTER TABLE finance ADD FOREIGN KEY (ClubID) REFERENCES clubs (ClubID);
-ALTER TABLE notification ADD FOREIGN KEY (ClubID) REFERENCES clubs (ClubID);
 ALTER TABLE players ADD FOREIGN KEY (ClubID) REFERENCES clubs (ClubID);
 ALTER TABLE statistics ADD FOREIGN KEY (MatchID) REFERENCES matches (MatchID);
 ALTER TABLE clubs add foreign key (LeagueID) references league(LeagueID);
@@ -141,7 +129,7 @@ ALTER table matches add foreign key (ClubID1) references clubs(ClubID);
 ALTER table matches add foreign key (ClubID2) references clubs(ClubID);
 ALTER table Results add foreign key (MatchID) references matches(MatchID);
 ALTER table Results add foreign key (WinnerClubID) references clubs(ClubID);
-
+ALTER table players add foreign key (UserID) references users(UserID);
 
 -- Insert roles into the roles table
 INSERT INTO clubmanagement.roles (RoleID, type) VALUES (1, 'MEMBER');
@@ -187,5 +175,7 @@ INSERT INTO tickets (MatchID, UserID, Price, IsPurchased) VALUES (1,4,25,1);
 
 -- Przykładowe wiadomości od menadżerów
 INSERT INTO messages (MessageText, SenderID, ReceiverRoleID) VALUES ('Witajcie, drużyna! Mamy dzisiaj ważny mecz o godzinie 18:00. Bądźcie gotowi!', 2, 1);
+INSERT INTO messages (MessageText, SenderID, ReceiverRoleID) VALUES ('Dupa1!', 2, 1);
+INSERT INTO messages (MessageText, SenderID, ReceiverRoleID) VALUES ('Dupa2!', 2, 1);
 INSERT INTO messages (MessageText, SenderID, ReceiverRoleID) VALUES ('Zmiana planów treningowych. Proszę wszystkich o dostosowanie się.', 2, 2);
 INSERT INTO messages (MessageText, SenderID, ReceiverRoleID) VALUES ('Dziękujemy fanom za wsparcie podczas ostatniego meczu. Jesteście niesamowici!', 2, 3);
