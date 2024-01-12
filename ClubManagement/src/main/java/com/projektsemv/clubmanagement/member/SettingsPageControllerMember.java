@@ -25,6 +25,7 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.MANAGER;
 import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.MEMBER;
 
 public class SettingsPageControllerMember implements Initializable {
@@ -32,11 +33,12 @@ public class SettingsPageControllerMember implements Initializable {
     @FXML
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut, settingsEditButton, settingsDeleteButton;
     @FXML
-    TextField settingsUsername, settingsName, settingsSurname, settingsPassword, settingsEmail;
+    private TextField settingsUsername, settingsName, settingsSurname, settingsPassword, settingsEmail;
     @FXML
     private Label username;
     @FXML
     ChoiceBox leagueChoiceBox, clubChoiceBox;
+    private int userID;
     private static BufferedReader ReadFromServer;
     private static PrintWriter SendToServer;
     private static final Message message = new Message();
@@ -45,19 +47,14 @@ public class SettingsPageControllerMember implements Initializable {
     List<String> textFieldData = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        leagueChoiceBox.setItems(teamsChoice);
-        clubChoiceBox.setItems(teamsChoice);
         SettingsPageControllerMember.ReadFromServer = Client.ReadFromServer;
         SettingsPageControllerMember.SendToServer = Client.SendToServer;
+        leagueChoiceBox.setItems(teamsChoice);
+        clubChoiceBox.setItems(teamsChoice);
+
         preparePage();
-        //System.out.println(textFieldData);
-        /*
-        settingsUsername.setText(textFieldData.get(1));
-        settingsName.setText(textFieldData.get(2));
-        settingsSurname.setText(textFieldData.get(3));
-        settingsPassword.setText(textFieldData.get(4));
-        settingsEmail.setText(textFieldData.get(5));
-*/
+
+
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -82,7 +79,15 @@ public class SettingsPageControllerMember implements Initializable {
                 ChangeController.changeScene(actionEvent, "messages-panel-member.fxml", "Wiadomości", MEMBER);
             }
         });
+        settingsEditButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
 
+                message.sendUpdateSettingsUser(SendToServer,String.valueOf(userID),settingsUsername.getText(),settingsName.getText(),settingsSurname.getText(),settingsPassword.getText(),settingsEmail.getText());
+
+                ChangeController.changeScene(actionEvent, "settings-page-member.fxml", "Ustawienia", MANAGER);
+            }
+        });
 
     }
     private void preparePage() {
@@ -98,14 +103,20 @@ public class SettingsPageControllerMember implements Initializable {
                     Platform.runLater(() -> username.setText(serverResponse));
                     String settingsResponse = ReadFromServer.readLine();
                     Platform.runLater(() -> {
-                        System.out.println(settingsResponse);
+
                         // Split the received data into an array of values
                         String[] values = settingsResponse.split("\\|");
+                        System.out.println(settingsResponse);
                         if(values[0].equals("USERSETTINGS")){
                             // Check if there are enough values to fill the labels
                             if (values.length >= 4) {
                                 for (int i=1;i<values.length;i++){
-                                    textFieldData.add(values[i].toString());
+                                    userID = Integer.parseInt(values[1]);
+                                    settingsUsername.setText(values[2]);
+                                    settingsName.setText(values[3]);
+                                    settingsSurname.setText(values[4]);
+                                    settingsPassword.setText(values[5]);
+                                    settingsEmail.setText(values[6]);
                                 }
                             }
                         }else{

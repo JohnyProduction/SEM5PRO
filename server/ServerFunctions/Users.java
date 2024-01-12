@@ -68,13 +68,28 @@ public class Users {
         //System.out.println(settingsObject);
         StringBuilder settingsData = new StringBuilder();
         for (Map<String, Object> row : settingsObject) {
-            settingsData.append("|").append(row.get("username")).append("|")
+            settingsData.append("|")
+                    .append(row.get("UserID")).append("|")
+                    .append(row.get("username")).append("|")
                     .append(row.get("name")).append("|")
                     .append(row.get("surname")).append("|")
                     .append(row.get("password")).append("|")
                     .append(row.get("email")).append("|");
         }
         return settingsData.toString();
+    }
+
+    public static boolean updateSettingsUser(int userID , String username,  String name, String surname, String password,String email){
+        List<Map<String, Object>> result = DBConnection.fetchDataFromDatabase(SQLEndpoints.updateSettingsUser(userID,username,name,surname,password,email));
+        // Assuming your query returns a list with a single map for simplicity
+        if (!result.isEmpty()) {
+            Map<String, Object> resultMap = result.get(0);
+
+            // Check if the deletion was successful (assuming a key "rowsAffected" in the map)
+            return resultMap.containsKey("rowsAffected") && (int) resultMap.get("rowsAffected") > 0;
+        }
+
+        return false; // No result or an empty result means the deletion was not successful
     }
     public static String getMemberSidebar(int userID) {
 
@@ -210,7 +225,7 @@ public class Users {
     }
     public static String getManagerFinanceChart(int userID){
         List<Map<String, Object>> winRatioObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getManagerFinance(userID));
-        System.out.println(winRatioObject);
+        //System.out.println(winRatioObject);
         StringBuilder incomesData = new StringBuilder();
         for (Map<String, Object> row : winRatioObject) {
             incomesData.append(row.get("total_income")).append("|");
@@ -218,6 +233,56 @@ public class Users {
             incomesData.append(row.get("net_profit")).append("|");
         }
         return incomesData.toString();
+    }
+    public static String getManagerUserList(int userID){
+        List<Map<String, Object>> userListObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getManagerUserList(userID));
+        //System.out.println(userListObject);
+        StringBuilder userListData = new StringBuilder();
+        for (Map<String, Object> row : userListObject) {
+            userListData.append(row.get("UserID")).append("|");
+            userListData.append(row.get("username")).append("|");
+            userListData.append(row.get("password")).append("|");
+            userListData.append(row.get("name")).append("|");
+            userListData.append(row.get("surname")).append("|");
+            userListData.append(row.get("email")).append("|");
+            userListData.append(row.get("role")).append("|");
+        }
+        return userListData.toString();
+    }
+    public static String getManagerUserRoles(){
+        List<Map<String, Object>> rolesObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getManagerRoles());
+        //System.out.println(rolesObject);
+        StringBuilder rolesData = new StringBuilder();
+        for (Map<String, Object> row : rolesObject) {
+            rolesData.append(row.get("RoleID")).append("|");
+            rolesData.append(row.get("type")).append("|");
+        }
+        return rolesData.toString();
+    }
+    public static boolean deleteUser(int userID) {
+        List<Map<String, Object>> result = DBConnection.fetchDataFromDatabase(SQLEndpoints.deleteUserFromDB(userID));
+
+        // Assuming your query returns a list with a single map for simplicity
+        if (!result.isEmpty()) {
+            Map<String, Object> resultMap = result.get(0);
+
+            // Check if the deletion was successful (assuming a key "rowsAffected" in the map)
+            return resultMap.containsKey("rowsAffected") && (int) resultMap.get("rowsAffected") > 0;
+        }
+
+        return false; // No result or an empty result means the deletion was not successful
+    }
+    public static boolean updateUser(int userID , String username, String password, String name, String surname, String email, int role){
+        List<Map<String, Object>> result = DBConnection.fetchDataFromDatabase(SQLEndpoints.updateUserFromDB(userID,username,password,name,surname,email,role));
+        // Assuming your query returns a list with a single map for simplicity
+        if (!result.isEmpty()) {
+            Map<String, Object> resultMap = result.get(0);
+
+            // Check if the deletion was successful (assuming a key "rowsAffected" in the map)
+            return resultMap.containsKey("rowsAffected") && (int) resultMap.get("rowsAffected") > 0;
+        }
+
+        return false; // No result or an empty result means the deletion was not successful
     }
 
     public static int saveUserID(){

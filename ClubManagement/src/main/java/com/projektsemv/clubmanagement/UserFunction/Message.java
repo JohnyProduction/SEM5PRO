@@ -20,5 +20,17 @@ public class Message {
     public void sendGetFinancePage(PrintWriter writer,String... arguments ) {
         writer.println("GETFINANCE" + "|" + String.join("|", arguments));
     }
+    public void sendUserListPage(PrintWriter writer,String... arguments ) {
+        writer.println("GETUSERLIST" + "|" + String.join("|", arguments));
+    }
+    public void sendDeleteUser(PrintWriter writer,String... arguments ){
+        writer.println("DELETEUSER" + "|" + String.join("|", arguments));
+    }
+    public void sendUpdateUser(PrintWriter writer,String... arguments ){
+        writer.println("UPDATEUSER" + "|" + String.join("|", arguments));
+    }
+    public void sendUpdateSettingsUser(PrintWriter writer,String... arguments ){
+        writer.println("UPDATESETTINGSUSER" + "|" + String.join("|", arguments));
+    }
 
 }

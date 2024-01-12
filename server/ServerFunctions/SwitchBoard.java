@@ -59,17 +59,33 @@ public class SwitchBoard {
                 break;
             case "GETSETTINGS":
                     serverWriter.println(Users.getUsername(userID));
-                    System.out.println(Users.getSettings(userID));
+                    //System.out.println(Users.getSettings(userID));
                     serverWriter.println("USERSETTINGS"+Users.getSettings(userID));
+                break;
+            case"UPDATESETTINGSUSER":
+                Users.updateSettingsUser(Integer.parseInt(parts[1]),parts[2],parts[3],parts[4],parts[5],parts[6]);
                 break;
             case "GETFINANCE":
                     serverWriter.println(Users.getUsername(userID));
                     serverWriter.println("INCOMES|"+Users.getManagerIncomesChart(userID));
-                    System.out.println("CHART|"+Users.getManagerFinanceChart(userID));
+                    //System.out.println("CHART|"+Users.getManagerFinanceChart(userID));
                     serverWriter.println("CHART|"+Users.getManagerFinanceChart(userID));
-                    //System.out.println("INCOMES"+Users.getManagerIncomesChart(userID));
-                    //serverWriter.println("EXPENSES"+Users.getManagerExpensesChart(userID));
-                    //System.out.println("EXPENSES"+Users.getManagerExpensesChart(userID));
+                break;
+            case "GETUSERLIST":
+                serverWriter.println(Users.getUsername(userID));
+                serverWriter.println("USERROLES|"+ Users.getManagerUserRoles());
+                serverWriter.println("USERLIST|"+ Users.getManagerUserList(userID));
+                break;
+            case "DELETEUSER":
+                String userIDNumber = parts[1];
+                if(Users.deleteUser(Integer.parseInt(userIDNumber))){
+                    serverWriter.println("DELETE|SUCCESS");
+                }else {
+                    serverWriter.println("DELETE|ERROR");
+                }
+                break;
+            case "UPDATEUSER":
+                Users.updateUser(Integer.parseInt(parts[1]),parts[2],parts[3],parts[4],parts[5],parts[6],Integer.parseInt(parts[7]));
                 break;
             case "":
                 break;

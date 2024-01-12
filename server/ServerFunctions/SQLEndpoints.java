@@ -8,11 +8,22 @@ public class SQLEndpoints {
     public static String registerNewUser(String username,String password, String email, String name, String surname){
         return "INSERT INTO USERS (username, password, email,roleID,name, surname) VALUES('"+username+"','"+password+"','"+email+"',3,'"+name+"','"+surname+"')";
     }
+    public static String updateSettingsUser(int userID , String username,  String name, String surname, String password,String email){
+        return "UPDATE users\n" +
+                "SET\n" +
+                "  username = '"+ username+"',\n" +
+                "  password = '"+ password+"',\n" +
+                "  name = '"+ name+"',\n" +
+                "  surname = '"+ surname+"',\n" +
+                "  email = '"+ email+"'\n" +
+                "WHERE UserID = "+userID;
+    }
     public static String getUsername(int userID){
         return "SELECT name FROM users where UserID='"+userID+"'";
     }
     public static String getSettingsData(int userID){
         return "SELECT\n" +
+                "    UserID,\n" +
                 "    username,\n" +
                 "    name,\n" +
                 "    surname,\n" +
@@ -226,8 +237,32 @@ public class SQLEndpoints {
                 "GROUP BY\n" +
                 "    c.club_name, MONTH(f.date);";
     }
-
-
+    public static String getManagerUserList(int userID){
+        return "SELECT u.UserID, u.username, u.password, u.name, u.surname, u.email, r.type as role\n" +
+                "FROM users u\n" +
+                "JOIN roles r ON u.roleID = r.RoleID\n" +
+                "JOIN players p ON u.UserID = p.UserID\n" +
+                "JOIN clubs c ON p.ClubID = c.ClubID\n" +
+                "WHERE c.ManagerID = "+userID;
+    }
+    public static String getManagerRoles(){
+        return "SELECT * FROM Roles";
+    }
+    public static String deleteUserFromDB(int userID){
+        return"DELETE FROM users\n" +
+                "WHERE userID = "+userID;
+    }
+    public static String updateUserFromDB(int userID , String username, String password, String name, String surname, String email, int role){
+        return "UPDATE users\n" +
+                "SET\n" +
+                "  username = '"+ username+"',\n" +
+                "  password = '"+ password+"',\n" +
+                "  name = '"+ name+"',\n" +
+                "  surname = '"+ surname+"',\n" +
+                "  email = '"+ email+"',\n" +
+                "  roleID = "+ role+"\n" +
+                "WHERE UserID = "+userID;
+    }
 
 
 

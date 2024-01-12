@@ -32,10 +32,6 @@
                <Text layoutX="339.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteLabel" text="Imię:" wrappingWidth="30.0" />
                <Text layoutX="311.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteLabel" text="Nazwisko:" wrappingWidth="61.0" />
                <Button fx:id="settingsEditButton" layoutX="391.0" layoutY="469.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="95.0" styleClass="buttonStyle" text="Edytuj" />
-               <Button fx:id="settingsDeleteButton" layoutX="496.0" layoutY="469.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="95.0" styleClass="buttonStyle" text="Usuń" />
-               <ChoiceBox fx:id="leagueChoiceBox" layoutX="391.0" layoutY="409.0" prefHeight="30.0" prefWidth="95.0" styleClass="textField" />
-               <ChoiceBox fx:id="clubChoiceBox" layoutX="496.0" layoutY="409.0" prefHeight="30.0" prefWidth="95.0" styleClass="textField" />
-               <Text layoutX="267.0" layoutY="429.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteLabel" text="Wybór ligi i klubu:" wrappingWidth="105.0" />
             </children>
          </AnchorPane>
       </children>
