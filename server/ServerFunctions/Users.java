@@ -149,7 +149,16 @@ public class Users {
         }
         return winRatioData.toString();
     }
-
+    public static String getMemberNews(int userID){
+        List<Map<String, Object>> newsObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getMemberNews(userID));
+        //System.out.println(winRatioObject);
+        StringBuilder newsData = new StringBuilder();
+        for (Map<String, Object> row : newsObject) {
+            newsData.append(row.get("sendername")).append("|");
+            newsData.append(row.get("message")).append("|");
+        }
+        return newsData.toString();
+    }
 
     //MANAGER
     public static String getManagerSidebar(int userID) {
@@ -284,6 +293,50 @@ public class Users {
 
         return false; // No result or an empty result means the deletion was not successful
     }
+
+    //FAN
+    public static String getFanSidebar(int userID) {
+
+        List<Map<String, Object>> sidebarObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getFanSideBar(userID));
+        //System.out.println(sidebarObject);
+        StringBuilder sideBarData = new StringBuilder();
+        for (Map<String, Object> row : sidebarObject) {
+            sideBarData.append("|").append(row.get("ClubName")).append("|")
+                    .append(row.get("LeagueName")).append("|")
+                    .append(row.get("ManagerName")).append("|")
+                    .append(row.get("ClubAddress")).append("|")
+                    .append(row.get("ClubContact")).append("|");
+        }
+        //System.out.println(sideBarData.toString());
+        return sideBarData.toString();
+    }
+    public static String getFanLastMatch(int userID) {
+        List<Map<String, Object>> lastMatchObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getLastFanMatch(userID));
+        //System.out.println(lastMatchObject);
+        StringBuilder lastMatchData = new StringBuilder();
+        for (Map<String, Object> row : lastMatchObject) {
+            lastMatchData.append("|").append(row.get("Club1")).append("|");
+            lastMatchData.append(row.get("Club2")).append("|");
+            lastMatchData.append(row.get("HomeResult")).append("|");
+            lastMatchData.append(row.get("GuestResult")).append("|");
+            lastMatchData.append(row.get("MatchDate")).append("|");
+        }
+
+        return lastMatchData.toString();
+    }
+    public static String getFanMatchTable(int userID) {
+        List<Map<String, Object>> tableMatchObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getFanMatchTable(userID));
+        //System.out.println(tableMatchObject);
+        StringBuilder tableMatchData = new StringBuilder();
+        for (Map<String, Object> row : tableMatchObject) {
+            tableMatchData.append(row.get("Result")).append("|");
+            tableMatchData.append(row.get("OpponentClub")).append("|");
+            tableMatchData.append(row.get("MatchDate")).append("|");
+        }
+        System.out.println(tableMatchData.toString());
+        return tableMatchData.toString();
+    }
+
 
     public static int saveUserID(){
         return userID;

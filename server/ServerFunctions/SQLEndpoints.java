@@ -119,6 +119,26 @@ public class SQLEndpoints {
                 "LEFT JOIN players p ON (r.WinnerClubID = p.ClubID OR m.ClubID1 = p.ClubID OR m.ClubID2 = p.ClubID) AND p.UserID = " + userID + "\n" +
                 "GROUP BY months.Month;";
     }
+    public static String getMemberNews(int userID){
+        return "SELECT\n" +
+                "    CONCAT(u2.name, ' ', u2.surname) AS sendername,\n" +
+                "    m.MessageText AS message\n" +
+                "FROM\n" +
+                "    users u\n" +
+                "JOIN players p ON\n" +
+                "    u.userID = p.userID\n" +
+                "JOIN clubs c ON\n" +
+                "    p.clubid = c.clubid\n" +
+                "JOIN messages m ON\n" +
+                "    c.managerid = m.senderid\n" +
+                "JOIN roles r ON\n" +
+                "    m.receiverroleid = r.roleid\n" +
+                "JOIN users u2 ON\n" +
+                "    c.managerid=u2.userid\n" +
+                "\n" +
+                "WHERE\n" +
+                "    u.userid = " + userID + " and r.roleid = u.roleid;";
+    }
     //MAGANGER
     public static String getManagerSideBar(int userID) {
         return "SELECT\n" +
@@ -264,6 +284,68 @@ public class SQLEndpoints {
                 "WHERE UserID = "+userID;
     }
 
+
+//FAN
+    public static String getLastFanMatch(int userID){
+        return "SELECT\n" +
+                "    c1.short_club_name AS Club1,\n" +
+                "    c2.short_club_name AS Club2,\n" +
+                "    r.result_home AS HomeResult,\n" +
+                "    r.result_guest AS GuestResult,\n" +
+                "    DATE_FORMAT(m.Date, '%d.%m.%Y') AS MatchDate\n" +
+                "FROM\n" +
+                "    matches m\n" +
+                "JOIN\n" +
+                "    clubs c1 ON m.ClubID1 = c1.ClubID\n" +
+                "JOIN\n" +
+                "    clubs c2 ON m.ClubID2 = c2.ClubID\n" +
+                "JOIN\n" +
+                "    Results r ON m.ResultID = r.ResultID\n" +
+                "JOIN\n" +
+                "    fans f ON f.UserID = "+ userID+" AND (f.ClubID = m.ClubID1 OR f.ClubID = m.ClubID2)\n" +
+                "ORDER BY\n" +
+                "    m.Date DESC LIMIT 1;";
+    }
+    public static String getFanSideBar(int userID) {
+        return "SELECT\n" +
+                "    c.club_name AS ClubName,\n" +
+                "    l.name AS LeagueName,\n" +
+                "    CONCAT(u.name, ' ', u.surname) AS ManagerName,\n" +
+                "    c.address AS ClubAddress,\n" +
+                "    c.contact AS ClubContact\n" +
+                "FROM\n" +
+                "    clubmanagement.clubs c\n" +
+                "JOIN\n" +
+                "    clubmanagement.league l ON c.LeagueID = l.LeagueID\n" +
+                "JOIN\n" +
+                "    clubmanagement.users u ON c.ManagerID = u.UserID\n" +
+                "JOIN\n" +
+                "    clubmanagement.fans f ON f.UserID = " + userID + " AND f.ClubID = c.ClubID";
+    }
+    public static String getFanMatchTable(int userID) {
+        return "SELECT\n" +
+                "    CASE\n" +
+                "        WHEN m.ClubID1 = f.ClubID THEN CONCAT(r.result_home, ' : ', r.result_guest)\n" +
+                "        ELSE CONCAT(r.result_guest, ' : ', r.result_home)\n" +
+                "    END AS Result,\n" +
+                "    CASE\n" +
+                "        WHEN m.ClubID1 = f.ClubID THEN c2.club_name\n" +
+                "        ELSE c1.club_name\n" +
+                "    END AS OpponentClub,\n" +
+                "    DATE_FORMAT(m.Date, '%d.%m.%Y') AS MatchDate\n" +
+                "FROM\n" +
+                "    clubmanagement.matches m\n" +
+                "JOIN\n" +
+                "    clubmanagement.clubs c1 ON m.ClubID1 = c1.ClubID\n" +
+                "JOIN\n" +
+                "    clubmanagement.clubs c2 ON m.ClubID2 = c2.ClubID\n" +
+                "JOIN\n" +
+                "    clubmanagement.Results r ON m.ResultID = r.ResultID\n" +
+                "JOIN\n" +
+                "    clubmanagement.fans f ON f.UserID = " + userID + " AND (f.ClubID = c1.ClubID OR f.ClubID = c2.ClubID)\n" +
+                "ORDER BY\n" +
+                "    m.Date DESC";
+    }
 
 
 

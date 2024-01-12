@@ -123,6 +123,11 @@ public class ClubStatsControllerMember implements Initializable {
             protected Void call() throws Exception {
                 try {
                     // Perform time-consuming operations (e.g., reading from the server) here
+                    String serverResponse = ReadFromServer.readLine();
+
+                    // Update the UI on the JavaFX application thread
+                    Platform.runLater(() -> username.setText(serverResponse));
+                    // Perform time-consuming operations (e.g., reading from the server) here
                     message.sendGetStatisticsPage(SendToServer, "MEMBER");
                     // Update the UI on the JavaFX application thread
                     String winRatioResponse = ReadFromServer.readLine();

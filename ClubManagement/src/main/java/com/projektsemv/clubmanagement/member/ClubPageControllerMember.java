@@ -29,7 +29,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
-import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.MANAGER;
 import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.MEMBER;
 
 public class ClubPageControllerMember implements Initializable {

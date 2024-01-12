@@ -32,5 +32,8 @@ public class Message {
     public void sendUpdateSettingsUser(PrintWriter writer,String... arguments ){
         writer.println("UPDATESETTINGSUSER" + "|" + String.join("|", arguments));
     }
+    public void sendGetNewsPage(PrintWriter writer,String... arguments ) {
+        writer.println("GETNEWS" + "|" + String.join("|", arguments));
+    }
 
 }

@@ -1,4 +1,5 @@
 package ServerFunctions;
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.io.*;
 import java.util.List;
 public class SwitchBoard {
@@ -40,10 +41,14 @@ public class SwitchBoard {
                     serverWriter.println("MANAGERLASTMATCH"+Users.getManagerLastMatch(userID));
                     serverWriter.println("MANAGERMATCHTABLE|"+Users.getManagerMatchTable(userID));
                 }else if (parts[1].equals("FAN")) {
-
+                    //System.out.println(Users.getFanLastMatch(userID));
+                    serverWriter.println("FANSIDEBAR"+Users.getFanSidebar(userID));
+                    serverWriter.println("FANLASTMATCH" +Users.getFanLastMatch(userID));
+                    serverWriter.println("FANMATCHTABLE|"+Users.getFanMatchTable(userID));
                 }
                 break;
             case "GETSTATISICS":
+                serverWriter.println(Users.getUsername(userID));
                 if(parts[1].equals("MEMBER")){
                     serverWriter.println("MEMBERCHART"+Users.getStatisticsWinRatio(userID));
                     //System.out.println(Users.getMonthlyStatisticsWinRatio(userID));
@@ -62,6 +67,9 @@ public class SwitchBoard {
                     //System.out.println(Users.getSettings(userID));
                     serverWriter.println("USERSETTINGS"+Users.getSettings(userID));
                 break;
+            case "GETSETTINGSFAN":
+
+                break;
             case"UPDATESETTINGSUSER":
                 Users.updateSettingsUser(Integer.parseInt(parts[1]),parts[2],parts[3],parts[4],parts[5],parts[6]);
                 break;
@@ -72,20 +80,33 @@ public class SwitchBoard {
                     serverWriter.println("CHART|"+Users.getManagerFinanceChart(userID));
                 break;
             case "GETUSERLIST":
-                serverWriter.println(Users.getUsername(userID));
-                serverWriter.println("USERROLES|"+ Users.getManagerUserRoles());
-                serverWriter.println("USERLIST|"+ Users.getManagerUserList(userID));
+                    serverWriter.println(Users.getUsername(userID));
+                    serverWriter.println("USERROLES|"+ Users.getManagerUserRoles());
+                    serverWriter.println("USERLIST|"+ Users.getManagerUserList(userID));
                 break;
             case "DELETEUSER":
-                String userIDNumber = parts[1];
-                if(Users.deleteUser(Integer.parseInt(userIDNumber))){
-                    serverWriter.println("DELETE|SUCCESS");
-                }else {
-                    serverWriter.println("DELETE|ERROR");
-                }
+                    String userIDNumber = parts[1];
+                    if(Users.deleteUser(Integer.parseInt(userIDNumber))){
+                        serverWriter.println("DELETE|SUCCESS");
+                    }else {
+                        serverWriter.println("DELETE|ERROR");
+                    }
                 break;
             case "UPDATEUSER":
-                Users.updateUser(Integer.parseInt(parts[1]),parts[2],parts[3],parts[4],parts[5],parts[6],Integer.parseInt(parts[7]));
+                    Users.updateUser(Integer.parseInt(parts[1]),parts[2],parts[3],parts[4],parts[5],parts[6],Integer.parseInt(parts[7]));
+                break;
+            case "GETNEWS":
+                //System.out.println(Users.getUsername(userID));
+                //serverWriter.println(Users.getUsername(userID));
+                    if(parts[1].equals("MEMBER")){
+
+                       // System.out.println(Users.getMemberNews(userID));
+                       serverWriter.println("NEWS|"+ Users.getMemberNews(userID));
+                    }else if (parts[1].equals("MANAGER")) {
+
+                    }else if (parts[1].equals("FAN")) {
+
+                    }
                 break;
             case "":
                 break;

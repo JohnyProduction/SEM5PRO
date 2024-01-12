@@ -1,8 +1,13 @@
 package com.projektsemv.clubmanagement.member;
 
 import com.projektsemv.clubmanagement.ChangeController;
+import com.projektsemv.clubmanagement.UserFunction.Client;
+import com.projektsemv.clubmanagement.UserFunction.News;
+import com.projektsemv.clubmanagement.UserFunction.Message;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +16,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,29 +30,21 @@ public class MessagesPanelControllerMember implements Initializable {
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut;
 
     @FXML
-    private ListView<String> messagesList;
+    private ListView<News> messagesList;
     @FXML
     private TextArea messagePreview, messageTextArena;
     @FXML
-    private TextField recipientUsername;
-    @FXML
-    private ChoiceBox<String> roleChoiceBox;
-    @FXML
-    private Label username, roleLabel, messageLabel, recipientUsernameLabel;
-    ObservableList<String> messages = FXCollections.observableArrayList(
-            "Admin1" + " ┃ " + "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ameta." ,
-            "Marek05" + " ┃ " + "Nam tempor consectetur diam, non blandit leo lacinia interdum. " ,
-            "Antek11" + " ┃ " + "Morbi condimentum dictum neque, ac elementum justo efficitur non. " ,
-            "Piłkarz18" + " ┃ " + "Aenean aliquam cursus sem congue efficitur. Vestibulum rhoncus tristique" ,
-            "Piłkarz20" + " ┃ " + " mollis. Praesent lacinia arcu in massa faucibus faucibus. " ,
-            "Szefuńvcio12" + " ┃ " + "Donec nibh tortor, lacinia sit amet orci at, " ,
-            "Kibic1" + " ┃ " + "iaculis condimentum est. Donec gravida ultrices diam a aliquet. "
-    );
-    ObservableList<String> roles = FXCollections.observableArrayList("Właściciel", "Gracz", "Kibic");
+    private Label username;
+    private static BufferedReader ReadFromServer;
+    private static PrintWriter SendToServer;
+    private static final Message message = new Message();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        messagesList.setItems(messages);
-        roleChoiceBox.setItems(roles);
+        MessagesPanelControllerMember.ReadFromServer = Client.ReadFromServer;
+        MessagesPanelControllerMember.SendToServer = Client.SendToServer;
+        preparePage();
+
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -60,7 +60,7 @@ public class MessagesPanelControllerMember implements Initializable {
         buttonOption2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ChangeController.changeScene(actionEvent, "list-of-users-member.fxml", "Lista użytkowników", MEMBER);
+                ChangeController.changeScene(actionEvent, "club-stats-member.fxml", "Lista użytkowników", MEMBER);
             }
         });
         buttonOptions.setOnAction(new EventHandler<ActionEvent>() {
@@ -73,35 +73,53 @@ public class MessagesPanelControllerMember implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 //Pobieranie do textArea zaznaczonego elementu
-                String selectedItem = messagesList.getSelectionModel().getSelectedItem();
+                String selectedItem = String.valueOf(messagesList.getSelectionModel().getSelectedItem());
                 messagePreview.setText(selectedItem);
                 messagePreview.setEditable(false);
             }
         });
-        //Ukryj etykietę po wybraniu opcji
-        roleChoiceBox.setOnAction(event -> {
-            roleLabel.setVisible(false);
-        });
-        //Ukryj etykietę po kliknięciu
-        messageTextArena.setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                messageLabel.setVisible(false); // Ukryj etykietę po kliknięciu w obszar tekstowy
-                messageTextArena.setEditable(true);
-            }else{
-                messageTextArena.setEditable(false);
-            }
-            event.consume(); //zdarzenie obsłużone
-        });
+    }
+    private void preparePage() {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    // Perform time-consuming operations (e.g., reading from the server) here
+                    //String serverResponse = ReadFromServer.readLine();
 
-        recipientUsername.setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                recipientUsername.setEditable(true);
-                recipientUsernameLabel.setVisible(false);
-            }else{
-                recipientUsername.setEditable(false);
-            }
-            event.consume();
-        });
+                    message.sendGetNewsPage(SendToServer, "MEMBER");
+                    //System.out.println(serverResponse);
+                    //Platform.runLater(() -> username.setText(serverResponse));
+                    // Update the UI on the JavaFX application thread
+                    String newsResponse = ReadFromServer.readLine();
+                    Platform.runLater(() -> {
+                        // Split the received data into an array of values
+                        String[] values = newsResponse.split("\\|");
+                        if(values[0].equals("NEWS")){
+                            // Check if there are enough values to fill the labels
+                            if (values.length >= 2) {
+                                // Set values to the respective labels
+                                ObservableList<News> messages = FXCollections.observableArrayList();
+                                for(int i=1;i<values.length;i+=2){
+                                  messages.add(new News(values[i],values[i+1]));
+                                }
+                                messagesList.setItems(messages);
+                                // Handle the case where there are not enough values
+                                System.out.println("Invalid data received from the server");
+                            }
+                        }else{
+                            System.out.println("Error getting news data");
+                        }
+                    });
 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+
+        // Start the task in a new thread
+        new Thread(task).start();
     }
 }

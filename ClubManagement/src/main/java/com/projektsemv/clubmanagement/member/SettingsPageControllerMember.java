@@ -36,21 +36,19 @@ public class SettingsPageControllerMember implements Initializable {
     private TextField settingsUsername, settingsName, settingsSurname, settingsPassword, settingsEmail;
     @FXML
     private Label username;
-    @FXML
-    ChoiceBox leagueChoiceBox, clubChoiceBox;
+
     private int userID;
     private static BufferedReader ReadFromServer;
     private static PrintWriter SendToServer;
     private static final Message message = new Message();
-    ObservableList<String> teamsChoice = FXCollections.observableArrayList("FCA", "FCB", "FCC"); //Przykładowa lista klubów, aby zaprezentować działanie choiceBoxów
+
 
     List<String> textFieldData = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SettingsPageControllerMember.ReadFromServer = Client.ReadFromServer;
         SettingsPageControllerMember.SendToServer = Client.SendToServer;
-        leagueChoiceBox.setItems(teamsChoice);
-        clubChoiceBox.setItems(teamsChoice);
+
 
         preparePage();
 
@@ -85,7 +83,7 @@ public class SettingsPageControllerMember implements Initializable {
 
                 message.sendUpdateSettingsUser(SendToServer,String.valueOf(userID),settingsUsername.getText(),settingsName.getText(),settingsSurname.getText(),settingsPassword.getText(),settingsEmail.getText());
 
-                ChangeController.changeScene(actionEvent, "settings-page-member.fxml", "Ustawienia", MANAGER);
+                ChangeController.changeScene(actionEvent, "settings-page-member.fxml", "Ustawienia", MEMBER);
             }
         });
 
