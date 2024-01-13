@@ -35,5 +35,8 @@ public class Message {
     public void sendGetNewsPage(PrintWriter writer,String... arguments ) {
         writer.println("GETNEWS" + "|" + String.join("|", arguments));
     }
+    public void sendNews(PrintWriter writer,String... arguments ) {
+        writer.println("SENDNEWS" + "|" + String.join("|", arguments));
+    }
 
 }

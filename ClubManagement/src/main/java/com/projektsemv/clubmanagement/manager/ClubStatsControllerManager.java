@@ -128,7 +128,6 @@ public class ClubStatsControllerManager implements Initializable {
                 try {
                     // Perform time-consuming operations (e.g., reading from the server) here
                     message.sendGetStatisticsPage(SendToServer, "MANAGER");
-
                     String serverResponse = ReadFromServer.readLine();
                     // Update the UI on the JavaFX application thread
                     Platform.runLater(() -> username.setText(serverResponse));

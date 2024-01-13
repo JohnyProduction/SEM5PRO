@@ -88,11 +88,12 @@ public class MessagesPanelControllerFan implements Initializable {
                 try {
 
                     // Perform time-consuming operations (e.g., reading from the server) here
-                    //String serverResponse = ReadFromServer.readLine();
-
                     message.sendGetNewsPage(SendToServer, "FAN");
+                    String serverResponse = ReadFromServer.readLine();
+
+
                     //System.out.println(serverResponse);
-                    Platform.runLater(() -> username.setText("test"));
+                    Platform.runLater(() -> username.setText(serverResponse));
                     // Update the UI on the JavaFX application thread
                     String newsResponse = ReadFromServer.readLine();
                     Platform.runLater(() -> {

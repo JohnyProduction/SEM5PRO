@@ -34,7 +34,9 @@ public class SwitchBoard {
                 break;
             case "GETPAGE":
                 serverWriter.println(userLogin);
+
                 if(parts[1].equals("MEMBER")){
+
                     serverWriter.println("MEMBERSIDEBAR"+Users.getMemberSidebar(userID));
                     serverWriter.println("MEMBERLASTMATCH"+Users.getLastMatch(userID));
                     serverWriter.println("MEMBERMATCHTABLE|"+Users.getTableMatch(userID));
@@ -51,15 +53,16 @@ public class SwitchBoard {
                 break;
             case "GETSTATISICS":
                 serverWriter.println(userLogin);
+                //System.out.println(userLogin);
                 if(parts[1].equals("MEMBER")){
                     serverWriter.println("MEMBERCHART"+Users.getStatisticsWinRatio(userID));
-                    System.out.println(Users.getStatisticsWinRatio(userID));
+                    //System.out.println(Users.getStatisticsWinRatio(userID));
                     serverWriter.println("MEMBERCHARTLINE|"+Users.getMonthlyStatisticsWinRatio(userID));
                 }else if (parts[1].equals("MANAGER")) {
-                    serverWriter.println(Users.getUsername(userID));
                     serverWriter.println("MANAGERCHART"+Users.getManagerStatisticsWinRatio(userID));
                     //System.out.println(Users.getManagerStatisticsWinRatio(userID));
                     serverWriter.println("MANAGERCHARTLINE|"+Users.getManagerMonthlyStatisticsWinRatio(userID));
+                    //System.out.println(Users.getManagerMonthlyStatisticsWinRatio(userID));
                 }else if (parts[1].equals("FAN")) {
 
                 }
@@ -98,16 +101,20 @@ public class SwitchBoard {
                     Users.updateUser(Integer.parseInt(parts[1]),parts[2],parts[3],parts[4],parts[5],parts[6],Integer.parseInt(parts[7]));
                 break;
             case "GETNEWS":
+                serverWriter.println(userLogin);
                 //System.out.println(Users.getUsername(userID));
                 //serverWriter.println(Users.getUsername(userID));
                     if(parts[1].equals("MEMBER")){
                        // System.out.println(Users.getMemberNews(userID));
                        serverWriter.println("NEWS|"+ Users.getMemberNews(userID));
                     }else if (parts[1].equals("MANAGER")) {
-
+                        serverWriter.println("NEWS|"+ Users.getMemberNews(userID));
                     }else if (parts[1].equals("FAN")) {
                         serverWriter.println("NEWS|"+ Users.getFanNews(userID));
                     }
+                break;
+            case "SENDNEWS":
+
                 break;
             case "":
                 break;

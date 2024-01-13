@@ -1,8 +1,14 @@
 package com.projektsemv.clubmanagement.manager;
 
 import com.projektsemv.clubmanagement.ChangeController;
+import com.projektsemv.clubmanagement.UserFunction.Client;
+import com.projektsemv.clubmanagement.UserFunction.Message;
+import com.projektsemv.clubmanagement.UserFunction.Roles;
+import com.projektsemv.clubmanagement.UserFunction.User;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +17,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,18 +28,19 @@ import static com.projektsemv.clubmanagement.UserFunction.UserInfo.UserType.*;
 public class MessagesPanelControllerManager implements Initializable {
 
     @FXML
-    private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut;
+    private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut, sendButton;
 
     @FXML
     private ListView<String> messagesList;
     @FXML
     private TextArea messagePreview, messageTextArena;
     @FXML
-    private TextField recipientUsername;
+    private ChoiceBox<Roles> roleChoiceBox;
     @FXML
-    private ChoiceBox<String> roleChoiceBox;
-    @FXML
-    private Label username, roleLabel, messageLabel, recipientUsernameLabel;
+    private Label username, roleLabel, messageLabel;
+    private static BufferedReader ReadFromServer;
+    private static PrintWriter SendToServer;
+    private static final Message message = new Message();
     ObservableList<String> messages = FXCollections.observableArrayList(
             "Admin1" + " ┃ " + "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ameta." ,
             "Marek05" + " ┃ " + "Nam tempor consectetur diam, non blandit leo lacinia interdum. " ,
@@ -40,11 +50,13 @@ public class MessagesPanelControllerManager implements Initializable {
             "Szefuńvcio12" + " ┃ " + "Donec nibh tortor, lacinia sit amet orci at, " ,
             "Kibic1" + " ┃ " + "iaculis condimentum est. Donec gravida ultrices diam a aliquet. "
     );
-    ObservableList<String> roles = FXCollections.observableArrayList("Właściciel", "Gracz", "Kibic");
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        MessagesPanelControllerManager.ReadFromServer = Client.ReadFromServer;
+        MessagesPanelControllerManager.SendToServer = Client.SendToServer;
+
         messagesList.setItems(messages);
-        roleChoiceBox.setItems(roles);
+
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -67,6 +79,13 @@ public class MessagesPanelControllerManager implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 ChangeController.changeScene(actionEvent, "settings-page-manager.fxml", "Ustawienia", MANAGER);
+            }
+        });
+        sendButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                message.sendNews(SendToServer,messageTextArena.getText(),String.valueOf(roleChoiceBox.getSelectionModel().getSelectedItem()));
+                ChangeController.changeScene(actionEvent, "messages-page-manager.fxml", "Wiadomości", MANAGER);
             }
         });
         messagesList.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -93,15 +112,50 @@ public class MessagesPanelControllerManager implements Initializable {
             event.consume(); //zdarzenie obsłużone
         });
 
-        recipientUsername.setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                recipientUsername.setEditable(true);
-                recipientUsernameLabel.setVisible(false);
-            }else{
-                recipientUsername.setEditable(false);
-            }
-            event.consume();
-        });
+    }
 
+    private void preparePage() {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    // Perform time-consuming operations (e.g., reading from the server) here
+                    message.sendUserListPage(SendToServer);
+                    String serverResponse = ReadFromServer.readLine();
+
+                    // Update the UI on the JavaFX application thread
+                    Platform.runLater(() -> username.setText(serverResponse));
+                    String userRolesResponse = ReadFromServer.readLine();
+                    Platform.runLater(() -> {
+                        // Split the received data into an array of values
+                        String[] values = userRolesResponse.split("\\|");
+                        if(values[0].equals("USERROLES")){
+                            System.out.println(userRolesResponse);
+                            // Check if there are enough values to fill the labels
+                            if (values.length >= 5) {
+                                // Set values to the respective labels
+                                ObservableList<Roles> roles = FXCollections.observableArrayList();
+                                for (int i = 1; i < values.length; i += 2) {
+                                    roles.add(new Roles(Integer.parseInt(values[i]), values[i + 1]));
+                                }
+                                roleChoiceBox.setItems(roles);
+
+                            } else {
+                                // Handle the case where there are not enough values
+                                System.out.println("Invalid data received from the server");
+                            }
+                        }else{
+                            System.out.println("Error getting user roles data");
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+
+        // Start the task in a new thread
+        new Thread(task).start();
     }
 }

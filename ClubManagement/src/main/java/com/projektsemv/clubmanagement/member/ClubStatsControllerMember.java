@@ -56,7 +56,7 @@ public class ClubStatsControllerMember implements Initializable {
         preparePage();
 
 
-        attendanceStatsChartLine.setData(attendanceStatsChartData());
+       //attendanceStatsChartLine.setData(attendanceStatsChartData());
 
         resultStatsChart.setVisible(true);
         resultStatsChartLine.setVisible(false);
@@ -120,15 +120,16 @@ public class ClubStatsControllerMember implements Initializable {
             protected Void call() throws Exception {
                 try {
                     // Perform time-consuming operations (e.g., reading from the server) here
+                    message.sendGetStatisticsPage(SendToServer, "MEMBER");
                     String serverResponse = ReadFromServer.readLine();
-                    System.out.println(serverResponse);
+                    //System.out.println(serverResponse);
                     // Update the UI on the JavaFX application thread
                     Platform.runLater(() -> username.setText(serverResponse));
                     // Perform time-consuming operations (e.g., reading from the server) here
-                    message.sendGetStatisticsPage(SendToServer, "MEMBER");
+
                     // Update the UI on the JavaFX application thread
                     String winRatioResponse = ReadFromServer.readLine();
-                    System.out.println(winRatioResponse);
+                    //System.out.println(winRatioResponse);
                     Platform.runLater(() -> {
                         // Split the received data into an array of values
                         String[] values = winRatioResponse.split("\\|");
