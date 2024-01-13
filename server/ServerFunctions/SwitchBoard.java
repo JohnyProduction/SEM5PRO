@@ -86,7 +86,7 @@ public class SwitchBoard {
                 Users.updateSettingsUser(Integer.parseInt(parts[1]),parts[2],parts[3],parts[4],parts[5],parts[6]);
                 break;
             case"UPDATEFANSETTINGS":
-
+                Users.updateFanSettings(Integer.parseInt(parts[1]),parts[2],parts[3],parts[4],parts[5],parts[6],Integer.parseInt(parts[7]),Integer.parseInt(parts[8]));
                 break;
             case "GETFINANCE":
                     serverWriter.println(userLogin);

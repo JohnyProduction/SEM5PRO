@@ -411,8 +411,8 @@ public class SQLEndpoints {
     public static String updateFan(int userID, int leagueID,int clubID){
         return "UPDATE fans" +
                 "SET" +
-                "leagueID="+leagueID+"\"" +
-                "clubID= "+clubID+"" +
+                "leagueID="+leagueID+
+                "clubID= "+clubID +
                 "WHERE userID="+userID;
     }
     public static String updateFanUser(int userID,String username, String name,String surname,String password,String email){
