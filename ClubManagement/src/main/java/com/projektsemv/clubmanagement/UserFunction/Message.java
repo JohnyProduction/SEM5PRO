@@ -38,5 +38,13 @@ public class Message {
     public void sendNews(PrintWriter writer,String... arguments ) {
         writer.println("SENDNEWS" + "|" + String.join("|", arguments));
     }
-
+    public void sendGetFanSettings(PrintWriter writer,String... arguments ) {
+        writer.println("GETSETTINGSFAN" + "|" + String.join("|", arguments));
+    }
+    public void sendGetFanClubs(PrintWriter writer,String... arguments ) {
+        writer.println("GETSETTINGSCLUBS" + "|" + String.join("|", arguments));
+    }
+    public void sendUpdateFanSettings(PrintWriter writer,String... arguments ) {
+        writer.println("UPDATEFANSETTINGS" + "|" + String.join("|", arguments));
+    }
 }

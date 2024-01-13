@@ -283,8 +283,22 @@ public class SQLEndpoints {
                 "  roleID = "+ role+"\n" +
                 "WHERE UserID = "+userID;
     }
-
-
+    public static String getManagerNews(int userID){
+        return "SELECT\n" +
+                "    CONCAT(u.name, ' ', u.surname) AS sendername,\n" +
+                "    m.MessageText AS message\n" +
+                "FROM\n" +
+                "    users u\n" +
+                "JOIN clubs c ON\n" +
+                "    u.UserID = c.ManagerID\n" +
+                "JOIN messages m ON\n" +
+                "    c.managerid = m.senderid\n" +
+                "WHERE\n" +
+                "    m.SenderID !="+userID+" AND m.ReceiverRoleID=2";
+    }
+    public static String setNews(int userID,String message,int roleID){
+        return "INSERT INTO messages (MessageText, SenderID, ReceiverRoleID) VALUES ('"+message+"', "+userID+", "+roleID+");";
+    }
 //FAN
     public static String getLastFanMatch(int userID){
         return "SELECT\n" +
@@ -366,6 +380,51 @@ public class SQLEndpoints {
                 "\n" +
                 "WHERE\n" +
                 "    u.userid = " + userID + " and r.roleid = u.roleid;";
+    }
+    public static String getFanSettingsData(int userID){
+        return "SELECT\n" +
+                "    u.UserID,\n" +
+                "    u.username,\n" +
+                "    u.name as Name,\n" +
+                "    u.surname,\n" +
+                "    u.password,\n" +
+                "    u.email,\n" +
+                "    CASE WHEN f.ClubID IS NOT NULL THEN c.short_club_name ELSE NULL END AS  Club,\n" +
+                "    CASE WHEN f.ClubID IS NOT NULL THEN l.name ELSE NULL END AS  League\n" +
+                "FROM\n" +
+                "    users u\n" +
+                "LEFT JOIN fans f ON\n" +
+                "    u.UserID = f.UserID\n" +
+                "LEFT JOIN clubs c ON\n" +
+                "    c.ClubID = f.ClubID\n" +
+                "LEFT JOIN league l ON\n" +
+                "    l.LeagueID = c.LeagueID\n" +
+                "WHERE\n" +
+                "    u.UserID = \n"+userID;
+    }
+    public static String getFanLeagues(){
+        return "SELECT LeagueID,name FROM league";
+    }
+    public static String getFanClubs(int leagueID){
+        return "SELECT ClubID,short_club_name FROM clubs WHERE LeagueID="+leagueID;
+    }
+    public static String updateFan(int userID, int leagueID,int clubID){
+        return "UPDATE fans" +
+                "SET" +
+                "leagueID="+leagueID+"\"" +
+                "clubID= "+clubID+"" +
+                "WHERE userID="+userID;
+    }
+    public static String updateFanUser(int userID,String username, String name,String surname,String password,String email){
+        return"UPDATE users\n" +
+                "SET\n" +
+                "    username = '"+username+"',\n" +
+                "    name = '"+name+"',\n" +
+                "    surname = '"+surname+"',\n" +
+                "    password = '"+password+"',\n" +
+                "    email = '"+email+"'\n" +
+                "WHERE\n" +
+                "    UserID = "+userID;
     }
 
     public static String getUserID(String username, String password){

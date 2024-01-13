@@ -73,10 +73,20 @@ public class SwitchBoard {
                     serverWriter.println("USERSETTINGS"+Users.getSettings(userID));
                 break;
             case "GETSETTINGSFAN":
-
+                    serverWriter.println(userLogin);
+                    //System.out.println(Users.getFanSettings(userID));
+                    serverWriter.println("USERLEAGUES|"+Users.getFanLeagues());
+                    System.out.println(Users.getFanLeagues());
+                    serverWriter.println("USERSETTINGS"+Users.getFanSettings(userID));
+                break;
+            case "GETSETTINGSCLUBS":
+                    serverWriter.println("USERCLUBS|" + Users.getFanClubs(Integer.parseInt(parts[1])));
                 break;
             case"UPDATESETTINGSUSER":
                 Users.updateSettingsUser(Integer.parseInt(parts[1]),parts[2],parts[3],parts[4],parts[5],parts[6]);
+                break;
+            case"UPDATEFANSETTINGS":
+
                 break;
             case "GETFINANCE":
                     serverWriter.println(userLogin);
@@ -108,12 +118,18 @@ public class SwitchBoard {
                        // System.out.println(Users.getMemberNews(userID));
                        serverWriter.println("NEWS|"+ Users.getMemberNews(userID));
                     }else if (parts[1].equals("MANAGER")) {
-                        serverWriter.println("NEWS|"+ Users.getMemberNews(userID));
+                        serverWriter.println("USERROLES|"+ Users.getManagerUserRoles());
+                        serverWriter.println("NEWS|"+ Users.getManagerNews(userID));
                     }else if (parts[1].equals("FAN")) {
                         serverWriter.println("NEWS|"+ Users.getFanNews(userID));
                     }
                 break;
             case "SENDNEWS":
+                if(Users.setManagerNews(userID,parts[1],Integer.parseInt(parts[2]))){
+                    System.out.println("Row affected");
+                }else{
+                    System.out.println("Row affected fuckup");
+                }
 
                 break;
             case "":

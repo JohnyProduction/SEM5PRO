@@ -1,10 +1,7 @@
 package com.projektsemv.clubmanagement.manager;
 
 import com.projektsemv.clubmanagement.ChangeController;
-import com.projektsemv.clubmanagement.UserFunction.Client;
-import com.projektsemv.clubmanagement.UserFunction.Message;
-import com.projektsemv.clubmanagement.UserFunction.Roles;
-import com.projektsemv.clubmanagement.UserFunction.User;
+import com.projektsemv.clubmanagement.UserFunction.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +28,7 @@ public class MessagesPanelControllerManager implements Initializable {
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut, sendButton;
 
     @FXML
-    private ListView<String> messagesList;
+    private ListView<News> messagesList;
     @FXML
     private TextArea messagePreview, messageTextArena;
     @FXML
@@ -41,21 +38,11 @@ public class MessagesPanelControllerManager implements Initializable {
     private static BufferedReader ReadFromServer;
     private static PrintWriter SendToServer;
     private static final Message message = new Message();
-    ObservableList<String> messages = FXCollections.observableArrayList(
-            "Admin1" + " ┃ " + "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ameta." ,
-            "Marek05" + " ┃ " + "Nam tempor consectetur diam, non blandit leo lacinia interdum. " ,
-            "Antek11" + " ┃ " + "Morbi condimentum dictum neque, ac elementum justo efficitur non. " ,
-            "Piłkarz18" + " ┃ " + "Aenean aliquam cursus sem congue efficitur. Vestibulum rhoncus tristique" ,
-            "Piłkarz20" + " ┃ " + " mollis. Praesent lacinia arcu in massa faucibus faucibus. " ,
-            "Szefuńvcio12" + " ┃ " + "Donec nibh tortor, lacinia sit amet orci at, " ,
-            "Kibic1" + " ┃ " + "iaculis condimentum est. Donec gravida ultrices diam a aliquet. "
-    );
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         MessagesPanelControllerManager.ReadFromServer = Client.ReadFromServer;
         MessagesPanelControllerManager.SendToServer = Client.SendToServer;
-
-        messagesList.setItems(messages);
+        preparePage();
 
         buttonLogOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -84,15 +71,19 @@ public class MessagesPanelControllerManager implements Initializable {
         sendButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                message.sendNews(SendToServer,messageTextArena.getText(),String.valueOf(roleChoiceBox.getSelectionModel().getSelectedItem()));
-                ChangeController.changeScene(actionEvent, "messages-page-manager.fxml", "Wiadomości", MANAGER);
+                if(messageTextArena.getText().isEmpty()){
+
+                }else{
+                    message.sendNews(SendToServer,messageTextArena.getText(),String.valueOf((roleChoiceBox.getSelectionModel().getSelectedIndex())+1));
+                    ChangeController.changeScene(actionEvent, "messages-panel-manager.fxml", "Wiadomości", MANAGER);
+                }
             }
         });
         messagesList.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 //Pobieranie do textArea zaznaczonego elementu
-                String selectedItem = messagesList.getSelectionModel().getSelectedItem();
+                String selectedItem = String.valueOf(messagesList.getSelectionModel().getSelectedItem());
                 messagePreview.setText(selectedItem);
                 messagePreview.setEditable(false);
             }
@@ -120,7 +111,7 @@ public class MessagesPanelControllerManager implements Initializable {
             protected Void call() throws Exception {
                 try {
                     // Perform time-consuming operations (e.g., reading from the server) here
-                    message.sendUserListPage(SendToServer);
+                    message.sendGetNewsPage(SendToServer,"MANAGER");
                     String serverResponse = ReadFromServer.readLine();
 
                     // Update the UI on the JavaFX application thread
@@ -129,6 +120,7 @@ public class MessagesPanelControllerManager implements Initializable {
                     Platform.runLater(() -> {
                         // Split the received data into an array of values
                         String[] values = userRolesResponse.split("\\|");
+                        System.out.println(userRolesResponse);
                         if(values[0].equals("USERROLES")){
                             System.out.println(userRolesResponse);
                             // Check if there are enough values to fill the labels
@@ -146,6 +138,29 @@ public class MessagesPanelControllerManager implements Initializable {
                             }
                         }else{
                             System.out.println("Error getting user roles data");
+                        }
+                    });
+                    String newsResponse = ReadFromServer.readLine();
+                    Platform.runLater(() -> {
+                        // Split the received data into an array of values
+                        String[] values = newsResponse.split("\\|");
+                        //System.out.println(newsResponse);
+                        if(values[0].equals("NEWS")){
+                            // Check if there are enough values to fill the labels
+                            if (values.length >= 2) {
+                                // Set values to the respective labels
+                                ObservableList<News> messages = FXCollections.observableArrayList();
+                                for(int i=1;i<values.length;i+=2){
+                                    messages.add(new News(values[i],values[i+1]));
+                                }
+                                messagesList.setItems(messages);
+                                // Handle the case where there are not enough values
+                            }
+                            else {
+                                System.out.println("Invalid data received from the server");
+                            }
+                        }else{
+                            System.out.println("Error getting news data");
                         }
                     });
                 } catch (IOException e) {
