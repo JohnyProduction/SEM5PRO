@@ -428,6 +428,56 @@ public class Users {
         return false; // No result or an empty result means the deletion was not successful
     }
 
+    public static String getFanTickets(int userID){
+        List<Map<String, Object>> ticketsObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getFanTickets(userID));
+        System.out.println(ticketsObject);
+        StringBuilder ticketsData = new StringBuilder();
+        for (Map<String, Object> row : ticketsObject) {
+            ticketsData
+                    .append(row.get("ticketID")).append("|")
+                    .append(row.get("date")).append("|")
+                    .append(row.get("price")).append("|")
+                    .append(row.get("Mecz")).append("|");
+        }
+        return ticketsData.toString();
+    }
+    public static String getFanIncomingMatch(int userID){
+        List<Map<String, Object>> incomingObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getFanIncomingMatch(userID));
+        //System.out.println(incomingObject);
+        StringBuilder incomingData = new StringBuilder();
+        for (Map<String, Object> row : incomingObject) {
+            incomingData
+                    .append(row.get("club1")).append("|")
+                    .append(row.get("club2")).append("|")
+                    .append(row.get("match_date")).append("|");
+        }
+        return incomingData.toString();
+    }
+    public static String getFanIncomingMatches(int userID){
+        List<Map<String, Object>> incomingObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getFanIncomingMatches(userID));
+        //System.out.println(incomingObject);
+        StringBuilder incomingData = new StringBuilder();
+        for (Map<String, Object> row : incomingObject) {
+            incomingData
+                    .append(row.get("MatchID")).append("|")
+                    .append(row.get("club1")).append("|")
+                    .append(row.get("club2")).append("|")
+                    .append(row.get("match_date")).append("|");
+        }
+        return incomingData.toString();
+    }
+    public static boolean buyTicket(int userID,int matchID,double price){
+        List<Map<String, Object>> result = DBConnection.fetchDataFromDatabase(SQLEndpoints.setBuyTicket(userID,matchID,price));
+        // Assuming your query returns a list with a single map for simplicity
+        if (!result.isEmpty()) {
+            Map<String, Object> resultMap = result.get(0);
+
+            // Check if the deletion was successful (assuming a key "rowsAffected" in the map)
+            return resultMap.containsKey("rowsAffected") && (int) resultMap.get("rowsAffected") > 0;
+        }
+
+        return false; // No result or an empty result means the deletion was not successful
+    }
     public static int saveUserID(){
         return userID;
     }

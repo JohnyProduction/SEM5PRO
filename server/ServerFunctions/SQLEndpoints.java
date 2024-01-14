@@ -67,6 +67,7 @@ public class SQLEndpoints {
                 "    Results r ON m.ResultID = r.ResultID\n" +
                 "JOIN\n" +
                 "    players p ON (p.ClubID = m.ClubID1 OR p.ClubID = m.ClubID2) AND p.UserID = "+userID+"\n" +
+                "WHERE m.isPlayed = 1\n" +
                 "ORDER BY\n" +
                 "    m.Date DESC\n" +
                 "LIMIT 1;";
@@ -92,6 +93,7 @@ public class SQLEndpoints {
                 "    Results r ON m.ResultID = r.ResultID\n" +
                 "JOIN\n" +
                 "    players p ON (p.ClubID = m.ClubID1 OR p.ClubID = m.ClubID2) AND p.UserID = "+userID+"\n" +
+                "WHERE m.isPlayed=1\n" +
                 "ORDER BY\n" +
                 "    m.Date DESC";
     }
@@ -102,7 +104,7 @@ public class SQLEndpoints {
                 "FROM Results r\n" +
                 "JOIN matches m ON r.MatchID = m.MatchID\n" +
                 "JOIN players p ON (p.ClubID = m.ClubID1 OR p.ClubID = m.ClubID2)\n" +
-                "WHERE p.UserID = " + userID + "\n" +
+                "WHERE m.isPlayed = 1 AND p.UserID = " + userID + "\n" +
                 "GROUP BY p.ClubID;";
     }
     public static String getMonthWinRatio(int userID) {
@@ -117,6 +119,7 @@ public class SQLEndpoints {
                 "LEFT JOIN Results r ON r.MatchID = MatchID\n" +
                 "LEFT JOIN matches m ON r.MatchID = m.MatchID\n" +
                 "LEFT JOIN players p ON (r.WinnerClubID = p.ClubID OR m.ClubID1 = p.ClubID OR m.ClubID2 = p.ClubID) AND p.UserID = " + userID + "\n" +
+                "WHERE m.isPlayed=1\n" +
                 "GROUP BY months.Month;";
     }
     public static String getMemberNews(int userID){
@@ -174,6 +177,7 @@ public class SQLEndpoints {
                 "    clubmanagement.Results r ON m.ResultID = r.ResultID\n" +
                 "WHERE\n" +
                 "    (c1.ManagerID = "+ userID+" OR c2.ManagerID = "+ userID+")\n" +
+                "AND m.isPlayed=1\n" +
                 "ORDER BY\n" +
                 "    m.Date DESC\n" +
                 "LIMIT 1";
@@ -199,6 +203,7 @@ public class SQLEndpoints {
                 "    clubmanagement.Results r ON m.ResultID = r.ResultID\n" +
                 "WHERE\n" +
                 "    (c1.ManagerID = "+ userID+" OR c2.ManagerID = "+ userID+")\n" +
+                "AND m.isPlayed=1\n" +
                 "ORDER BY\n" +
                 "    m.Date DESC\n";
     }
@@ -209,7 +214,7 @@ public class SQLEndpoints {
                 "FROM clubs c\n" +
                 "JOIN matches m ON c.ClubID = m.ClubID1 OR c.ClubID = m.ClubID2\n" +
                 "LEFT JOIN Results r ON m.MatchID = r.MatchID\n" +
-                "WHERE c.ManagerID = "+userID;
+                "WHERE m.isPlayed = 1 AND c.ManagerID = "+userID;
     }
     public static String getManagerMonthWinRatio(int userID) {
         return "SELECT\n" +
@@ -223,7 +228,7 @@ public class SQLEndpoints {
                 "LEFT JOIN Results r ON r.MatchID = MatchID\n" +
                 "LEFT JOIN matches m ON r.MatchID = m.MatchID\n" +
                 "LEFT JOIN clubs c ON r.WinnerClubID = c.ClubID OR m.ClubID1 = c.ClubID OR m.ClubID2 = c.ClubID\n" +
-                "WHERE c.ManagerID = "+ userID+"\n" +
+                "WHERE m.isPlayed = 1 AND c.ManagerID = "+ userID+"\n" +
                 "GROUP BY months.Month;";
     }
     public static String getManagerIncomes(int userID){
@@ -317,6 +322,7 @@ public class SQLEndpoints {
                 "    Results r ON m.ResultID = r.ResultID\n" +
                 "JOIN\n" +
                 "    fans f ON f.UserID = "+ userID+" AND (f.ClubID = m.ClubID1 OR f.ClubID = m.ClubID2)\n" +
+                "WHERE m.isPlayed=1\n" +
                 "ORDER BY\n" +
                 "    m.Date DESC LIMIT 1;";
     }
@@ -357,6 +363,7 @@ public class SQLEndpoints {
                 "    clubmanagement.Results r ON m.ResultID = r.ResultID\n" +
                 "JOIN\n" +
                 "    clubmanagement.fans f ON f.UserID = " + userID + " AND (f.ClubID = c1.ClubID OR f.ClubID = c2.ClubID)\n" +
+                "WHERE m.isPlayed=1\n" +
                 "ORDER BY\n" +
                 "    m.Date DESC";
     }
@@ -427,6 +434,55 @@ public class SQLEndpoints {
                 "    UserID = "+userID;
     }
 
+    public static String getFanTickets(int userID){
+        return "SELECT\n" +
+                "  tickets.TicketID AS ticketID,\n" +
+                " DATE_FORMAT(matches.Date, '%Y-%m-%d') AS date,\n" +
+                "  tickets.Price AS price,\n" +
+                "  CONCAT(club1.club_name, ' vs ', club2.club_name) AS Mecz\n" +
+                "FROM\n" +
+                "  tickets\n" +
+                "JOIN\n" +
+                "  matches ON tickets.MatchID = matches.MatchID\n" +
+                "JOIN\n" +
+                "  clubs AS club1 ON matches.ClubID1 = club1.ClubID\n" +
+                "JOIN\n" +
+                "  clubs AS club2 ON matches.ClubID2 = club2.ClubID\n" +
+                "WHERE\n" +
+                "  tickets.UserID = "+userID;
+    }
+
+    public static String getFanIncomingMatch(int userID){
+        return"SELECT\n" +
+                "  c1.short_club_name AS 'club1',\n" +
+                "  c2.short_club_name AS 'club2',\n" +
+                "  DATE_FORMAT(m.Date, '%Y-%m-%d') AS 'match_date'\n" +
+                "FROM\n" +
+                "  fans f\n" +
+                "  JOIN clubs c1 ON f.ClubID = c1.ClubID\n" +
+                "  JOIN matches m ON (c1.ClubID = m.ClubID1 OR c1.ClubID = m.ClubID2) AND m.isPlayed IS NULL\n" +
+                "  JOIN clubs c2 ON (c1.ClubID = m.ClubID1 AND c2.ClubID = m.ClubID2) OR (c1.ClubID = m.ClubID2 AND c2.ClubID = m.ClubID1)\n" +
+                "WHERE\n" +
+                "  f.UserID = "+ userID+"\n" +
+                "LIMIT 1;";
+    }
+    public static String getFanIncomingMatches(int userID){
+        return "SELECT\n" +
+                "  m.MatchID as MatchID,\n" +
+                "  c1.club_name AS 'club1',\n" +
+                "  c2.club_name AS 'club2',\n" +
+                "  DATE_FORMAT(m.Date, '%Y-%m-%d') AS 'match_date'\n" +
+                "FROM\n" +
+                "  fans f\n" +
+                "  JOIN clubs c1 ON f.ClubID = c1.ClubID\n" +
+                "  JOIN matches m ON (c1.ClubID = m.ClubID1 OR c1.ClubID = m.ClubID2) AND m.isPlayed IS NULL\n" +
+                "  JOIN clubs c2 ON (c1.ClubID = m.ClubID1 AND c2.ClubID = m.ClubID2) OR (c1.ClubID = m.ClubID2 AND c2.ClubID = m.ClubID1)\n" +
+                "WHERE\n" +
+                "  f.UserID = "+ userID;
+    }
+    public static String setBuyTicket(int userID,int matchID,double price){
+        return "INSERT INTO tickets (MatchID, UserID, Price, IsPurchased) values ("+matchID+","+userID+","+price+",1)";
+    }
     public static String getUserID(String username, String password){
         return "SELECT UserID FROM users where username='"+username+"' and password='"+password+"'+";
     }

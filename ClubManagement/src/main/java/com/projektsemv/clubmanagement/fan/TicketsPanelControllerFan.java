@@ -1,8 +1,11 @@
 package com.projektsemv.clubmanagement.fan;
 
 import com.projektsemv.clubmanagement.ChangeController;
+import com.projektsemv.clubmanagement.UserFunction.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,6 +13,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,7 +27,7 @@ public class TicketsPanelControllerFan implements Initializable {
     private Button buttonOption1, buttonOption2, buttonOption3, buttonOptions, buttonLogOut, buyTicketButton;
 
     @FXML
-    private ListView<String> messagesList;
+    private ListView<Tickets> messagesList;
     @FXML
     private TextArea messagePreview, messageTextArena;
     @FXML
@@ -30,18 +36,20 @@ public class TicketsPanelControllerFan implements Initializable {
     private ChoiceBox<String> roleChoiceBox;
     @FXML
     private Label username, roleLabel, messageLabel, recipientUsernameLabel;
-    ObservableList<String> messages = FXCollections.observableArrayList(
-            "1" + " ┃ " + "2023-12-19" + " ┃ " + "50.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs Zaksa Kędzierzyn-Koźle",
-            "2" + " ┃ " + "2023-11-19" + " ┃ " + "40.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs ZAKSA Strzelce Opolskie",
-            "3" + " ┃ " + "2023-9-9" + " ┃ " + "45.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs Trefl Gdańsk",
-            "4" + " ┃ " + "2023-12-12" + " ┃ " + "40.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs Indykpol AZS Olsztyn",
-            "5" + " ┃ " + "2023-03-19" + " ┃ " + "45.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs Jastrzębski Węgiel",
-            "6" + " ┃ " + "2023-02-09" + " ┃ " + "55.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs PGE Skra Bełchatów",
-            "7" + " ┃ " + "2023-01-11" + " ┃ " + "60.00 PLN" + " ┃ " + "Asseco Resovia Rzeszów vs ZAKSA Strzelce Opolskie"
-    );
+    @FXML
+    private Label resultsClub1,resultsClub2,resultsDateOfMatch;
+    private static BufferedReader ReadFromServer;
+    private static PrintWriter SendToServer;
+    private static final Message message = new Message();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        messagesList.setItems(messages);
+
+        TicketsPanelControllerFan.ReadFromServer = Client.ReadFromServer;
+        TicketsPanelControllerFan.SendToServer = Client.SendToServer;
+
+        preparePage();
+
         //roleChoiceBox.setItems(roles);
         buttonOption1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -71,7 +79,7 @@ public class TicketsPanelControllerFan implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 //Pobieranie do textArea zaznaczonego elementu
-                String selectedItem = messagesList.getSelectionModel().getSelectedItem();
+                String selectedItem = String.valueOf(messagesList.getSelectionModel().getSelectedItem());
                 messagePreview.setText("\n" + selectedItem);
                 messagePreview.setEditable(false);
             }
@@ -84,5 +92,63 @@ public class TicketsPanelControllerFan implements Initializable {
         });
 
 
+    }
+    private void preparePage() {
+
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    // Perform time-consuming operations (e.g., reading from the server) here
+                    message.sendGetFanTickets(SendToServer);
+                    String serverResponse = ReadFromServer.readLine();
+                    // Update the UI on the JavaFX application thread
+                    Platform.runLater(() -> username.setText(serverResponse));
+                    String incomingResponse = ReadFromServer.readLine();
+                    Platform.runLater(() -> {
+
+                        // Split the received data into an array of values
+                        String[] values = incomingResponse.split("\\|");
+                        System.out.println(incomingResponse);
+                        if(values[0].equals("INCOMING")){
+                            // Check if there are enough values to fill the labels
+                            if (values.length >= 3) {
+                                resultsClub1.setText(values[1]);
+                                resultsClub2.setText(values[2]);
+                                resultsDateOfMatch.setText(values[3]);
+                            }
+                        }else{
+                            System.out.println("Error getting user incoming match data");
+                        }
+                    });
+                    String ticketsResponse = ReadFromServer.readLine();
+                    Platform.runLater(() -> {
+
+                        // Split the received data into an array of values
+                        String[] values = ticketsResponse.split("\\|");
+                        System.out.println(ticketsResponse);
+                        if(values[0].equals("TICKETS")){
+                            // Check if there are enough values to fill the labels
+                            if (values.length >= 4) {
+                                ObservableList<Tickets> tickets = FXCollections.observableArrayList();
+                                for (int i = 1; i+3 < values.length; i += 4) {
+                                    tickets.add(new Tickets(Integer.parseInt(values[i]), values[i + 1],values[i+2],values[i+3]));
+                                }
+                                messagesList.setItems(tickets);
+                            }
+                        }else{
+                            System.out.println("Error getting user tickets data");
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+
+        // Start the task in a new thread
+        new Thread(task).start();
     }
 }

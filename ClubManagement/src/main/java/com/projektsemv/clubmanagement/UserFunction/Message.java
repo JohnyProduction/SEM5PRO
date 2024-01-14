@@ -47,4 +47,13 @@ public class Message {
     public void sendUpdateFanSettings(PrintWriter writer,String... arguments ) {
         writer.println("UPDATEFANSETTINGS" + "|" + String.join("|", arguments));
     }
+    public void sendGetFanTickets(PrintWriter writer,String... arguments ) {
+        writer.println("GETTICKETS" + "|" + String.join("|", arguments));
+    }
+    public void sendGetBuyTicketsPage(PrintWriter writer,String... arguments ) {
+        writer.println("BUYTICKETSPAGE" + "|" + String.join("|", arguments));
+    }
+    public void sendBuyTickets(PrintWriter writer,String... arguments ) {
+        writer.println("BUYTICKET" + "|" + String.join("|", arguments));
+    }
 }

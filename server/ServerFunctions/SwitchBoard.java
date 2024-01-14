@@ -132,6 +132,21 @@ public class SwitchBoard {
                 }
 
                 break;
+            case"GETTICKETS":
+                serverWriter.println(userLogin);
+                serverWriter.println("INCOMING|"+Users.getFanIncomingMatch(userID));
+                serverWriter.println("TICKETS|"+Users.getFanTickets(userID));
+                break;
+            case "BUYTICKETSPAGE":
+                serverWriter.println(userLogin);
+                serverWriter.println("BUYTICKETLIST|"+Users.getFanIncomingMatches(userID));
+                break;
+            case"BUYTICKET":
+                if(Users.buyTicket(userID,Integer.parseInt(parts[1]),50.0)){
+                    System.out.println("Row affected");
+                }else{
+                    System.out.println("Row affected fuckup");
+                }
             case "":
                 break;
         }

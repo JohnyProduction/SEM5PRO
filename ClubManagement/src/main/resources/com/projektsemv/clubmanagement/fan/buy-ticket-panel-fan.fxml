@@ -19,7 +19,7 @@
     <AnchorPane prefHeight="720.0" prefWidth="244.0">
         <children>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="250.0" styleClass="loginContainer" />
-               <Label fx:id="userName" layoutX="42.0" layoutY="114.0" prefHeight="32.0" prefWidth="200.0" styleClass="mediumTextStyle2" text="Admin1" />
+               <Label fx:id="username" layoutX="42.0" layoutY="114.0" prefHeight="32.0" prefWidth="200.0" styleClass="mediumTextStyle2" text="Admin1" />
                   <Label layoutX="40.0" layoutY="64.0" prefHeight="50.0" prefWidth="170.0" styleClass="loginTopTitleLabel" text="Dzień dobry!" />
                   <Button fx:id="buttonOption1" layoutX="25.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonStyleActual" text="Strona klubu" />
                   <Button fx:id="buttonOption2" layoutX="25.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonStyle" text="Lista biletów" />
