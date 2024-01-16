@@ -478,6 +478,28 @@ public class Users {
 
         return false; // No result or an empty result means the deletion was not successful
     }
+    public static String getFansFrequency(int userID){
+        List<Map<String, Object>> frequencyObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getFansFrequency(userID));
+        //System.out.println(frequencyObject);
+        StringBuilder frequencyData = new StringBuilder();
+        for (Map<String, Object> row : frequencyObject) {
+            frequencyData
+                    .append(row.get("Month")).append("|")
+                    .append(row.get("PurchasedTicketsCount")).append("|");
+        }
+        return frequencyData.toString();
+    }
+    public static String getFansManagerFrequency(int userID){
+        List<Map<String, Object>> frequencyObject = DBConnection.fetchDataFromDatabase(SQLEndpoints.getFansManagerFrequency(userID));
+        //System.out.println(frequencyObject);
+        StringBuilder frequencyData = new StringBuilder();
+        for (Map<String, Object> row : frequencyObject) {
+            frequencyData
+                    .append(row.get("Month")).append("|")
+                    .append(row.get("PurchasedTicketsCount")).append("|");
+        }
+        return frequencyData.toString();
+    }
     public static int saveUserID(){
         return userID;
     }

@@ -486,4 +486,28 @@ public class SQLEndpoints {
     public static String getUserID(String username, String password){
         return "SELECT UserID FROM users where username='"+username+"' and password='"+password+"'+";
     }
+    public static String getFansFrequency(int userID){
+        return "SELECT MONTH(m.date) AS Month, COUNT(*) AS PurchasedTicketsCount\n" +
+                "FROM tickets t\n" +
+                "JOIN matches m ON t.MatchID = m.MatchID\n" +
+                "WHERE m.ClubID1 IN (\n" +
+                "    SELECT ClubID\n" +
+                "    FROM players\n" +
+                "    WHERE UserID = "+ userID+"\n" +
+                ")\n" +
+                "OR m.ClubID2 IN (\n" +
+                "    SELECT ClubID\n" +
+                "    FROM players\n" +
+                "    WHERE UserID = "+ userID+"\n" +
+                ")\n" +
+                "GROUP BY Month;";
+    }
+    public static String getFansManagerFrequency(int userID){
+        return "SELECT MONTH(m.date) AS Month, COUNT(*) AS PurchasedTicketsCount\n" +
+                "FROM tickets t\n" +
+                "JOIN matches m ON t.MatchID = m.MatchID\n" +
+                "JOIN clubs c ON m.ClubID1 = c.ClubID OR m.ClubID2 = c.ClubID\n" +
+                "WHERE c.ManagerID = "+ userID+"\n" +
+                "GROUP BY Month;";
+    }
 }

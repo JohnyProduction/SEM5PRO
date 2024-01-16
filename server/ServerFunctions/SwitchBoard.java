@@ -58,11 +58,13 @@ public class SwitchBoard {
                     serverWriter.println("MEMBERCHART"+Users.getStatisticsWinRatio(userID));
                     //System.out.println(Users.getStatisticsWinRatio(userID));
                     serverWriter.println("MEMBERCHARTLINE|"+Users.getMonthlyStatisticsWinRatio(userID));
+                    serverWriter.println("FANSONMATCH|"+Users.getFansFrequency(userID));
                 }else if (parts[1].equals("MANAGER")) {
                     serverWriter.println("MANAGERCHART"+Users.getManagerStatisticsWinRatio(userID));
                     //System.out.println(Users.getManagerStatisticsWinRatio(userID));
                     serverWriter.println("MANAGERCHARTLINE|"+Users.getManagerMonthlyStatisticsWinRatio(userID));
                     //System.out.println(Users.getManagerMonthlyStatisticsWinRatio(userID));
+                    serverWriter.println("FANSONMATCH|"+Users.getFansManagerFrequency(userID));
                 }else if (parts[1].equals("FAN")) {
 
                 }

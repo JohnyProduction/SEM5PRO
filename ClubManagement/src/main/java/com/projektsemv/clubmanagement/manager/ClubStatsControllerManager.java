@@ -117,7 +117,6 @@ public class ClubStatsControllerManager implements Initializable {
                 attendanceStatsChartLine.setVisible(true);
 
                 mainStatsLabel.setText("Statystyki frekwencji");
-                statsInfoLabel.setText("Średnia na mecz");
             }
         });
     }
@@ -166,6 +165,22 @@ public class ClubStatsControllerManager implements Initializable {
                             System.out.println("Error getting sidebar data");
                         }
                     });
+                    String frequencyResponse = ReadFromServer.readLine();
+                    Platform.runLater(() -> {
+                        // Split the received data into an array of values
+                        String[] values = frequencyResponse.split("\\|");
+                        if(values[0].equals("FANSONMATCH")){
+                            // Check if there are enough values to fill the labels
+                            if (values.length >= 2) {
+                                attendanceStatsChartLine.setData(attendanceStatsChartData(values));
+                            } else {
+                                // Handle the case where there are not enough values
+                                System.out.println("Invalid data received from the server");
+                            }
+                        }else{
+                            System.out.println("Error getting fans data");
+                        }
+                    });
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -202,6 +217,19 @@ public class ClubStatsControllerManager implements Initializable {
 
         ObservableList<XYChart.Series> lineChartData =
                 FXCollections.observableArrayList(wins,loses);
+
+        return lineChartData;
+    }
+    public static ObservableList<XYChart.Series>attendanceStatsChartData(String[] values){
+        XYChart.Series attendance = new XYChart.Series();
+        attendance.setName("Frekwencja ostatnich spotkań");
+
+        for (int i = 1; i + 1 <= values.length; i += 2) {
+            attendance.getData().add(new XYChart.Data(values[i], Integer.parseInt(values[i+1])));
+        }
+
+        ObservableList<XYChart.Series> lineChartData =
+                FXCollections.observableArrayList(attendance);
 
         return lineChartData;
     }
